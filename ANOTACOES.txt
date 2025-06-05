@@ -4,6 +4,12 @@ Tecnologias utilizadas:
 - Angular CLI: 9.1.15
 - Node: 12.22.12
 _________________________________________________________________________________________________________________________________________________________________________
+- Criar uma pasta raiz para o projeto, neste caso foi crud.
 
--Comando para criar o arquivo packagejson, que contem as dependências do projeto: npm init -y.
--Comando npm i json-server: instala localmente na sua pasta o pacote json-server, que permite criar uma API REST fake rapidinho para testes e prototipação, e já o coloca no arquivo packagejson criado anteriormente.
+- Dentro da pasta crud, criar uma pasta chamada backend.
+
+-Dentro da pasta backend, rodar o comando para criar o arquivo packagejson, que contem as dependências do projeto: npm init -y.
+
+-Também dentro da pasta backend, rodar o comando npm i json-server: instala localmente na pasta o pacote json-server, que permite criar uma API REST fake rapidinho para testes e prototipação, e já o coloca no arquivo packagejson criado anteriormente.
+
+-Dentro da pasta backend, criar  arquivo db.json, onde criamos um objeto, e dentro deste objeto vai ter todos os endpoints da API. Criou 3 objetos(produtos) com as propriedades de id, nome, preço.
