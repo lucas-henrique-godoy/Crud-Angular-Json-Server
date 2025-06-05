@@ -1,5 +1,9 @@
 						**PROJETO CRUD ANGULAR E JSON SERVER - CADASTRO DE PRODUTOS
 
-Técnologias utilizadas:
+Tecnologias utilizadas:
 - Angular CLI: 9.1.15
 - Node: 12.22.12
+_________________________________________________________________________________________________________________________________________________________________________
+
+-Comando para criar o arquivo packagejson, que contem as dependências do projeto: npm init -y.
+-Comando npm i json-server: instala localmente na sua pasta o pacote json-server, que permite criar uma API REST fake rapidinho para testes e prototipação, e já o coloca no arquivo packagejson criado anteriormente.
