@@ -8,7 +8,7 @@ ________________________________________________________________________________
 
 - Dentro da pasta crud, criar uma pasta chamada backend.
 
--Dentro da pasta backend, rodar o comando para criar o arquivo package.json, que contem as dependências do projeto: npm init -y.
+-Dentro da pasta backend, rodar o comando para criar o arquivo package.json, que contem as dependências do projeto, com os valores padrão: npm init -y.
 
 -Também dentro da pasta backend, rodar o comando npm i json-server: instala localmente na pasta o pacote json-server, que permite criar uma API REST fake rapidinho para testes e prototipação, e já o coloca no arquivo package.json criado anteriormente.
 
