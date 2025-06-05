@@ -22,3 +22,24 @@ ________________________________________________________________________________
 Basicamente esse script chama o json-server que foi instalado ateriormente, colocou para ele ficar monitorando o arquivo db.jon na porta 3001. Agora a API esta funcional.
 
 -Dentro da pasta backend, colocar o comando npm start para rodar a API.
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+*TIVE UM ERRO DEPOIS DE CRIAR O DB.JSON E RODAR A API:
+
+✅ Resumo do erro e solução
+Erro:
+Você recebeu o erro SyntaxError: Unexpected token '?' ao rodar npm start. Isso aconteceu porque o pacote json-server usa o operador ?? (nullish coalescing), que não é suportado pelo Node.js 12, a versão que você está usando.
+
+Causa:
+Seu Node.js está desatualizado (versão 12), e o json-server instalado foi desenvolvido para versões mais recentes do Node (14+).
+
+Solução aplicada:
+Desinstalamos a versão atual do json-server e instalamos uma versão mais antiga e compatível com Node 12, assim:
+
+npm uninstall json-server
+
+npm install json-server@0.16.3 --save-dev
+
+Depois disso, npm start funcionou corretamente com a sua versão atual do Node.js.
+_______________________________________________________________________________________________________________________________________________________________________
