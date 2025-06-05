@@ -1,0 +1,5 @@
+						**PROJETO CRUD ANGULAR E JSON SERVER - CADASTRO DE PRODUTOS
+
+Técnologias utilizadas:
+- Angular CLI: 9.1.15
+- Node: 12.22.12
