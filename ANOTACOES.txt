@@ -8,8 +8,15 @@ ________________________________________________________________________________
 
 - Dentro da pasta crud, criar uma pasta chamada backend.
 
--Dentro da pasta backend, rodar o comando para criar o arquivo packagejson, que contem as dependências do projeto: npm init -y.
+-Dentro da pasta backend, rodar o comando para criar o arquivo package.json, que contem as dependências do projeto: npm init -y.
 
--Também dentro da pasta backend, rodar o comando npm i json-server: instala localmente na pasta o pacote json-server, que permite criar uma API REST fake rapidinho para testes e prototipação, e já o coloca no arquivo packagejson criado anteriormente.
+-Também dentro da pasta backend, rodar o comando npm i json-server: instala localmente na pasta o pacote json-server, que permite criar uma API REST fake rapidinho para testes e prototipação, e já o coloca no arquivo package.json criado anteriormente.
 
 -Dentro da pasta backend, criar  arquivo db.json, onde criamos um objeto, e dentro deste objeto vai ter todos os endpoints da API. Criou 3 objetos(produtos) com as propriedades de id, nome, preço.
+
+-Dentro do arquivo package.json criou um script para iniciar o db.json. Comando: 
+"scripts": {
+    "start": "json-server --watch db.json --port 3001"    
+  },
+
+Basicamente esse script chama o json-server que foi instalado ateriormente, colocou para ele ficar monitorando o arquivo db.jon na porta 3001. Agora a API esta funcional.
