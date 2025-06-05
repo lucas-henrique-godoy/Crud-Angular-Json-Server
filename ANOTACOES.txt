@@ -12,7 +12,7 @@ ________________________________________________________________________________
 
 -Também dentro da pasta backend, rodar o comando npm i json-server: instala localmente na pasta o pacote json-server, que permite criar uma API REST fake rapidinho para testes e prototipação, e já o coloca no arquivo package.json criado anteriormente.
 
--Dentro da pasta backend, criar  arquivo db.json, onde criamos um objeto, e dentro deste objeto vai ter todos os endpoints da API. Criou 3 objetos(produtos) com as propriedades de id, nome, preço.
+-Dentro da pasta backend, criar  arquivo db.json, onde criamos um objeto, e dentro deste objeto vai ter todos os endpoints da API. Criou 3 objetos(produtos) com as propriedades de id, nome, preço. O arquivo db.json funciona como um banco de dados fake quando usado com o json-server. Ele simula uma API REST completa (com rotas GET, POST, PUT, DELETE) sem precisar de backend real. É útil para testes e protótipos de frontend.
 
 -Dentro do arquivo package.json criou um script para iniciar o db.json. Comando: 
 "scripts": {
