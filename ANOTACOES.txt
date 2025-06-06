@@ -38,6 +38,7 @@ Solução aplicada:
 Desinstalamos a versão atual do json-server e instalamos uma versão mais antiga e compatível com Node 12, assim:
 
 npm uninstall json-server
+_______________________________________________________________________________________________________________________________________________________________________
 
 npm install json-server@0.16.3 --save-dev
 
