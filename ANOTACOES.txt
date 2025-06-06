@@ -19,7 +19,7 @@ ________________________________________________________________________________
     "start": "json-server --watch db.json --port 3001"    
   },
 
-Basicamente esse script chama o json-server que foi instalado ateriormente, colocou para ele ficar monitorando o arquivo db.jon na porta 3001. Agora a API esta funcional.
+Basicamente esse script chama o json-server que foi instalado anteriormente, colocou para ele ficar monitorando o arquivo db.jon na porta 3001. Agora a API esta funcional.
 
 -Dentro da pasta backend, colocar o comando npm start para rodar a API.
 
