@@ -37,10 +37,9 @@ Seu Node.js está desatualizado (versão 12), e o json-server instalado foi dese
 Solução aplicada:
 Desinstalamos a versão atual do json-server e instalamos uma versão mais antiga e compatível com Node 12, assim:
 
-npm uninstall json-server
-_______________________________________________________________________________________________________________________________________________________________________
+-Desinstala a versão atual do json-erver: npm uninstall json-server
 
-npm install json-server@0.16.3 --save-dev
+-Instala aversão do jso-server compatível com o Node 12: npm install json-server@0.16.3 --save-dev
 
 Depois disso, npm start funcionou corretamente com a sua versão atual do Node.js.
 _______________________________________________________________________________________________________________________________________________________________________
