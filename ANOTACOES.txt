@@ -58,3 +58,5 @@ ________________________________________________________________________________
 -Para criar um novo projeto Angular, rodar o comando: ng new minha-app.
 
 - Typescript: Linguagem criada pela Microsoft, que é um superset do JavaScript, onde possuí todas as funcionalidades do JavaScript, mas tem outras como Tipagem Forte e é Orientada a Objetos. No Angular, o código escrito em Typescript é compilado para JavaScript.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* Árvore de Componentes: A partir do componente principal(raiz ou pai) que no Angular normalmente se chama app.component, você referencia outros componentes como: Formulário, Header, um componente de navegação, um componente que representa o conteúdo, etc.
