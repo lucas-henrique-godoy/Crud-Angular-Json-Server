@@ -5,7 +5,7 @@ Tecnologias utilizadas:
 - Node: 12.22.12
 _______________________________________________________________________________________________________________________________________________________________________
 		
-#SESSÃO - BACKEND DO PROJETO
+#SEÇÃO - BACKEND DO PROJETO
 
 - Criar uma pasta raiz para o projeto, neste caso foi crud.
 
@@ -46,3 +46,5 @@ Desinstalamos a versão atual do json-server e instalamos uma versão mais antig
 
 Depois disso, npm start funcionou corretamente com a sua versão atual do Node.js.
 _______________________________________________________________________________________________________________________________________________________________________
+
+			# SESSÃO FRONTEND
