@@ -53,3 +53,4 @@ ________________________________________________________________________________
 
 - O que é Angular? Um framework JavaScript desenvolvido pelo Google para criação de aplicações Web SPA(Single Page Application) baseada em componentes.
 
+- Command Line Interface(CLI)- Interface de linha de comando do Angular. Para instalar rodar  comando: npm i -g @angular/cli.
