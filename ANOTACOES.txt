@@ -47,4 +47,9 @@ Desinstalamos a versão atual do json-server e instalamos uma versão mais antig
 Depois disso, npm start funcionou corretamente com a sua versão atual do Node.js.
 _______________________________________________________________________________________________________________________________________________________________________
 
-			# SESSÃO FRONTEND
+			# SEÇÃO - FRONTEND DO PROJETO
+
+	**VISÃO GERAL ANGULAR
+
+- O que é Angular? Um framework JavaScript desenvolvido pelo Google
+
