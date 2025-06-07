@@ -85,7 +85,7 @@ O que devemos colocar dentro de cada um desses atributos?
 
 -Declarations: Declara todos os componentes que fazem parte daquele módulo; declarar diretivas que fazem parte daquele módulo; declarar os pipes que fazem parte daquele módulo. Neste projeto, será usado para declarar principalmente os componentes que fazem parte daquele módulo. Quando dizemos que um componente faz patê de um módulo, não necessariamente ele é visível para fora do módulo, você deve colocar esse componente também dentro de exports.
 
--Imports: Serve para importar outros módulos, ou seja, um módulo pode depender de outro módulo, podendo ser um módulo da própria aplicação ou um módulo externo.
+-Imports: Serve para importar outros módulos, ou seja, um módulo pode depender de outro módulo, podendo ser um módulo da própria aplicação ou um módulo externo. Podemos importar dependências e bibliotecas.
 
 -Exports: Serve para declarar componentes, diretivas e pipes que podem ser visíveis para fora do módulo.
 
@@ -94,5 +94,5 @@ O que devemos colocar dentro de cada um desses atributos?
 -Bootstrap: Serve para definir o componente que será carregado naquele módulo, sendo necessário apenas para 1 único módulo, que é o módulo inicial da aplicação, o app.module.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
--OBS: Quando dizemos que um componente faz parte de um módulo, não necessariamente ele é visível para fora do módulo. Para tornar um componente visivel para fora do módulo, ele deve ser colocado dentro de exports.
+-OBS: Quando dizemos que um componente faz parte de um módulo, não necessariamente ele é visível para fora do módulo. Para tornar um componente visível para fora do módulo, ele deve ser colocado dentro de exports.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
