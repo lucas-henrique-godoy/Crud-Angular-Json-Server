@@ -49,7 +49,7 @@ ________________________________________________________________________________
 
 			# SEÇÃO - FRONTEND DO PROJETO
 
-	**VISÃO GERAL ANGULAR
+**VISÃO GERAL ANGULAR
 
 - O que é Angular? Um framework JavaScript desenvolvido pelo Google para criação de aplicações Web SPA(Single Page Application) baseada em componentes.
 
