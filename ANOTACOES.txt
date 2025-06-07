@@ -82,9 +82,14 @@ ________________________________________________________________________________
 - Dentro do arquivo app.module tem 5 atributos: Declarations, Imports, Exports, Providers, Bootstrap.
 O que devemos cocoar dentro de cada um desses atributos?
 
--Declarations:
--Imports:
--Exports:
+-Declarations: Declara todos os componentes que fazem parte daquele módulo; declarar diretivas que fazem parte daquele módulo; declarar os pipes que fazem parte daquele módulo. Neste projeto, sera usado para declarar pricipalmente os componentes que fazem parte daquele módulo.Quando dizemos
+
+-Imports: Serve para importar outros módulos, ou seja, um módulo pode depender de outro módulo, podendo ser um módulo da própria aplicação ou um módulo externo.
+
+-Exports: Serve para declarar componentes, diretivas e pipes que podem ser visíveis para fora do módulo.
+
 -Providers:
 -Bootstrap:
+
+-OBS: Quando dizemos que um componente faz parte de um módulo, não necessariamente ele é visível para fora do módulo. Para tornar um componente visivel para fora do módulo, ele deve ser colocado dentro de exports.
 
