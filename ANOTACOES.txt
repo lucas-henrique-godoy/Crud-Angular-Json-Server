@@ -61,3 +61,8 @@ ________________________________________________________________________________
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **Árvore de Componentes: A partir do componente principal(raiz ou pai) que no Angular normalmente se chama app.component, você referencia outros componentes como: Formulário, Header, um componente de navegação, um componente que representa o conteúdo, etc.
+_______________________________________________________________________________________________________________________________________________________________________
+
+**Conceitos Essenciais- Inicialização da Aplicação:
+
+- Arquivo main.ts: 
