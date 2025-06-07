@@ -79,16 +79,17 @@ ________________________________________________________________________________
 **Organização Usando Módulo: O Angular não organiza a aplicação somente em componentes, mas também em módulos, isso significa que todos os componentes irão estar dentro de algum módulo, seja um único módulo para toda a aplicação,como numa aplicação pequena todos os componentes podem ficar dentro de app.module(módulo principal criado por padrão), como é o caso deste projeto. Mas podemos organizar nossa aplicação em diversos módulos. Desse modo, quando você criar um componente dentro do módulo, voce tem a escolha de dizer se aquele componente ficará visível para fora do módulo, ou seja alguém de fora do módulo pode referenciar aquele componente, ou seja ,você pode dizer que aquele componente vai ficar visúvel  apenas dentro do módulo.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Anatomia do módulo: 
+
 - Dentro do arquivo app.module tem 5 atributos: Declarations, Imports, Exports, Providers, Bootstrap.
 O que devemos cocoar dentro de cada um desses atributos?
 
--Declarations: Declara todos os componentes que fazem parte daquele módulo; declarar diretivas que fazem parte daquele módulo; declarar os pipes que fazem parte daquele módulo. Neste projeto, será usado para declarar pricipalmente os componentes que fazem parte daquele módulo.Quando dizemos
+-Declarations: Declara todos os componentes que fazem parte daquele módulo; declarar diretivas que fazem parte daquele módulo; declarar os pipes que fazem parte daquele módulo. Neste projeto, será usado para declarar principalmente os componentes que fazem parte daquele módulo. Quando dizemos
 
 -Imports: Serve para importar outros módulos, ou seja, um módulo pode depender de outro módulo, podendo ser um módulo da própria aplicação ou um módulo externo.
 
 -Exports: Serve para declarar componentes, diretivas e pipes que podem ser visíveis para fora do módulo.
 
--Providers: Servepara declarar os services.
+-Providers: Serve para declarar os services.
 
 -Bootstrap: Serve para definir o componente que será carregado naquele módulo, sendo necessário apenas para 1 único módulo, que é o módulo inicial da aplicação, o app.module.
 
