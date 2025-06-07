@@ -56,3 +56,5 @@ ________________________________________________________________________________
 - Command Line Interface(CLI)- Interface de linha de comando do Angular. Para instalar rodar  comando: npm i -g @angular/cli.
 
 -Para criar um novo projeto Angular, rodar o comando: ng new minha-app.
+
+- Typescript: Linguagem criada pela Microsoft, que é um superste do JavaScript. No Angular, o código escrito em Typescript é compildo para JavaScript.
