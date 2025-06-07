@@ -72,4 +72,4 @@ ________________________________________________________________________________
 - Arquivo app.component: É o componente que é criado por padrão, onde a partir dele  toda a árvore de componentes será chamada.
 _______________________________________________________________________________________________________________________________________________________________________
 
-**O que é um componente? É como um pedaço da aplicação, um trecho de código que representa um componente visual da sua tela. Um componente é composto por um arquivo HTML, CSS e TS. Ou seja,  estrutura(HTML), estilo(CSS), comportamento(TS).
+**O que é um componente? É como um pedaço da aplicação, um trecho de código que representa um componente visual da sua tela. Um componente é composto por um arquivo HTML, CSS e TS. Ou seja,  estrutura(HTML), estilo(CSS), comportamento(TS). Quando um componente é criado, é gerado uma tag, exemplo o componente home.component gera a tag <app-home><app-home>
