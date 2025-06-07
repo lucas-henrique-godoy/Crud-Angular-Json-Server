@@ -80,3 +80,11 @@ ________________________________________________________________________________
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Anatomia do módulo: 
 - Dentro do arquivo app.module tem 5 atributos: Declarations, Imports, Exports, Providers, Bootstrap.
+O que devemos cocoar dentro de cada um desses atributos?
+
+-Declarations:
+-Imports:
+-Exports:
+-Providers:
+-Bootstrap:
+
