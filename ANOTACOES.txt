@@ -75,3 +75,5 @@ ________________________________________________________________________________
 **O que é um componente? É como um pedaço da aplicação, um trecho de código que representa um componente visual da sua tela. Um componente é composto por um arquivo HTML, CSS e TS. Ou seja,  estrutura(HTML), estilo(CSS), comportamento(TS). Quando um componente é criado, é gerado uma tag personalizada, exemplo o componente home.component gera a tag <app-home><app-home>,essa é a forma para referenciar todo o código HTML, CSS  e TS 	que foi criado. A ideia é encapsular dentro desse componente as três tecnologias da WEB.
 
 -Arquivo TS: É o arquivo de comportamento do componente, a partir dele é que o Angular irá encontrar os arquivos HTML e CSS, pois ele faz uma referencia, então quando criamos um componentes pelo menos devemos ter o arquivo TS.
+
+*Organização Usando Módulo: O Angular não organiza a aplicação em componentes, mas também em módulos, isso significa que todos os componentes irão estar dentro de algum módulo, seja um único módulo para toda a aplicação, ou seja numa aplicação pequena, todos os componentes podem ficar dentro de ap.module, como é o caso deste projeto. 
