@@ -76,4 +76,4 @@ ________________________________________________________________________________
 
 -Arquivo TS: É o arquivo de comportamento do componente, a partir dele é que o Angular irá encontrar os arquivos HTML e CSS, pois ele faz uma referencia, então quando criamos um componentes pelo menos devemos ter o arquivo TS.
 
-*Organização Usando Módulo: O Angular não organiza a aplicação em componentes, mas também em módulos, isso significa que todos os componentes irão estar dentro de algum módulo, seja um único módulo para toda a aplicação, ou seja numa aplicação pequena, todos os componentes podem ficar dentro de ap.module, como é o caso deste projeto. 
+*Organização Usando Módulo: O Angular não organiza a aplicação somente em componentes, mas também em módulos, isso significa que todos os componentes irão estar dentro de algum módulo, seja um único módulo para toda a aplicação,como numa aplicação pequena todos os componentes podem ficar dentro de app.module(módulo principal criado por padrão), como é o caso deste projeto. Mas podemos organizar nossa aplicação em diversos módulos.
