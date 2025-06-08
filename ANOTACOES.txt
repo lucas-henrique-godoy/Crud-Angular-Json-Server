@@ -91,7 +91,7 @@ O que devemos colocar dentro de cada um desses atributos?
 
 -Providers: Serve para declarar os services.
 
--Bootstrap: Serve para definir o componente que será carregado naquele módulo, sendo necessário apenas para 1 único módulo, que é o módulo inicial da aplicação, o app.module.
+-Bootstrap: É onde tem a referência docompoennte principal que será carregado, sendo necessário apenas para 1 único módulo, que é o módulo inicial da aplicação, o app.module.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -OBS: Quando dizemos que um componente faz parte de um módulo, não necessariamente ele é visível para fora do módulo. Para tornar um componente visível para fora do módulo, ele deve ser colocado dentro de exports.
