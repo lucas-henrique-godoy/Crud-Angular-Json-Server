@@ -110,5 +110,5 @@ ________________________________________________________________________________
 **Arquivos dentro de um projeto Angular:
 
 - Arquivo angular.json: Possui algumas configurações do Angular.
-- Arquivo assets: Serve para colocar arquivo de imagem, fontes.
+- Arquivo assets: Serve para colocar arquivos estáticos, arquivos de imagem e  fontes.
 - Arquivo Enviroments: Local onde é colocado as variáveis de ambiente.
