@@ -81,6 +81,7 @@ ________________________________________________________________________________
 **Anatomia do módulo: 
 
 - Dentro do arquivo app.module tem 5 atributos: Declarations, Imports, Exports, Providers, Bootstrap.
+
 O que devemos colocar dentro de cada um desses atributos?
 
 -Declarations: Declara todos os componentes que fazem parte daquele módulo; declarar diretivas que fazem parte daquele módulo; declarar os pipes que fazem parte daquele módulo. Neste projeto, será usado para declarar principalmente os componentes que fazem parte daquele módulo. Quando dizemos que um componente faz patê de um módulo, não necessariamente ele é visível para fora do módulo, você deve colocar esse componente também dentro de exports.
