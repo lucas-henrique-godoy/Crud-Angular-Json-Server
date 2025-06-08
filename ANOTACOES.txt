@@ -98,4 +98,8 @@ O que devemos colocar dentro de cada um desses atributos?
 -OBS: Quando dizemos que um componente faz parte de um módulo, não necessariamente ele é visível para fora do módulo. Para tornar um componente visível para fora do módulo, ele deve ser colocado dentro de exports.
 _______________________________________________________________________________________________________________________________________________________________________
 
-**Instalando a cli do Angular. Comando: npm i -g @angular/cli
+**Instalando e criando projeto Angular
+
+-Instalando a cli do Angular. Comando: npm i -g @angular/cli
+
+- Criando um projeto Angular: ng new nome-projeto
