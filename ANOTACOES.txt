@@ -95,7 +95,8 @@ O que devemos colocar dentro de cada um desses atributos?
 -Bootstrap: É onde tem a referência do componente principal que será carregado, sendo necessário apenas para 1 único módulo, que é o módulo inicial da aplicação, o app.module. No caso do app.module, não precisamos exportar nada, os outros módulos é que vão exportar para o app.module utilizar, ou seja o app.module importa os outros módulos.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
--OBS: Quando dizemos que um componente faz parte de um módulo, não necessariamente ele é visível para fora do módulo. Para tornar um componente visível para fora do módulo, ele deve ser colocado dentro de exports.
+-OBS: Quando dizemos que um componente faz parte de um módulo, não necessariamente ele é visível para fora do módulo. Para tornar um componente visível para fora do módulo, ele deve ser colocado dentro de exports. 
+-Quando criamos um componente ele já é registrado dentro de app.module automaticamente, ou seja se estamos trabalhando dentro de um módulo app.module, só vai ser possível usar componentes que estejam carregados dentro do ap.module.
 _______________________________________________________________________________________________________________________________________________________________________
 
 **Instalando e criando projeto Angular
@@ -106,6 +107,7 @@ ________________________________________________________________________________
 - Criando um projeto Angular sem arquivos desnecessários como arquivos de teste: ng new nome-projeto --minimal
 - Rodar o projeto Angular: ng serve ou npm start, ambos funcionam.
 - Instalando a dependência do Angular Material: ng add @angular/material
+-Criar um componente: ng generate componente nome-do-componente
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **Arquivos dentro de um projeto Angular:
