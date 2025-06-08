@@ -105,6 +105,7 @@ ________________________________________________________________________________
 - Criando um projeto Angular: ng new nome-projeto
 - Criando um projeto Angular sem arquivos desnecessários como arquivos de teste: ng new nome-projeto --minimal
 - Rodar o projeto Angular: ng serve ou npm start, ambos funcionam.
+- Instalando a dependência do Angular Material: ng add @angular/material
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **Arquivos dentro de um projeto Angular:
