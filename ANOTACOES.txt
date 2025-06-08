@@ -104,3 +104,11 @@ ________________________________________________________________________________
 
 - Criando um projeto Angular: ng new nome-projeto
 - Criando um projeto Angular sem arquivos desnecessários como arquivos de teste: ng new nome-projeto --minimal
+- Rodar o projeto Angular: ng serve ou npm start, ambos funcionam.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**Arquivos dentro de um projeto Angular:
+
+- Arquivo angular.json: Possui algumas configurações do Angular.
+- Arquivo assets: Serve para colocar arquivo de imagem, fontes.
+- Arquivo Enviroments: Local onde é colocado as variáveis de ambiente.
