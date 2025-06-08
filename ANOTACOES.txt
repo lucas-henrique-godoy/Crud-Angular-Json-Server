@@ -103,3 +103,4 @@ ________________________________________________________________________________
 -Instalando a cli do Angular. Comando: npm i -g @angular/cli
 
 - Criando um projeto Angular: ng new nome-projeto
+- Criando um projeto Angular sem arquivos desnecessários como arquivos de teste: ng new nome-projeto --minimal
