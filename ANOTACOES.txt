@@ -113,6 +113,26 @@ ________________________________________________________________________________
 **Arquivos dentro de um projeto Angular:
 
 - Arquivo angular.json: Possui algumas configurações do Angular.
+✅ Explicação Corrigida e Completa:
+Dependendo da versão do Angular (e também das configurações padrão do projeto), ao gerar um novo componente com o Angular CLI (ng generate component), os arquivos de template (HTML) e estilo (CSS/SCSS) podem ser criados dentro do próprio arquivo .ts — o que é chamado de inline template e inline style. Para alterar esse comportamento padrão, você pode configurar o arquivo angular.json (ou workspace.json, dependendo da estrutura do projeto), adicionando ou modificando as seguintes opções:
+
+"@schematics/angular:component": {
+  "inlineTemplate": false,
+  "inlineStyle": false
+}
+O que isso faz:
+"inlineTemplate": false → Garante que o Angular CLI crie um arquivo HTML separado.
+
+"inlineStyle": false → Garante que o Angular CLI crie um arquivo CSS/SCSS separado.
+
+Observação importante:
+Essa configuração define o comportamento padrão para quando você gerar componentes. No entanto, você ainda pode sobrescrever isso com flags no comando, por exemplo:
+
+ng generate component nome-do-componente --inline-template --inline-style
+Ou para desativar inline no comando (mesmo que esteja ativado por padrão):
+
+ng generate component nome-do-componente --inline-template=false --inline-style=false 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 - Arquivo assets: Serve para colocar arquivos estáticos, arquivos de imagem e  fontes.
 - Arquivo Enviroments: Local onde é colocado as variáveis de ambiente.
 _______________________________________________________________________________________________________________________________________________________________________
