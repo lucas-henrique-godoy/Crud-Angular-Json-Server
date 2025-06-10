@@ -1,0 +1,22 @@
+.header {
+    display: flex;   /*Alinha por padrão na horizontal*/
+    align-items: center; /*Alinha na vertical*/
+}
+
+.header a { /*stilizando o Link dentro do header*/
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.header .logo {
+    max-height: 32px; /*altura maxima do logo*/
+}
+
+.header .title-group {
+    padding-left: 25px;
+}
+
+.header .title-group i {
+    padding-right: 5px;
+}
