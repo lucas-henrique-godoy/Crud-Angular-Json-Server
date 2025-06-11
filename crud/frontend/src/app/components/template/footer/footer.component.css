@@ -1,0 +1,7 @@
+.footer {
+    position:fixed; /*Coloca o footer fixado na parte de baixo da página*/
+    bottom: 0;
+
+    display: flex;
+    justify-content: flex-end;  /*Alinha o texto do footer no final da linha, ou seja, embaixo a direita na pagina*/
+}
