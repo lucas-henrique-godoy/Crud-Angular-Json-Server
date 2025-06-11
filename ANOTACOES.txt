@@ -137,5 +137,6 @@ ng generate component nome-do-componente --inline-template=false --inline-style=
 - Arquivo Enviroments: Local onde é colocado as variáveis de ambiente.
 _______________________________________________________________________________________________________________________________________________________________________
 
-- Nesta etapa depois de criar o componente de Header,  nós iremos importar dentro do  app.module o MatToolbarModule(barra de ferramentas).
-- Criamos também o componente footer. Aqui foi usado também o MatToolbar.
+- Nesta etapa depois de criar o componente de Header,  nós iremos importar dentro do  app.module o MatToolbarModule(barra de ferramentas). Estilizamos o header também.
+- Criamos e estilizamos também o componente footer. Aqui foi usado também o MatToolbar.
+- Criamos e estilizamos o componente NAV(navegação).
