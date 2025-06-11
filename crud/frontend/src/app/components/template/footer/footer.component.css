@@ -4,4 +4,10 @@
 
     display: flex;
     justify-content: flex-end;  /*Alinha o texto do footer no final da linha, ou seja, embaixo a direita na pagina*/
+    
+}
+
+.footer > span {
+    font-size: 1.1rem;  /*Esse CSS aplica um tamanho de fonte levemente maior que o normal e uma fonte mais leve aos elementos span que são filhos diretos de um elemento com a classe .footer, por isso o sinal de >*/
+    font-weight: 300;
 }
