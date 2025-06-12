@@ -1,0 +1,12 @@
+.sidenav {
+    background-color: #3F51B5;   /*Nav com cor azul e largura de 200 pixels*/
+    width: 200px;
+}
+
+.sidenav a {   /*Cor do titulo e do icone branco*/
+    color: #FFF;
+}
+
+.sidenav i {                /*Espaçamento entre o ícone e o titulo do menu*/
+    padding-right: 10px;
+}
