@@ -139,4 +139,4 @@ ________________________________________________________________________________
 
 - Nesta etapa depois de criar o componente de Header,  nós iremos importar dentro do  app.module o MatToolbarModule(barra de ferramentas). Estilizamos o header também.
 - Criamos e estilizamos também o componente footer. Aqui foi usado também o MatToolbar.
-- Criamos e estilizamos o componente NAV(navegação).
+- Criamos e estilizamos o componente NAV(navegação). E iImportei o MatSidenavModule e o MatListModule dentro de app.modulepara usar no componente nav
