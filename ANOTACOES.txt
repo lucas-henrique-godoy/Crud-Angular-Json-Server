@@ -150,7 +150,7 @@ ________________________________________________________________________________
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **DIRETIVAS DE ATRIBUTO: Altera aparência(CSS) e o comportamento de um elemento. Exemplo: alguma ação dentro de um botão, componente ou outra diretiva.
-EXEMPLO DE CÓDIGO DE UMA DIRETIVA:
+-EXEMPLO DE CÓDIGO DE UMA DIRETIVA:
 @Directive({
     selector: '[appRed]'
 })
@@ -161,6 +161,14 @@ export class RedDirective {
 }
 
 - A Diretiva acima, esta pegando o elemento da DOM, pegando atributo style e color(dentro de style), e alterando a cor para vermelho.
+
+-USO DA DIRETIVA NO HTML:
+<i class="material-icons v-middle" appRed>
+    favorite
+</i>
+
+-Aqui a Diretiva altera a cor do ícone para vermelho.
+
 
 
 
