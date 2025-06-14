@@ -1,3 +1,10 @@
-<i class="material-icons v-middle" appRed>
-    favorite
-</i>
+<form *ngIf="product" class="product-form">
+
+</form>
+
+
+<ul>
+    <li **ngFor="let product of products">
+        {{ product.name }}
+    </li>
+</ul>
