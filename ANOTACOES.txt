@@ -150,3 +150,14 @@ ________________________________________________________________________________
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **DIRETIVAS DE ATRIBUTO: Altera aparência(CSS) e o comportamento de um elemento. Exemplo: alguma ação dentro de um botão, componente ou outra diretiva.
+EXEMPLO DECÓDIGO DE UMA DIRETIVA:
+@Directive({
+    selector: '[appRed]'
+})
+export class RedDirective {
+    constructor(el: ElementRef) {
+        el.nativeElement.style.color = '#e35e6b';
+    }
+}
+
+#DECORATOR: É um padrão de projeto eu tem como objetivo evitar herança, o invés de trabalhar como herança, você trabalha com composição para estender um determinado objeto. Exemplo: @Directive, @NgModule, @Component, etc.
