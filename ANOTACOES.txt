@@ -143,6 +143,6 @@ ________________________________________________________________________________
 _______________________________________________________________________________________________________________________________________________________________________
 
 
-				# SEÇÃO - ELEMENTOS DO ANGULAR - Mini Curso: Componentes, Rotas, Diretivas, Pipes.
+				# SEÇÃO - ELEMENTOS DO ANGULAR - Mini Curso: Componentes, Rotas, Diretivas, Pipes, Observables, Services.
 
 -
