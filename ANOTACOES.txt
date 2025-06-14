@@ -168,7 +168,9 @@ export class RedDirective {
 </i>
 
 -Aqui a Diretiva altera a cor do ícone para vermelho.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+**DIRETIVAS ESTRUTURAIS: Altera layout adicionando e removendo elementos da DOM(estrutura da página).
 
 
 
