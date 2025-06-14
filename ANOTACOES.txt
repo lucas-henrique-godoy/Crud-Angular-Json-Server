@@ -171,9 +171,10 @@ export class RedDirective {
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-**DIRETIVAS ESTRUTURAIS: Altera layout adicionando e removendo elementos da DOM(estrutura da página).
+**DIRETIVAS ESTRUTURAIS: Altera layout adicionando e removendo elementos da DOM(estrutura da página/HTML).
 
 -EXEMPLO DE CÓDIGO DE UMA DIRETIVA ESTRUTURAL:
+
 <form *ngIf="product" class="product-form">
 
 </form>
