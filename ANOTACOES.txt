@@ -151,6 +151,7 @@ ________________________________________________________________________________
 
 **DIRETIVAS DE ATRIBUTO: Altera aparência(CSS) e o comportamento de um elemento. Exemplo: alguma ação dentro de um botão, componente ou outra diretiva.
 -EXEMPLO DE CÓDIGO DE UMA DIRETIVA DE ATRIBUTO:
+
 @Directive({
     selector: '[appRed]'
 })
@@ -163,15 +164,15 @@ export class RedDirective {
 - A Diretiva acima, esta pegando o elemento da DOM, pegando atributo style e color(dentro de style), e alterando a cor para vermelho.
 
 -USO DA DIRETIVA NO HTML:
-<i class="material-icons v-middle" appRed>
+<i class="material-icons v-middle" appRed> -		Aqui a Diretiva altera a cor do ícone para vermelho.
     favorite
 </i>
 
--Aqui a Diretiva altera a cor do ícone para vermelho.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **DIRETIVAS ESTRUTURAIS: Altera layout adicionando e removendo elementos da DOM(estrutura da página).
--EXEMPLODE CÓDIGO DE UMA DIRETIVA ESTRUTURAL:
+
+-EXEMPLO DE CÓDIGO DE UMA DIRETIVA ESTRUTURAL:
 <form *ngIf="product" class="product-form">
 
 </form>
