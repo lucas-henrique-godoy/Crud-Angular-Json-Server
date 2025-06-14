@@ -171,7 +171,7 @@ export class RedDirective {
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-**DIRETIVAS ESTRUTURAIS: Altera layout adicionando e removendo elementos da DOM(estrutura da página/HTML).
+**DIRETIVAS ESTRUTURAIS: Altera layout adicionando e removendo elementos da DOM(estrutura da página/HTML). A diferença visual entre a diretiva de atributo para a estrutural, é eu a diretiva estrutural usa asterisco na frente. Exemplo: *ngIf, *ngFor.
 
 -EXEMPLO DE CÓDIGO DE UMA DIRETIVA ESTRUTURAL:
 
@@ -181,7 +181,7 @@ export class RedDirective {
 
 
 <ul>
-    <li **ngFor="let product of products">
+    <li *ngFor="let product of products">
         {{ product.name }}
     </li>
 </ul>
