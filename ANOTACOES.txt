@@ -145,4 +145,4 @@ ________________________________________________________________________________
 
 				# SEÇÃO - ELEMENTOS DO ANGULAR - Mini Curso: Componentes, Rotas, Diretivas, Pipes, Observables, Services, Injeção de Dependência.
 
-**COMPONENTE ANGULAR: É formado em via de regra por 3 partes: HTML, CSS, TS. Não necessariamente precisamos ter estilo no componente. Também não é obrigatório ter o arquivo HTML,  podemos colocar o template dentro do arquivo TS
+**COMPONENTE ANGULAR: É formado em via de regra por 3 partes: HTML, CSS, TS. Não necessariamente precisamos ter estilo no componente. Também não é obrigatório ter o arquivo HTML,  podemos colocar o template dentro do arquivo TS. Existe um escopo("mundo") dentro do componente, ou seja, o componente tem o seu próprio "mundo" interno, como e fosse uma pequena aplicação.
