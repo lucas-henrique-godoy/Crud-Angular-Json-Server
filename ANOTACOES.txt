@@ -234,7 +234,7 @@ ________________________________________________________________________________
 })
 export class ProductCreateComponent implements OnInit {
 
-    createProduct() {    - Aqui é o método criado no TS que será chamado no HTML
+    createProduct() {    - Aqui é o método criado no TS que será chamado no HTML pelo evento de click.
         //...
     }
 }
