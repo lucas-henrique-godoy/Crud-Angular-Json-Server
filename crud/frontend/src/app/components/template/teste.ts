@@ -4,8 +4,5 @@
     styleUrl: ['./product-create.component.css']
 })
 export class ProductCreateComponent implements OnInit {
-
-    createProduct() {
-        //...
-    }
+    nome: string;       
 }
