@@ -190,7 +190,64 @@ export class RedDirective {
 </ul>
 
 - Aqui ele irá acrescentar novos elementos. Temos uma UL(lista-não-ordenada) com LI,  e a partir desse LI ele irá fazer um laço FOR em cima  dos produtos, se tiver 10 produtos ele vai repetir o LI 10 vezes mostrando os nomes dos produtos. Esta diretiva estrutural ira adicionar novos elementos na DOM de acordo com a lista de produtos.
+_______________________________________________________________________________________________________________________________________________________________________
+
+**PROPERTY BININDG(BINDING DE ATRIBUTO): É uma das formas de comunicação entre o arquivo TS e o HTML dentro do componente. Binding quer dizer ligação,  e assim usando o colchetes associado a um atributo, ele vai fazer a ligação e pegar nome que colocamos na propriedade no HTML,  e vai procurar uma variável com esse nome e ai sim ele pega o valor da variável e associa ao dataSource que é um atributo de tabela. O Material Design usa esse dataSource com mais frequência para renderizar tabelas.
+
+-EXEMPLO DE PROPERTY BINDING:
+
+<table [dataSource]="products">  
+    
+</table>
+
+-Aqui o atributo dataSource irá no TS buscar a variável products que é uma lista(Array) e usar essa variável para montar a tabela. O dataSource deve estar dentro de colchetes para funcionar.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+@Component({
+    selector: 'app-product-read',
+    templateUrl: './product-read.compnent.html',
+    styleUrl: ['./product-read.component.css']			
+})
+export class ProductReadComonent
+implements OnInit {
+
+    products: Product[];  -Aqui definimos uma  variável que é uma lista de produtos no TS,  e será usada pelo dataSorce para construir a tabela no HTML.
+}
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+**EVENT BINDING: Usado para fazer ligação entre um evento do HTML pra um método que esta no arquivo TS. Para fazer isso é usado a sintaxe dos parênteses.
+
+-EXEMPLO DE EVENT BINDING:
+
+<button mat-raised-button (click)="createProduct()" color="primary">
+    Salvar
+</button>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+@Component({
+    selector: 'app-product-create',
+    templateUrl: './product-create.compnent.html',
+    styleUrl: ['./product-create.component.css']
+})
+export class ProductCreateComponent implements OnInit {
+
+    createProduct() {
+        //...
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+_______________________________________________________________________________________________________________________________________________________________________
 **DECORATOR: É um padrão de projeto eu tem como objetivo evitar herança, o invés de trabalhar como herança, você trabalha com composição para estender um determinado objeto. Exemplo: @Directive, @NgModule, @Component, etc. O Angular usa para definir que aquele classe exerce algum tipo de papel dentro do framework. Exemplo: Se queremos que uma classe seja um componente, usamos o @Component.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------

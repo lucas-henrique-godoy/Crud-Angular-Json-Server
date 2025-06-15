@@ -1,10 +1,3 @@
-<form *ngIf="product" class="product-form">
-
-</form>
-
-
-<ul>
-    <li **ngFor="let product of products">
-        {{ product.name }}
-    </li>
-</ul>
+<button mat-raised-button (click)="createProduct()" color="primary">
+    Salvar
+</button>
