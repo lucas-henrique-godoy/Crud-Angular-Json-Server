@@ -189,7 +189,7 @@ export class RedDirective {
     </li>
 </ul>
 
--
+- Aqui ele irá acrescentar novos elementos. Temos uma UL(lista-não-ordenada) com LI,  e a partir desse LI ele irá fazer um laço FOR em cima  dos produtos, se tiver 10 produtos ele vai repetir o LI 10 vezes mostrando os nomes dos produtos. Esta diretiva estrutural ira adicionar novos elementos na DOM de acordo com a lista de produtos.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **DECORATOR: É um padrão de projeto eu tem como objetivo evitar herança, o invés de trabalhar como herança, você trabalha com composição para estender um determinado objeto. Exemplo: @Directive, @NgModule, @Component, etc. O Angular usa para definir que aquele classe exerce algum tipo de papel dentro do framework. Exemplo: Se queremos que uma classe seja um componente, usamos o @Component.
