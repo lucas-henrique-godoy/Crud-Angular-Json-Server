@@ -221,9 +221,10 @@ ________________________________________________________________________________
 
 -EXEMPLO DE EVENT BINDING:
 
-<button mat-raised-button (click)="createProduct()" color="primary">
+<button mat-raised-button (click)="createProduct()" color="primary"> - Aqui é a chamada do método que esta no TS por meio de um evento click, dentro de parênteses.
     Salvar
 </button>
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 @Component({
@@ -233,7 +234,7 @@ ________________________________________________________________________________
 })
 export class ProductCreateComponent implements OnInit {
 
-    createProduct() {
+    createProduct() {    - Aqui é o método criado no TS que será chamado no HTML
         //...
     }
 }
