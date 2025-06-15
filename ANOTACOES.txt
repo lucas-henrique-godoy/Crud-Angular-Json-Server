@@ -175,17 +175,21 @@ export class RedDirective {
 
 -EXEMPLO DE CÓDIGO DE UMA DIRETIVA ESTRUTURAL:
 
-<form *ngIf="product" class="product-form">
+<form *ngIf="product" class="product-form">   
 
 </form>
 
+-Aqui irá exibir ou não o elemento formulário se o produto estiver definido/setado. Aqui ele  altera a estrutura, porque ele irá ou suprimir um determinado elemento ou  mostrar, de acordo com a expressão colocada no *ngIf. Ou seja, estamos fazendo uma condicional baseada em uma variável, ele irá mostrar o formulário se o produto estiver setado, ou ele simplesmente vai remover o formulário da DOM caso produto não esteja setado. Por isso é uma diretiva estrutural, pois irá mexer na DOM, vai remover um elemento caso a expressão seja falsa.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 <ul>
-    <li *ngFor="let product of products">
+    <li *ngFor="let product of products">   
         {{ product.name }}
     </li>
 </ul>
 
+-
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **DECORATOR: É um padrão de projeto eu tem como objetivo evitar herança, o invés de trabalhar como herança, você trabalha com composição para estender um determinado objeto. Exemplo: @Directive, @NgModule, @Component, etc. O Angular usa para definir que aquele classe exerce algum tipo de papel dentro do framework. Exemplo: Se queremos que uma classe seja um componente, usamos o @Component.
