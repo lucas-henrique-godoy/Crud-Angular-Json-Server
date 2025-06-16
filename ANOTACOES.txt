@@ -316,11 +316,21 @@ ROUTER OUTLET:
 <mat-sidenav-content>
   <router-outlet></router-outlet> -Aqui dentro de <router-outlet></router-outlet> é onde as rotas serão carregadas.
 </mat-sidenav-content>
+_______________________________________________________________________________________________________________________________________________________________________
+
+**PIPES: São processamentos que você faz em cima de variáveis. Ou seja, você pode usar pipes para fazer a formatação de dados. Por exemplo, digamos que  eventualmente o formato que você recebeu de um banco de dados, não é o formato que você quer exibir, e para isso você ode usar um pipe para formatação de um dado. Por exemplo, eu recebi um valor numérico e eu quero formatar esse valor como um valor de moeda, em real colocando o símbolo de real e quero colocar duas casas decimais. Então você pode passar esse valor e colocando um pipe | (barra reta), onde terá um método que será chamado e irá processar esse valor para transformar esse dado o formato que você quer. 
+
+-EXEMPLO DE PIPE:
+<p>
+    O vencimento é 
+    {{ produto.vencimento | date }}
+</p>
 
 
-
-
-
+-EXEMPLO DE PIPE COM PARÂMETRO:
+<td mat-cell *matCellDef="let product">
+    {{ product.price | currency: 'BRL' }}
+</td>
 
 
 
