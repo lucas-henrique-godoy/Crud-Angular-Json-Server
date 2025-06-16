@@ -246,7 +246,7 @@ Vamos supor que houvesse uma outra mudança na na variável do TS de Rebeca para
 -EXEMPLO DE ONE WAY DATABINING(EXPLCIAOD ACIMA):
 
 HTML:
-<input [value]="nome">  -Aqui mostra o valor que for colocado na variável do TS
+<input [value]="nome">  -Aqui mostra o valor que for colocado na variável do TS. Tem que usar colchetes.
 
 
 TS:
