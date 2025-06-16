@@ -246,7 +246,7 @@ Vamos supor que houvesse uma mudançana na variável do TS de Rebeca para Ana, e
 -EXEMPLO DE ONE WAY DATABINING(EXPLCIAOD ACIMA):
 
 HTML:
-<input [value]="nome">  -Aqui mostra o valor que for colocado na variavel do TS
+<input [value]="nome">  -Aqui mostra o valor que for colocado na variável do TS
 
 
 TS:
