@@ -332,7 +332,26 @@ ________________________________________________________________________________
     {{ product.price | currency: 'BRL' }}
 </td>
 
+ -Aqui estamos exibindo a propriedade price do objeto product, utilizando o pipe currency para formatar o valor como uma moeda.
+O parâmetro 'BRL' indica que a moeda usada deve ser o Real brasileiro (R$).
+Ou seja, o valor será exibido no formato de moeda brasileira, como por exemplo: R$ 1.000,00.
 
+📌 Observações extras (se quiser aprofundar):
+Se você não passar parâmetro, o Angular usa a moeda padrão do sistema.
+
+É possível também passar mais parâmetros para personalizar, como o número de casas decimais.
+
+Exemplo com mais opções:
+
+{{ product.price | currency:'BRL':'symbol':'1.2-2' }}
+Mostra o símbolo da moeda e sempre com duas casas decimais (ex: R$ 1.000,00).
+
+
+-EXEMLO DE UMA CADEIA DE PROCESSAMENTO/CADEIA DE PIPES:
+<p>
+    O vencimento é 
+    {{ produto.vencimento | date: 'fullDate' | uppercase }}
+</p>
 
 _______________________________________________________________________________________________________________________________________________________________________
 **DECORATOR: É um padrão de projeto eu tem como objetivo evitar herança, o invés de trabalhar como herança, você trabalha com composição para estender um determinado objeto. Exemplo: @Directive, @NgModule, @Component, etc. O Angular usa para definir que aquele classe exerce algum tipo de papel dentro do framework. Exemplo: Se queremos que uma classe seja um componente, usamos o @Component.

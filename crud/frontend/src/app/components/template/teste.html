@@ -1,6 +1,6 @@
 <p>
     O vencimento é 
-    {{ produto.vencimento | date }}
+    {{ produto.vencimento | date: 'fullDate' | uppercase }}
 </p>
 
 <td mat-cell *matCellDef="let product">
