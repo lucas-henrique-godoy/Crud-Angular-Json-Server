@@ -241,7 +241,7 @@ export class ProductCreateComponent implements OnInit {
 _______________________________________________________________________________________________________________________________________________________________________
 
 **ONE WAY DATA BINDING(DATA BINDING DE UMA ÚNICA DIREÇÃO): One-Way Data Binding (ligação de dados unidirecional) significa que os dados vão de um único sentido: do componente(TS) para a view (HTML). É quando você exibe dados na tela, mas não os altera diretamente a partir da tela. A view apenas reflete o estado do componente. Imagine que no HTML você tem um input de nome,  e lá no arquivo TS você tem uma variável chamada nome. Vamos supor que você coloque na variável nome o valor Rebeca(nome = "Rebeca"). Por conta do  One-Way Data Binding, ele irá aplicar esse nome(Rebeca) para o Input no HTML mostrando o nome Rebeca.
-Vamos supor que houvesse uma mudança na na variável do TS de Rebeca para Ana, ele vai mandar uma notificação e atualizar o componente para Ana, porque o valor da variável no TS mudou.
+Vamos supor que houvesse uma outra mudança na na variável do TS de Rebeca para Ana, ele vai mandar uma notificação e atualizar o componente para Ana, porque o valor da variável no TS mudou.
 
 -EXEMPLO DE ONE WAY DATABINING(EXPLCIAOD ACIMA):
 
@@ -257,7 +257,7 @@ TS:
 })
 export class ProductCreateComponent implements OnInit {
 
-    nome: string = "Rebeca";  	-Variável que é mostrada no input, se mudar o valor, la também muda.  
+    nome: string = "Rebeca";  	-Variável que é mostrada no input, se mudar o valor, lá também muda.  
 }
 
 
