@@ -143,13 +143,13 @@ ________________________________________________________________________________
 _______________________________________________________________________________________________________________________________________________________________________
 
 
-				# SEÇÃO - ELEMENTOS DO ANGULAR - Mini Curso: Componentes, Rotas, Diretivas, Pipes, Observables, Services, Injeção de Dependência.
+			# SEÇÃO - ELEMENTOS DO ANGULAR - Mini Curso: Componentes, Rotas, Diretivas, Pipes, Observables, Services, Injeção de Dependência.
 
 
 **COMPONENTE ANGULAR: É formado em via de regra por 3 partes: HTML, CSS, TS. Não necessariamente precisamos ter estilo no componente. Também não é obrigatório ter o arquivo HTML,  podemos colocar o template dentro do arquivo TS. Existe um escopo("mundo") dentro do componente, ou seja, o componente tem o seu próprio "mundo" interno, como e fosse uma pequena aplicação. Exemplo: Se aplicarmos um estilo CSS em um seletor genérico(link, titulo, etc), esta estilização será aplicada somente dentro do componente. Existem os arquivos globais, onde são aplicados regras que valem para todos os componentes(index.html, styles.css, etc).
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-**DIRETIVAS DE ATRIBUTO: Altera aparência(CSS) e o comportamento de um elemento,componente ou outra diretiva. Exemplo: alguma ação dentro de um botão, mudar a cor de algo, etc.
+**DIRETIVAS DE ATRIBUTO: Altera aparência(CSS) e o comportamento de um elemento, componente ou outra diretiva. Exemplo: alguma ação dentro de um botão, mudar a cor de algo, etc.
 
 -EXEMPLO DE CÓDIGO DE UMA DIRETIVA DE ATRIBUTO:
 
@@ -164,8 +164,10 @@ export class RedDirective {
 
 - A Diretiva acima, esta pegando o elemento da DOM, pegando atributo style e color(dentro de style), e alterando a cor para vermelho.
 
+
+
 -USO DA DIRETIVA NO HTML:
-<i class="material-icons v-middle" appRed> -		Aqui a Diretiva altera a cor do ícone para vermelho.
+<i class="material-icons v-middle" appRed>  -Aqui a Diretiva altera a cor do ícone para vermelho.
     favorite
 </i>
 
@@ -192,10 +194,11 @@ export class RedDirective {
 - Aqui ele irá acrescentar novos elementos. Temos uma UL(lista-não-ordenada) com LI,  e a partir desse LI ele irá fazer um laço FOR em cima  dos produtos, se tiver 10 produtos ele vai repetir o LI 10 vezes mostrando os nomes dos produtos. Esta diretiva estrutural ira adicionar novos elementos na DOM de acordo com a lista de produtos.
 _______________________________________________________________________________________________________________________________________________________________________
 
-**PROPERTY BININDG(BINDING DE ATRIBUTO): É uma das formas de comunicação entre o arquivo TS e o HTML dentro do componente. Binding quer dizer ligação,  e assim usando o colchetes associado a um atributo, ele vai fazer a ligação e pegar nome que colocamos na propriedade no HTML,  e vai procurar uma variável com esse nome, e ai sim ele pega o valor da variável e associa ao dataSource que é um atributo de tabela. O Material Design usa esse dataSource com mais frequência para renderizar tabelas.
+**PROPERTY BININDG(BINDING DE ATRIBUTO): É uma das formas de comunicação entre o arquivo TS e o HTML dentro do componente. Binding quer dizer ligação,  e assim usando os colchetes associados a um atributo, ele vai fazer a ligação e pegar nome que colocamos na propriedade no HTML,  e vai procurar uma variável com esse nome, e ai sim ele pega o valor da variável e associa ao dataSource que é um atributo de tabela. O Material Design usa esse dataSource com mais frequência para renderizar tabelas.
 
 -EXEMPLO DE PROPERTY BINDING:
 
+HTML:
 <table [dataSource]="products">  
     
 </table>
@@ -204,6 +207,7 @@ ________________________________________________________________________________
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+TS:
 @Component({
     selector: 'app-product-read',
     templateUrl: './product-read.compnent.html',
@@ -262,12 +266,12 @@ export class ProductCreateComponent implements OnInit {
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-**TWO WAY DATA BINDING(DATA BINDING DE DUAS DIREÇÕES): Two-Way Data Binding significa que os dados vão do componente (TS) para a view (HTML) e também da view (HTML) de volta para o componente (TS), ou seja, qualquer alteração feita na variável do componente será refletida automaticamente na tela, e qualquer alteração feita na tela (como digitar em um input) atualizará a variável no componente.
+**TWO WAY DATA BINDING(DATA BINDING DE DUAS DIREÇÕES): Two-Way Data Binding significa que os dados vão do componente (TS) para a view (HTML) e também da view (HTML) de volta para o componente (TS), ou seja, qualquer alteração feita na variável do componente será refletida automaticamente na tela, e qualquer alteração feita na tela (como digitar em um input) atualizará a variável no componente. É muito usado no Angular quando trabalhamos com formulários. Exemplo: Criar usuário, Alterar usuário. Assim tanto se alterarmos no HTML, como no código Typescript, os dados vão  ficar sincronizados.   
 
 -EXEMPLO DE TWO WAY DATABINING(EXPLCIAOD ACIMA):
 
 HTML:
-<input [(ngModel)]="nome">
+<input [(ngModel)]="nome"> -Essa é a sintaxe para se usar o two way data binding, assim os dados podem ser alterados tano no HTML quanto no TS.
 
 
 TS:
@@ -278,7 +282,7 @@ TS:
 })
 export class ProductCreateComponent implements OnInit {
 
-    nome: string = "Rebeca";  	-Variável que é mostrada no input, se mudar o valor, lá também muda.  
+    nome: string = "Rebeca";  	-Variável que é mostrada no input, se mudar o valor, lá também muda e vice versa.  
 }
 
 
