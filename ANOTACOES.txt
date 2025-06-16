@@ -291,7 +291,7 @@ ________________________________________________________________________________
 **ANGULAR ROUTER: O Angular Router é o sistema de navegação de páginas do Angular.
 Ele permite que você troque de componentes na tela sem recarregar a página, como se fosse um site de várias páginas — mas tudo acontece dentro do Angular.
 🧠 Por que usar? Imagine um app com várias "telas": Home, Sobre, Produtos, você não quer criar um HTML diferente para cada um, mas sim mudar o conteúdo dinamicamente. É isso que o Angular Router faz. Ele funciona com rotas: você define qual componente deve ser mostrado quando o usuário acessa uma determinada URL. 
-Por exemplo, quando o usuário clica o menu HOME e a URL HOME é selecionada, automaticamente o componente HOME vai ser carregao no Router Outlet que é um componente que faz parte do Angular Router
+Por exemplo, quando o usuário clica o menu HOME e a URL HOME é selecionada, automaticamente o componente HOME vai ser carregado no Router Outlet que é um componente que faz parte do Angular Router, onde irá injetar dentro dele os componentes de acordo com a navegação que foi feita. O que vai dizer a navegação é exatamente a URL do componente que foi mapeada, como houve m mapeamento de /home para o componente HOME, automaticamente quando você navega para ele, ele vai colocar o componente no local especificado que você disse.
 
 
 
