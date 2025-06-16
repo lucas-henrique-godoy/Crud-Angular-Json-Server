@@ -205,7 +205,7 @@ HTML:
 
 -Aqui o atributo dataSource irá no TS buscar a variável products que é uma lista(Array) e usar essa variável para montar a tabela. O dataSource deve estar dentro de colchetes para funcionar.
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 TS:
 @Component({
@@ -225,12 +225,13 @@ ________________________________________________________________________________
 
 -EXEMPLO DE EVENT BINDING:
 
+HTML:
 <button mat-raised-button (click)="createProduct()" color="primary"> - Aqui é a chamada do método que esta no TS por meio de um evento click, dentro de parênteses.
     Salvar
 </button>
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+TS:
 @Component({
     selector: 'app-product-create',
     templateUrl: './product-create.compnent.html',
@@ -247,7 +248,7 @@ ________________________________________________________________________________
 **ONE WAY DATA BINDING(DATA BINDING DE UMA ÚNICA DIREÇÃO): One-Way Data Binding (ligação de dados unidirecional) significa que os dados vão de um único sentido: do componente(TS) para a view (HTML). É quando você exibe dados na tela, mas não os altera diretamente a partir da tela. A view apenas reflete o estado do componente. Imagine que no HTML você tem um input de nome,  e lá no arquivo TS você tem uma variável chamada nome. Vamos supor que você coloque na variável nome o valor Rebeca(nome = "Rebeca"). Por conta do  One-Way Data Binding, ele irá aplicar esse nome(Rebeca) para o Input no HTML mostrando o nome Rebeca.
 Vamos supor que houvesse uma outra mudança na na variável do TS de Rebeca para Ana, ele vai mandar uma notificação e atualizar o componente para Ana, porque o valor da variável no TS mudou.
 
--EXEMPLO DE ONE WAY DATABINING(EXPLCIAOD ACIMA):
+-EXEMPLO DE ONE WAY DATABINING(EXPLICADO ACIMA):
 
 HTML:
 <input [value]="nome">  -Aqui mostra o valor que for colocado na variável do TS. Tem que usar colchetes pois é um binding de atributo.
@@ -271,7 +272,7 @@ export class ProductCreateComponent implements OnInit {
 -EXEMPLO DE TWO WAY DATABINING(EXPLCIAOD ACIMA):
 
 HTML:
-<input [(ngModel)]="nome"> -Essa é a sintaxe para se usar o two way data binding, assim os dados podem ser alterados tano no HTML quanto no TS.
+<input [(ngModel)]="nome"> -Essa é a sintaxe para se usar o Two Way Data Binding, assim os dados podem ser alterados tanto no HTML quanto no TS.
 
 
 TS:
