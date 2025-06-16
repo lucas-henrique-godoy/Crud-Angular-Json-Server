@@ -260,6 +260,27 @@ export class ProductCreateComponent implements OnInit {
     nome: string = "Rebeca";  	-Variável que é mostrada no input, se mudar o valor, lá também muda.  
 }
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**TWO WAY DATA BINDING(DATA BINDING DE DUAS DIREÇÕES): Two-Way Data Binding significa que os dados vão do componente (TS) para a view (HTML) e também da view (HTML) de volta para o componente (TS), ou seja, qualquer alteração feita na variável do componente será refletida automaticamente na tela, e qualquer alteração feita na tela (como digitar em um input) atualizará a variável no componente.
+
+-EXEMPLO DE TWO WAY DATABINING(EXPLCIAOD ACIMA):
+
+HTML:
+<input [(ngModel)]="nome">
+
+
+TS:
+@Component({
+    selector: 'app-product-create',
+    templateUrl: './product-create.compnent.html',
+    styleUrl: ['./product-create.component.css']
+})
+export class ProductCreateComponent implements OnInit {
+
+    nome: string = "Rebeca";  	-Variável que é mostrada no input, se mudar o valor, lá também muda.  
+}
+
 
 
 
