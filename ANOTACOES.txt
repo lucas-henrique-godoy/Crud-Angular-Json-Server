@@ -292,7 +292,30 @@ ________________________________________________________________________________
 Ele permite que você troque de componentes na tela sem recarregar a página, como se fosse um site de várias páginas — mas tudo acontece dentro do Angular.
 🧠 Por que usar? Imagine um app com várias "telas": Home, Produto, Usuário, você não quer criar um HTML diferente para cada um, mas sim mudar o conteúdo dinamicamente. É isso que o Angular Router faz. Ele funciona com rotas: você define qual componente deve ser mostrado quando o usuário acessa uma determinada URL.
  
--Por exemplo, quando o usuário clica o menu HOME e a URL HOME é selecionada, automaticamente o componente HOME vai ser carregado no Router Outlet que é um componente que faz parte do Angular Router, onde irá injetar dentro dele os componentes de acordo com a navegação que foi feita. O que vai dizer a navegação é exatamente a URL do componente que foi mapeada, como houve um mapeamento de /home para o componente Home, automaticamente quando você navega para ele, ele vai colocar o componente no local especificado que você disse. Se o usuário for lá e navegar para /produto, automaticamente ele vai trocar os componentes e vai carregar nesse mesmo local que você previamente definiu com o componente do Router(Router-Outlet) ele vai substituir o produto. Da mesma forma se o usuário for lá e navegar para /usuário, seja clicando o menu ou mesmo colocando direto na URL, ele vai substituir o componente produto pelo componente usuário. Então sempre que você for navegando na sua aplicação, basicamente vai ter um mapeamento entre a rota e o componente, e ai tendo um mapeamento entre a rota e o componente ele coloca dentro desse elemento no Router Outlet o componente selecionado a partir da rota  
+-Por exemplo, quando o usuário clica o menu HOME e a URL HOME é selecionada, automaticamente o componente HOME vai ser carregado no Router Outlet que é um componente que faz parte do Angular Router, onde irá injetar dentro dele os componentes de acordo com a navegação que foi feita. O que vai dizer a navegação é exatamente a URL do componente que foi mapeada, como houve um mapeamento de /home para o componente Home, automaticamente quando você navega para ele, ele vai colocar o componente no local especificado que você disse. Se o usuário for lá e navegar para /produto, automaticamente ele vai trocar os componentes e vai carregar nesse mesmo local que você previamente definiu com o componente do Router(Router-Outlet) ele vai substituir o produto. Da mesma forma se o usuário for lá e navegar para /usuário, seja clicando o menu ou mesmo colocando direto na URL, ele vai substituir o componente produto pelo componente usuário. Então sempre que você for navegando na sua aplicação, basicamente vai ter um mapeamento entre a rota e o componente, e ai tendo um mapeamento entre a rota e o componente ele coloca dentro desse elemento no Router Outlet o componente selecionado a partir da rota.
+
+-EXEMPLO DE ROUTER:
+
+HTML:
+<a routerLink="/products"> -Link da URL da rota do componente onde o usuário poderá acessar na aplicação.
+  Produtos
+</a>
+
+
+TS:
+const routes: Routes = [{
+  path: "products",   			- Aqui é definido a rota para o componente products. Path é o caminho.
+  componente: ProductCrudComponent 
+}, {
+  path: "products/create",
+  component: ProductCreateComponent
+}]; 
+
+
+ROUTER OUTLET:
+<mat-sidenav-content>
+  <router-outlet></router-outlet> -Aqui dentro de <router-outlet></router-outlet> é onde as rotas serão carregadas.
+</mat-sidenav-content>
 
 
 
