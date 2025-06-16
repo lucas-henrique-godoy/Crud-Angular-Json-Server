@@ -325,7 +325,7 @@ ________________________________________________________________________________
     O vencimento é 
     {{ produto.vencimento | date }}
 </p>
-
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -EXEMPLO DE PIPE COM PARÂMETRO:
 <td mat-cell *matCellDef="let product">
@@ -345,13 +345,16 @@ Exemplo com mais opções:
 
 {{ product.price | currency:'BRL':'symbol':'1.2-2' }}
 Mostra o símbolo da moeda e sempre com duas casas decimais (ex: R$ 1.000,00).
-
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -EXEMLO DE UMA CADEIA DE PROCESSAMENTO/CADEIA DE PIPES:
 <p>
     O vencimento é 
     {{ produto.vencimento | date: 'fullDate' | uppercase }}
 </p>
+
+-Essa cadeia de pipes formata a data de vencimento (produto.vencimento) para o formato completo (fullDate) e depois transforma o texto todo em letras maiúsculas (uppercase).
+
 
 _______________________________________________________________________________________________________________________________________________________________________
 **DECORATOR: É um padrão de projeto eu tem como objetivo evitar herança, o invés de trabalhar como herança, você trabalha com composição para estender um determinado objeto. Exemplo: @Directive, @NgModule, @Component, etc. O Angular usa para definir que aquele classe exerce algum tipo de papel dentro do framework. Exemplo: Se queremos que uma classe seja um componente, usamos o @Component.
