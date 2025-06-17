@@ -355,7 +355,11 @@ Mostra o símbolo da moeda e sempre com duas casas decimais (ex: R$ 1.000,00).
 -Essa cadeia de pipes formata a data de vencimento (produto.vencimento) para o formato completo (fullDate) e depois transforma o texto todo em letras maiúsculas (uppercase).
 _______________________________________________________________________________________________________________________________________________________________________
 
-**PROGRAMAÇÃO REATIVA(REACTIVEX) 
+**PROGRAMAÇÃO REATIVA(REACTIVEX): O Angular usa esse framework ReactiveX que trabalha com conceitos de programação reativa. Programação reativa tem o conceito de o código só será chamado de forma reativa, ou seja, precisa acontecer alguma coisa externa, no caso um evento para dai quando acontecer isso o código ser executado.
+
+-IMPORTAÇÃO DO OBSERVABLE NO ANGULAR: import { Observable } from "rxjs";
+
+*O PADRÃO OBSERVER: É o padrão de projeto mais utilizado na web
 
 
 
