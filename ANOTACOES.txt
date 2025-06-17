@@ -359,7 +359,7 @@ ________________________________________________________________________________
 
 -IMPORTAÇÃO DO OBSERVABLE NO ANGULAR: import { Observable } from "rxjs";
 
-*O PADRÃO OBSERVER: É o padrão de projeto mais utilizado na web
+*O PADRÃO OBSERVER: É o padrão de projeto mais utilizado na web. Tudo começa a partir do padrão Observer. É um padrão orientado Evento
 
 
 
