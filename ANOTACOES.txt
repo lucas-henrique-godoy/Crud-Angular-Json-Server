@@ -355,7 +355,7 @@ Mostra o símbolo da moeda e sempre com duas casas decimais (ex: R$ 1.000,00).
 -Essa cadeia de pipes formata a data de vencimento (produto.vencimento) para o formato completo (fullDate) e depois transforma o texto todo em letras maiúsculas (uppercase).
 _______________________________________________________________________________________________________________________________________________________________________
 
-**OBSERVABLES: 
+**PROGRAMAÇÃO REATIVA(RECTIVEX) 
 
 
 
