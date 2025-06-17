@@ -354,6 +354,13 @@ Mostra o símbolo da moeda e sempre com duas casas decimais (ex: R$ 1.000,00).
 </p>
 
 -Essa cadeia de pipes formata a data de vencimento (produto.vencimento) para o formato completo (fullDate) e depois transforma o texto todo em letras maiúsculas (uppercase).
+_______________________________________________________________________________________________________________________________________________________________________
+
+**OBSERVABLES: 
+
+
+
+
 
 _______________________________________________________________________________________________________________________________________________________________________
 **DECORATOR: É um padrão de projeto eu tem como objetivo evitar herança, o invés de trabalhar como herança, você trabalha com composição para estender um determinado objeto. Exemplo: @Directive, @NgModule, @Component, etc. O Angular usa para definir que aquele classe exerce algum tipo de papel dentro do framework. Exemplo: Se queremos que uma classe seja um componente, usamos o @Component.
