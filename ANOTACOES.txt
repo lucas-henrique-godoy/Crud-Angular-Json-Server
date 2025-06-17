@@ -359,7 +359,12 @@ ________________________________________________________________________________
 
 -IMPORTAÇÃO DO OBSERVABLE NO ANGULAR: import { Observable } from "rxjs";
 
-*O PADRÃO OBSERVER: É o padrão de projeto mais utilizado na web. Tudo começa a partir do padrão Observer. É um padrão orientado Evento
+*O PADRÃO OBSERVER: É o padrão de projeto mais utilizado na web. Tudo começa a partir do padrão Observer. É um padrão orientado Evento.
+
+-Subject: É quem tem a capacidade de monitorar e detectar quando um evento acontece.
+-Observer: São os códigos que estão interessados num determinado evento.
+
+*  O que acontece, se você tirar a figura do Subject, os observables(quem esta interessado em monitorar os eventos) precisam ficar monitorando os eventos, mas se você tiver alguém que vai ser capaz de monitorar os eventos, você pode delegar para esse Subject. Exemplo: "Monitore o evento tal, e  quando acontecer o evento me notifique" ou seja, me avise que o evento aconteceu. Por isso os observadores precisam se registrar no Subject dizendo que ele é interessado no evento, ou seja, para o padrão de projeto Observer existir, antes precisa haver um explicito desejo dizer "Eu estou interessado em receber notificações de um determinado evento", ou seja, há um registro
 
 
 
