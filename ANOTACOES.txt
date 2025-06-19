@@ -383,4 +383,4 @@ Então deixa bem claro que trabalhar com o padrão Observer deixa o Observador q
 
 _______________________________________________________________________________________________________________________________________________________________________
 **DECORATOR: É um padrão de projeto eu tem como objetivo evitar herança, o invés de trabalhar como herança, você trabalha com composição para estender um determinado objeto. Exemplo: @Directive, @NgModule, @Component, etc. O Angular usa para definir que aquele classe exerce algum tipo de papel dentro do framework. Exemplo: Se queremos que uma classe seja um componente, usamos o @Component.
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+_______________________________________________________________________________________________________________________________________________________________________
