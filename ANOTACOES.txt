@@ -372,7 +372,7 @@ EXEMPLO: Imagine que você tem um evento de compra, e você tem um Observador qu
 
 -CENÁRIO 1-SEM  OBSERVER: A namorada não irá usar o padrão Observer e ela vai ficar de forma proativa na janela olhando os carros chegarem, quando chegar o carro amarelo do namorado, ela vai para dentro da sala e diz "Pessoal ele acabou de chegar, vamos apagaras luzes e ficar em silêncio para a gente fazer a surpresa". Neste primeiro cenário sem um Observer, quem estava interessada no evento(que era namorada), ela ficou parada sem curtir mais a festa olhando na janela até que o evento acontecesse para dai ela ser responsável por todo o processo de detectar o evento e avisar todos os convidados.  Neste caso como ela teve uma postura proativa, ficou muito  ruim para ela, porque ela ficou totalmente ocupada em detectar o evento e daí avisar os convidados.
 
--CENÁRIO 2-COM OBSERVER: 
+-CENÁRIO 2-COM OBSERVER: A namorada delegou a tarefa de ficar observando para o porteiro, aqui temos o uso do padrão Observer, porque o Porteiro é o Subject. Como ele esta na portaria ele tem a capacidade de detectar o Evento de uma forma muito mais fácil, até porque o Namorado vai ter que passar pelo prédio ou pela portaria, então ele tem a posição privilegiada pra detectar o Evento.
 
 
 
