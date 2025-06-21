@@ -384,7 +384,7 @@ Então deixa bem claro que trabalhar com o padrão Observer deixa o Observador q
 -Os Observables que estão dentro do RXJS que o Angular usa como dependência, possuem algumas vantagens por exemplo: 
 1- Um Observable diferente da Promisse você consegue reusar ele.
 
-2- Consegue lidar com um STREAM DE DADOS, vamos supor que você precisa ficar monitorando uma determinada votação presidencial, e você pode criar um Observable para ficar de tempo em tempos consumindo essa informação do servidor, ou seja, com um único Observable você consegue ficar recebendo uma STREAM DE DADOS. Exemplo: "Foram apurados 20% da urna onde um candidato esta com 50% e outro esta com 50%". Daqui a pouco chega mais informações dizendo "Foram apuradas 40% das urnas e agora um cadidato esta com 60%e o outro esta com 40%", depois chegam mais dados. E com 1 único Observable voce fica recebendo esse STREM DE DADOS, ou seja, um conjunto de dados em sequencia, sem necessariamante ficar criando novos objetos porquevoce consegue reusar.
+2- Consegue lidar com um STREAM DE DADOS, vamos supor que você precisa ficar monitorando uma determinada votação presidencial, e você pode criar um Observable para ficar de tempo em tempos consumindo essa informação do servidor, ou seja, com um único Observable você consegue ficar recebendo uma STREAM DE DADOS. Exemplo: "Foram apurados 20% da urna onde um candidato esta com 50% e outro esta com 50%". Daqui a pouco chega mais informações dizendo "Foram apuradas 40% das urnas e agora um candidato esta com 60%e o outro esta com 40%", depois chegam mais dados. E com 1 único Observable voce fica recebendo esse STREM DE DADOS, ou seja, um conjunto de dados em sequencia, sem necessariamente ficar criando novos objetos porque voce consegue reusar.
 
 3- Operadores: As Promises também tem um outro "poder" que são os Operadores, que são funções que podem ser usadas juntamente com os Observables. Por exemplo no caso da Promisse você tem basicamente o método then. No caso dos Obsevables você tem outros métodos como map. Você consegue fazer filtros que são tipo de funções(Operadores) que você consegue trabalhar com os seus dados. Por exemplo:  Eu acabei de receber uma lista de produtos do meu backend, você te como ficar trabalhando com esses dados a partir dos Observables de uma maneira muito interessante. Então tem uma serie de funções que ajudam a processar os dados. Em outras palavras por trás do Observable ele vai encapsular essa questão do padrão Observer. O padrão Observer é a base da programação reativa, ou seja só tem programação reativa a partir do padrão Observer. Quando o evento acontece ai sim é que o código vai de forma reativa agir por conta que um determinado evento que aconteceu.
 
@@ -398,7 +398,7 @@ criarNoBackend(produto: Produto): Observable<Produto> {
 
 -Esse método recebe um produto como parâmetro e faz uma chamada do tipo post para cadastrar esse produto no backend. Foi chamado o módulo http do Angular que serve para trabalhar com as requisições HTTP. Entretanto o backend da nossa aplicação demora as vezes alguns segundos para responder, então esse método não ira responder na hora que você chamou, ele via responder depois de algum tempo no futuro, por isso esse método retorna um Observable, e esse Observable que será retornado a partir desse método, podemos passar para ele registrar um Observador(exatamente o que esta acontecendo no código abaixo no subscribe). Você pode registrar um Observador:
 
-
+----------------------------------------------------------------------------------------------------------------------------------------------------
 
 criarProduto(): void {
   this.criarNoBackend(this.produto).subscribe (() => {
@@ -406,7 +406,7 @@ criarProduto(): void {
 })
 }
 
-- Neste método eu chamei o criarNoBackend, passei o produto e como resposta desa chamada eu recebo um Observable, ou seja,  na hora que eu chamo ele ja retorna um Observable, só que a resposta do servidor anda nao chegou, por isso que eu chamo o metodo subscribe e ai eu passo uma função para ser chamada quando a resposta do servidor chegar
+- Neste método eu chamei o criarNoBackend, passei o produto e como resposta desa chamada eu recebo um Observable, ou seja,  na hora que eu chamo ele ja retorna um Observable, só que a resposta do servidor anda nao chegou, por isso que eu chamo o metodo subscribe e ai eu passo uma função para ser chamada quando a resposta do servidor chegar.
 
 -Neste metodo esta sendo regstrado um Observador, que é a função Arrow que esta sendo passada como parametro para o subscribe. Ou seja, o subcribe é o método de registro. Neste caso o Observable é o meu Subject. Ou seja, o Observable tem a capacidade de detectar que um determinado evento aconteceu, que é o evento da resposta do meu servidor(backend) para minha requisição post que foi feita, e quando essa respost chegar  método que eu pasei para o subscribe será chamado e ai sim eu posso exibir uma mensagem por exemplo, de que o usuario foi salvo, ou chamar a navegação para ir para uma outra tela, ou seja, eu posso fazer qualquer coisa que eu queira em resposta da minha chamada ao backend.
 
