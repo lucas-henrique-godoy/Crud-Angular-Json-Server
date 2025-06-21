@@ -398,13 +398,17 @@ criarNoBackend(produto: Produto): Observable<Produto> {
 
 -Esse método recebe um produto como parâmetro e faz uma chamada do tipo post para cadastrar esse produto no backend. Foi chamado o módulo http do Angular que serve para trabalhar com as requisições HTTP. Entretanto o backend da nossa aplicação demora as vezes alguns segundos para responder, então esse método não ira responder na hora que você chamou, ele via responder depois de algum tempo no futuro, por isso esse método retorna um Observable, e esse Observable que será retornado a partir desse método, podemos passar para ele registrar um Observador(exatamente o que esta acontecendo no código abaixo no subscribe). Você pode registrar um Observador:
 
+
+
 criarProduto(): void {
   this.criarNoBackend(this.produto).subscribe (() => {
     this.exibirMensagem("Salvo com sucesso!");
 })
 }
 
--Neste metodo esta sendo regstrado um Observador, que é a função Arrow que esta sendo passada como parametro para o subscribe. Ou seja, o subcribe é o método de registro. Neste caso o Observable é o meu Subject. Ou seja, o Observable tem a capacidade de detectar que um determinado evento aconteceu, que é o evento da resposta do meu servidor(backend)
+- Neste método eu chamei o criarNoBackend, passei o produto e como resposta desa chamada eu recebo um Observable, ou seja,  na hora que eu chamo ele ja retorna um Observable, só que a resposta do servidor anda nao chegou, por isso que eu chamo o metodo subscribe e ai eu passo uma função para ser chamada quando a resposta do servidor chegar
+
+-Neste metodo esta sendo regstrado um Observador, que é a função Arrow que esta sendo passada como parametro para o subscribe. Ou seja, o subcribe é o método de registro. Neste caso o Observable é o meu Subject. Ou seja, o Observable tem a capacidade de detectar que um determinado evento aconteceu, que é o evento da resposta do meu servidor(backend) para minha requisição post que foi feita, e quando essa respost chegar  método que eu pasei para o subscribe será chamado e ai sim eu posso exibir uma mensagem por exemplo, de que o usuario foi salvo, ou chamar a navegação para ir para uma outra tela, ou seja, eu posso fazer qualquer coisa que eu queira em resposta da minha chamada ao backend.
 
 
 
