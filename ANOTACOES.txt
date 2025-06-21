@@ -378,7 +378,7 @@ Então deixa bem claro que trabalhar com o padrão Observer deixa o Observador q
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *ENTENDENDO OBSERVABLES: Do ponto de vista do Javascript puro a gente começa a trabalhar com esse conceito de reatividade a partir deque você tem a possibilidade de passar uma função como parâmetro para outra função, e essas funções são chamadas também de CALLBACKS. Por exemplo: Você passa uma função para outra função como parâmetro para outra função dizendo: "Eu quero que você invoque essa função que eu estou passando como parâmetro, quando a resposta a requisição chegar". E ai ele vai lá e chama a CALLBACK. Um dos problemas da CALLBACK é quando você te uma logica mais complexa e você vai acabar caindo num cenário que você precisa passar uma CALLBACK dentro de outra CALLBACK(CALLBACK HELL), uma  função dentro da outra, tornando assim o código de difícil leitura, difícil manutenção. Quanto mais outras CALLBACKS, outras logicas fossem adicionadas ficava ainda mais complicados a código.
-A partir do ECMA Script 2015 surgiu um conceito de Promises onde também são usados os CALLBACKS, mas na Promisse tem a capacidade de encadear as varias chamadas, você consegue compor melhor varias chamadas de Promisse
+A partir do ECMA Script 2015 surgiu um conceito de Promises onde também são usados os CALLBACKS, mas na Promisse tem a capacidade de encadear as varias chamadas, você consegue compor melhor varias chamadas de Promisses,  sem ter essa questão desse aninhamento que era causado pelo CALLBACK.
 
 
 
