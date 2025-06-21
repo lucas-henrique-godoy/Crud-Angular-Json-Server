@@ -3,7 +3,7 @@
 Tecnologias utilizadas:
 - Angular CLI: 9.1.15
 - Node: 12.22.12
-_______________________________________________________________________________________________________________________________________________________________________
+____________________________________________________________________________________________________________________________________________________
 		
 #SEÇÃO - BACKEND DO PROJETO
 
@@ -26,8 +26,7 @@ Basicamente esse script chama o json-server que foi instalado anteriormente, col
 
 -Dentro da pasta backend, colocar o comando npm start para rodar a API.
 
-_______________________________________________________________________________________________________________________________________________________________________
-
+____________________________________________________________________________________________________________________________________________________
 *TIVE UM ERRO DEPOIS DE CRIAR O DB.JSON E RODAR A API:
 
 ✅ Resumo do erro e solução
@@ -45,7 +44,7 @@ Desinstalamos a versão atual do json-server e instalamos uma versão mais antig
 -Instala aversão do jso-server compatível com o Node 12: npm install json-server@0.16.3 --save-dev
 
 Depois disso, npm start funcionou corretamente com a sua versão atual do Node.js.
-_______________________________________________________________________________________________________________________________________________________________________
+____________________________________________________________________________________________________________________________________________________
 
 			# SEÇÃO - FRONTEND DO PROJETO
 
@@ -58,10 +57,10 @@ ________________________________________________________________________________
 -Para criar um novo projeto Angular, rodar o comando: ng new minha-app.
 
 - Typescript: Linguagem criada pela Microsoft, que é um superset do JavaScript, onde possuí todas as funcionalidades do JavaScript, mas tem outras como Tipagem Forte e é Orientada a Objetos. No Angular, o código escrito em Typescript é compilado para JavaScript.
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------
 
 **Árvore de Componentes: A partir do componente principal(raiz ou pai) que no Angular normalmente se chama app.component, você referencia outros componentes como: Formulário, Header, um componente de navegação, um componente que representa o conteúdo, etc.
-_______________________________________________________________________________________________________________________________________________________________________
+____________________________________________________________________________________________________________________________________________________
 
 **Conceitos Essenciais- Inicialização da Aplicação:
 
@@ -70,14 +69,13 @@ ________________________________________________________________________________
 - Arquivo app.module: Arquivo que é chamado pelo main.ts para inicializar a aplicação. A aplicação Angular é organizada em componentes, ou seja uma grande árvore de componentes. Esses componentes são organizados dentro de módulos, a aplicação é modularizada. Os módulos por sua vez, nos dão alguns "poderes", como por exemplo criar determinados componentes que estão visíveis apenas dentro do módulo. Isso traz um maior nível de encapsulamento. Exemplo: Imagine que você tem um determinado componente que é um componente que não pode ser usado fora de determinada situação(ele não pode ser usado no sistema inteiro), então podemos coloca-lo dentro de um módulo e ele ficar visível apenas dentro daquele módulo. Dentro do arquivo app.module tem a um atributo chamado bootstrap que também serve para inicializar a aplicação e aponta para o app.component que é o que é criado por padrão.
 
 - Arquivo app.component: É o componente que é criado por padrão, onde a partir dele  toda a árvore de componentes será chamada.
-_______________________________________________________________________________________________________________________________________________________________________
-
-**O que é um componente? É como um pedaço da aplicação, um trecho de código que representa um componente visual da sua tela. Um componente é composto por um arquivo HTML, CSS e TS. Ou seja,  estrutura(HTML), estilo(CSS), comportamento(TS). Quando um componente é criado, é gerado uma tag personalizada, exemplo o componente home.component gera a tag <app-home><app-home>,essa é a forma para referenciar todo o código HTML, CSS  e TS 	que foi criado. A ideia é encapsular dentro desse componente as três tecnologias da WEB.
+____________________________________________________________________________________________________________________________________________________
+**O que é um componente? É como um pedaço da aplicação, um trecho de código que representa um componente visual da sua tela. Um componente é composto por um arquivo HTML, CSS e TS. Ou seja,  estrutura(HTML), estilo(CSS), comportamento(TS). Quando um componente é criado, é gerado uma tag personalizada, exemplo o componente home.component gera a tag <app-home><app-home>,essa é a forma para referenciar todo o código HTML, CSS  e TS que foi criado. A ideia é encapsular dentro desse componente as três tecnologias da WEB.
 
 -Arquivo TS: É o arquivo de comportamento do componente, a partir dele é que o Angular irá encontrar os arquivos HTML e CSS, pois ele faz uma referencia, então quando criamos um componentes pelo menos devemos ter o arquivo TS.
 
 **Organização Usando Módulo: O Angular não organiza a aplicação somente em componentes, mas também em módulos, isso significa que todos os componentes irão estar dentro de algum módulo, seja um único módulo para toda a aplicação, como numa aplicação pequena todos os componentes podem ficar dentro de app.module(módulo principal criado por padrão), como é o caso deste projeto. Mas podemos organizar nossa aplicação em diversos módulos. Desse modo, quando você criar um componente dentro do módulo, você tem a escolha de dizer se aquele componente ficará visível para fora do módulo, ou seja alguém de fora do módulo pode referenciar aquele componente, ou seja ,você pode dizer que aquele componente vai ficar visível  apenas dentro do módulo.
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------
 **Anatomia do módulo: 
 
 - Dentro do arquivo app.module tem 5 atributos: Declarations, Imports, Exports, Providers, Bootstrap.
@@ -94,11 +92,13 @@ O que devemos colocar dentro de cada um desses atributos?
 
 -Bootstrap: É onde tem a referência do componente principal que será carregado, sendo necessário apenas para 1 único módulo, que é o módulo inicial da aplicação, o app.module. No caso do app.module, não precisamos exportar nada, os outros módulos é que vão exportar para o app.module utilizar, ou seja o app.module importa os outros módulos.
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------
 -OBS: Quando dizemos que um componente faz parte de um módulo, não necessariamente ele é visível para fora do módulo. Para tornar um componente visível para fora do módulo, ele deve ser colocado dentro de exports. 
 -Quando criamos um componente ele já é registrado dentro de app.module automaticamente, ou seja se estamos trabalhando dentro de um módulo app.module, só vai ser possível usar componentes que estejam carregados dentro do ap.module.
-_______________________________________________________________________________________________________________________________________________________________________
 
+
+**DECORATOR: É um padrão de projeto eu tem como objetivo evitar herança, o invés de trabalhar como herança, você trabalha com composição para estender um determinado objeto. Exemplo: @Directive, @NgModule, @Component, etc. O Angular usa para definir que aquele classe exerce algum tipo de papel dentro do framework. Exemplo: Se queremos que uma classe seja um componente, usamos o @Component.
+____________________________________________________________________________________________________________________________________________________
 **Instalando e criando projeto Angular
 
 -Instalando a cli do Angular. Comando: npm i -g @angular/cli
@@ -324,7 +324,7 @@ ________________________________________________________________________________
     O vencimento é 
     {{ produto.vencimento | date }}
 </p>
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------
 
 -EXEMPLO DE PIPE COM PARÂMETRO:
 <td mat-cell *matCellDef="let product">
@@ -353,8 +353,7 @@ Mostra o símbolo da moeda e sempre com duas casas decimais (ex: R$ 1.000,00).
 </p>
 
 -Essa cadeia de pipes formata a data de vencimento (produto.vencimento) para o formato completo (fullDate) e depois transforma o texto todo em letras maiúsculas (uppercase).
-_______________________________________________________________________________________________________________________________________________________________________
-
+____________________________________________________________________________________________________________________________________________________
 **PROGRAMAÇÃO REATIVA(REACTIVEX): O Angular usa esse framework ReactiveX que trabalha com conceitos de programação reativa. Programação reativa tem o conceito de o código só será chamado de forma reativa, ou seja, precisa acontecer alguma coisa externa, no caso um evento para dai quando acontecer isso o código ser executado.
 
 -IMPORTAÇÃO DO OBSERVABLE NO ANGULAR: import { Observable } from "rxjs";
