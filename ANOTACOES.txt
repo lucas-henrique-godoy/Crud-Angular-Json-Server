@@ -408,9 +408,8 @@ criarProduto(): void {
 - Neste método eu chamei o criarNoBackend, passei o produto e como resposta desa chamada eu recebo um Observable, ou seja,  na hora que eu chamo ele ja retorna um Observable, só que a resposta do servidor anda nao chegou, por isso que eu chamo o metodo subscribe e ai eu passo uma função para ser chamada quando a resposta do servidor chegar.
 
 -Neste metodo esta sendo regstrado um Observador, que é a função Arrow que esta sendo passada como parametro para o subscribe. Ou seja, o subcribe é o método de registro. Neste caso o Observable é o meu Subject. Ou seja, o Observable tem a capacidade de detectar que um determinado evento aconteceu, que é o evento da resposta do meu servidor(backend) para minha requisição post que foi feita, e quando essa respost chegar  método que eu pasei para o subscribe será chamado e ai sim eu posso exibir uma mensagem por exemplo, de que o usuario foi salvo, ou chamar a navegação para ir para uma outra tela, ou seja, eu posso fazer qualquer coisa que eu queira em resposta da minha chamada ao backend.
-
-
-
 ____________________________________________________________________________________________________________________________________________________
-**DECORATOR: É um padrão de projeto eu tem como objetivo evitar herança, o invés de trabalhar como herança, você trabalha com composição para estender um determinado objeto. Exemplo: @Directive, @NgModule, @Component, etc. O Angular usa para definir que aquele classe exerce algum tipo de papel dentro do framework. Exemplo: Se queremos que uma classe seja um componente, usamos o @Component.
-____________________________________________________________________________________________________________________________________________________
+
+
+**SERVICES: Sao classes que tem como principal objetivo organizar e compartilhar métodos e dados entre componentes.
+
