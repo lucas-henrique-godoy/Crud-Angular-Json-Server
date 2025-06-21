@@ -383,7 +383,8 @@ Então deixa bem claro que trabalhar com o padrão Observer deixa o Observador q
 
 -Os Observables que estão dentro do RXJS que o Angular usa como dependência, possuem algumas vantagens por exemplo: 
 1- Um Observable diferente da Promisse você consegue reusar ele, 
-2- Consegue lidar com um STREAM DE DADOS, vamos supor que você precisa ficar monitorando uma determinada votação presidencial, e você pode criar um Observable para ficar de tempo em tempos consumindo essa informação 
+2- Consegue lidar com um STREAM DE DADOS, vamos supor que você precisa ficar monitorando uma determinada votação presidencial, e você pode criar um Observable para ficar de tempo em tempos consumindo essa informação do servidor, ou seja, com um único Observable você consegue ficar recebendo uma STREAM DE DADOS. Exemplo: "Foram apurados 20% da urna onde um candidato esta com 50% e outro esta com 50%". Daqui a pouco chega mais informações dizendo "Foram apuradas 40% das urnas e agora um cadidato esta com 60%e o outro esta com 40%", depois chegam mais dados. E com 1 único Observable voce fica recebendo esse STREM DE DADOS, ou seja, um conjunto de dados em sequencia, sem necessariamante ficar criando novos objetos porquevoce consegue reusar.
+3- Operadores: As Promises tambem tem um outro "poder" que são os Operadores, que são funções que podem ser usadas untamente com os Observables
 
 
 
