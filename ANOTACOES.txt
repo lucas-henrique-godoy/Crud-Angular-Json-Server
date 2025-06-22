@@ -411,5 +411,6 @@ criarProduto(): void {
 _______________________________________________________________________________________________________________________________________________________________________
 
 
-**SERVICES: São classes que tem como principal objetivo organizar e compartilhar métodos e dados entre componentes.
+**SERVICES: São classes que tem como principal objetivo organizar e compartilhar métodos e dados entre componentes. É possível também utilizar Services dentro de Diretivas. A ideia é você separar responsabilidades.
+-Tudo aquilo que diz respeito a responsabilidade de mostrar algo visual na tela diz respeito ao componente. Mas sempre que você tem regras que não tem respeito diretamente com a parte visual, ou você quer encapsular o acesso a sua API(o backend da aplicação), o ideal é você separar as responsabilidades
 
