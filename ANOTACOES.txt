@@ -439,12 +439,29 @@ export class ProductService {
 
 
 -OBS: Existe um padrão de projeto do Design Pattern chamado Sigleton, que consiste em criar apenas uma única instancia de uma classe, as vezes criando um construtor privado dependendo da linguagem, ou as vezes criando um método para devolver essa instância. Como o Angular ele vai  gerenciar a criação do Service e vai ser responsável por gerenciar a criação dos componentes, porque você não instancia uma classe produtoService, da mesma forma que você não vai instanciar uma classe correspondente a um componente, você não vai instanciar um componente. Quem vai fazer todo esse trabalho de instanciar essas classes gerenciadas como: Componente, Diretiva, Service é o Angular. Então como o Angular é responsável por gerenciar a criação desses objetos, ele também vai ser responsável por Injetar Dependência de um objeto no outro, como também é responsável por garantir que uma determinada instancia sempre será devolvida quando você pedir. Imagine que você tem um Service e esse Service tem um contador dentro dele, se você vai lá e aumenta esse contador para 10 em um determinado Componente A,  quando você injetar esse Service no Componente B, 
-o contador vale 10. E se lá no Componente B  você aumentar esse contador para 30, quando você injetar esse Service novamente dentro do Componente A, o contador agora vale 30. E você você aumentar esse contador novamente para 130 e você vai injetar esse Service no Componente C, o contador vale 130, porque estamos sempre trabalhand com a mesma instância do Service uma vez que você usa o provideIn: "root".
+o contador vale 10. E se lá no Componente B  você aumentar esse contador para 30, quando você injetar esse Service novamente dentro do Componente A, o contador agora vale 30. Se você aumentar esse contador novamente para 130 e você vai injetar esse Service no Componente C, o contador vale 130, porque estamos sempre trabalhando com a mesma instância do Service uma vez que você usa o provideIn: "root".
 _______________________________________________________________________________________________________________________________________________________________________
 
 **INJEÇAO DE DEPENDÊNCIA: É um padrão no qual a classe recebe as dependênciasde uma fonte externa ao invés de criar por conta própria.
 
--Num cenário padrão quando uma Classe A precisa de uma Classe B, ouseja, a Classe A vai preisar da Clase B, então a Classe A vai criar a Classe B. É muito natural acontecer isso, mas na Injeção de Dependência ha uma inversão dessa logica, ou sej, é um padrão onde a classe recebe as dependências a partir de uma fonte externa ao invés de criar por conta própria. Ou seja, a Classe A precisa da Classe B, ao invés da Classe A criar por conta própria uma instância da Classe B, a Classe A vai receber a Classe B a partir do construtor ou a partir de algum outro mecanismo como é o caso da Injeão de Dependência. 
+-Num cenário padrão quando uma Classe A precisa de uma Classe B, ouseja, a Classe A vai preisar da Clase B, então a Classe A vai criar a Classe B. É muito natural acontecer isso, mas na Injeção de Dependência ha uma inversão dessa logica, ou sej, é um padrão onde a classe recebe as dependências a partir de uma fonte externa ao invés de criar por conta própria. Ou seja, a Classe A precisa da Classe B, ao invés da Classe A criar por conta própria uma instância da Classe B, a Classe A vai receber a Classe B a partir do construtor ou a partir de algum outro mecanismo como é o caso da Injeão de Dependência.
+Dependendo da linguagem, framework que você vai usar a forma  de implementar a Injeção de Dependência é diferente.
+
+EXEMPLO DE UM CENÁRIO SEM INJEÇÃO DE DEPENDÊNCIA: A classe Carro depende da Classe Motor
+
+CLASSE CARRO   	  ===>                CLASSE MOTOR
+
+classCarro {                          class Motor {}
+  motor: Motor
+
+ construtor() {
+  ths.motor = new Motor()
+ }
+}
+
+-Neste cenário a Classe Carro dependência da Classe Motor. Então nada mais natural dentro do construtor você instanciar o Motor a parir da linha : ths.motor = new Motor(), ou seja, você acabou de instanciar um objeto Motor e atribuiu a variável dentro da Classe Carro, e tal forma de que quando Carro for instanciado o Carro terá automaticamente um Motor. Mas quem foi responsável por instanciar o Motor ? Foi a própria Classe Carro, ou seja, ai não houve Injeção de Dependência, porque a Classe Carro foi responsável por criar uma instancia da Classe Motor.
+
+
 
 
 
