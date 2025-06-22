@@ -426,8 +426,7 @@ Sintaxe: ng g s nome da pasta/nome do service
 
  O provideIn: "root" significa que existe um injetor(Injector) e esse injetor é o injetor raiz da nossa aplicação. Basicamente só existe  1 injetor raiz da minha aplicação e uma vez definido que o meu produtoService vai ser provido pelo "root", significa que eu vou ter apenas uma única instância do ProdutoService em toda a minha aplicação, ou seja, sempre que eu injetar o meu produtoService dentro de um Componente, Diretiva o Angular vai me devolver a mesma instância.
 
--OBS: Existe um padrão de projeto do Design Pattern chamado Sigleton, que consiste em criar apenas uma única instancia de uma classe, as vezes criando um construtor privado dependendo da linguagem, ou as vezes criando um método para devolver essa instância. Como o Angular ele vai  gerenciar a criação do Service e vai ser responsável por gerenciar a criação dos componentes, porque você não instancia uma classe produtoService, da mesma forma que você não vai instanciar uma classe correspondente a um componente, você não vai instanciar um componente. Quem vai fazer todo esse trabalho de instanciar essas classes gerenciadas como: Componente, Diretiva, Service é o Angular. Então como o Angular é responsável por gerenciar a criação desses objetos, ele também vai ser responsável por Injetar Dependência de um objeto no outro, como também é responsável por garantir que uma determinada instancia sempre será devolvida quando você pedir. Imagine que você tem um Service e esse Service tem um contador dentro dele, se você vai lá e aumenta esse contador para 10 em um determinado Componente A,  quando você injetar esse Service no Componente B, 
-o contador vale 10. E se lá no Componente B  você aumentar esse contador para 30, quando você injetar esse Service novamente dentro do Componente A, o contador agora vale 30
+
  
 
 @Injectable({
@@ -439,6 +438,10 @@ export class ProductService {
 
 
 -Quando usamos o comando para criar um Service: ng g s nome da pasta/nome do servisse. No exemplo acima , o nome do arquivo ficaria product.service.ts e o nome da classe ficou ProductService. No Angular existe todo um Guide Line relativo  nomenclatura dos Componentes, Services, Diretivas, então precisamos ficar atentos o máximo possível as Guides Lines porque isso ira nos ajudar a manter o nosso projeto, como se outros desenvolvedores vierem para o projeto eles irão estar muito mais familiarizados porque é uma forma padrão de se usar nomenclatura dentro do Angular.
+
+
+-OBS: Existe um padrão de projeto do Design Pattern chamado Sigleton, que consiste em criar apenas uma única instancia de uma classe, as vezes criando um construtor privado dependendo da linguagem, ou as vezes criando um método para devolver essa instância. Como o Angular ele vai  gerenciar a criação do Service e vai ser responsável por gerenciar a criação dos componentes, porque você não instancia uma classe produtoService, da mesma forma que você não vai instanciar uma classe correspondente a um componente, você não vai instanciar um componente. Quem vai fazer todo esse trabalho de instanciar essas classes gerenciadas como: Componente, Diretiva, Service é o Angular. Então como o Angular é responsável por gerenciar a criação desses objetos, ele também vai ser responsável por Injetar Dependência de um objeto no outro, como também é responsável por garantir que uma determinada instancia sempre será devolvida quando você pedir. Imagine que você tem um Service e esse Service tem um contador dentro dele, se você vai lá e aumenta esse contador para 10 em um determinado Componente A,  quando você injetar esse Service no Componente B, 
+o contador vale 10. E se lá no Componente B  você aumentar esse contador para 30, quando você injetar esse Service novamente dentro do Componente A, o contador agora vale 30. E você você aumentar esse contador novamente para 130 e você vai injetar esse Service no Componente C, o contador vale 130, porque estamos sempre trabalhand com a mesma instância do Service uma vez que você usa o provideIn: "root".
 
 
 
