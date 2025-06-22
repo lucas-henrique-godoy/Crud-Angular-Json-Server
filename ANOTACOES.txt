@@ -507,7 +507,10 @@ class Motor {
 
 
 
--Principalmente no caso do Angular se a gente substituir Carro por Componente e substituir Motor por Service. Quem é responsável  por criar o Carro, ou seja o Componente , e quem é responsável por criar  Service é o Angular, então ele será capaz de prover essas dependências pra gente a partir da Injeção de Dependênicia
+-Principalmente no caso do Angular se a gente substituir Carro por Componente e substituir Motor por Service. Quem é responsável  por criar o Carro, ou seja o Componente , e quem é responsável por criar  Service é o Angular, então ele será capaz de prover essas dependências pra gente a partir da Injeção de Dependência.
+
+-Dentro do Framework Angular tem um módulo de Injeção de Dependência, ou seja, há um framework dentro do outro. Então quando você cria uma classe ProductService e diz que essa classe  é @Injectable, você esta dizendo em outras palavras que essa classe ode ser injetada  e ao mesmo tempo que você coloca um @Injectable você esta dizendo pro Angular que ele deve considerar essa classe, ele  deve instanciar essa classe para você. 
+Então o Angular vai instanciar essa classe criando uma instancia e ProductService. Num cenário comum eu tenho uma única instancia, isso não significa que eu não possa ter mais. Mas no cenário da nossa aplicação usando provideIn: "root", ele vai ter apenas uma instancia dessa classe para toda a aplicação(ProductService).
 
 
 
