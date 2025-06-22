@@ -469,7 +469,7 @@ class Carro {
   motor: Motor
 
   construtor() {
-    this.motor = new Motor()
+    this.motor = new Motor() --Gera erro aqui.
   }
 }
 
@@ -486,13 +486,13 @@ class Motor {
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -EXEMPLO  DE UM CENÁRIO COM INJEÇÃO DE DEPENDÊNCIA:
 
--Uma forma de resolver isso seria passar Motor como parâmetro para o Carro. Fazendo isso, significa que alguém externo, imagina que você tem uma classe chamada Fabrica e na hora de você criar o Carro você cria o Motor, sabe exatamente o que precisa passar para o Motor e ai sim você passa o Motor construído para dentro do Carro. Ou seja, uma fonte externa   
+-Uma forma de resolver isso seria passar Motor como parâmetro para o Carro. Fazendo isso, significa que alguém externo, imagina que você tem uma classe chamada Fabrica e na hora de você criar o Carro você cria o Motor, sabe exatamente o que precisa passar para o Motor e ai sim você passa o Motor construído para dentro do Carro. Ou seja, uma fonte externa passou a dependência para dentro do Carro. E ai você vai ter frameworks que vão te ajudar no processo de Injetar Dependência.
 
   
 class Carro {
   motor: Motor
 
-  construtor (motor: Motor) {
+  construtor (motor: Motor) {  -Passando o Motor como parâmetro
     this.motor = motor
   }
 }
@@ -505,6 +505,9 @@ class Motor {
  }
 }
 
+
+
+-Principalmente no caso do Angular se a gente substituir Carro por Componente e substituir Motor por Service. Quem é responsável  por criar o Carro, ou seja o Componente , e quem é responsável por criar  Service é o Angular, então ele será capaz de prover essas dependências pra gente a partir da Injeção de Dependênicia
 
 
 
