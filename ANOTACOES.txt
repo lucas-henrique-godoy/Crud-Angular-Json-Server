@@ -515,6 +515,8 @@ Depois que o Angular instanciar o ProductService, agora ele vai precisar instanc
 
 Então nos temos o framework(Angular) quando ele instancia ele cria  o ProductService, e quando ele for instancia o Componente(ProductCreateComponent) ele passa o ProductService que é injetado no Componente. Não necessariamente você vai ter apenas 1 única instancia do componente, sempre que você referenciar o componente a partir da sua tag ele vai criar uma nova instancia daquele componente, para cada tag você vai ter uma instancia. Portanto quem vai ser responsável por criar essas instancias é o Angular.
 
+Falando a respeito do provideIn: "root". O "root" é um apelido(alias) para o AppModule, chamado de root injector. Associado ao AppModule, que é o modulo inicial da aplicação, o root injector é responsável pela injeção de dependência e ele esta associado ao AppModule. Quando você diz que o seu provideIn vai ser o "root", você esta dizendo em outras palavras que o provideIn vai ser o AppModule 
+
 
 
 
