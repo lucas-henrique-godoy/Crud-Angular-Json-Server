@@ -444,10 +444,10 @@ ________________________________________________________________________________
 
 **INJEÇAO DE DEPENDÊNCIA: É um padrão no qual a classe recebe as dependênciasde uma fonte externa ao invés de criar por conta própria.
 
--Num cenário padrão quando uma Classe A precisa de uma Classe B, ouseja, a Classe A vai preisar da Clase B, então a Classe A vai criar a Classe B. É muito natural acontecer isso, mas na Injeção de Dependência ha uma inversão dessa logica, ou sej, é um padrão onde a classe recebe as dependências a partir de uma fonte externa ao invés de criar por conta própria. Ou seja, a Classe A precisa da Classe B, ao invés da Classe A criar por conta própria uma instância da Classe B, a Classe A vai receber a Classe B a partir do construtor ou a partir de algum outro mecanismo como é o caso da Injeão de Dependência.
+-Num cenário padrão quando uma Classe A precisa de uma Classe B, ouseja, a Classe A vai preisar da Clase B, então a Classe A vai criar a Classe B. É muito natural acontecer isso, mas na Injeção de Dependência ha uma inversão dessa logica, ou sej, é um padrão onde a classe recebe as dependências a partir de uma fonte externa ao invés de criar por conta própria. Ou seja, a Classe A precisa da Classe B, ao invés da Classe A criar por conta própria uma instância da Classe B, a Classe A vai receber a Classe B a partir do construtor ou a partir de algum outro mecanismo como é o caso da Injeção de Dependência.
 Dependendo da linguagem, framework que você vai usar a forma  de implementar a Injeção de Dependência é diferente.
 
-EXEMPLO DE UM CENÁRIO SEM INJEÇÃO DE DEPENDÊNCIA: A classe Carro depende da Classe Motor
+-EXEMPLO  DE UM CENÁRIO SEM INJEÇÃO DE DEPENDÊNCIA: A classe Carro depende da Classe Motor
 
 CLASSE CARRO   	  ===>                CLASSE MOTOR
 
@@ -455,11 +455,65 @@ classCarro {                          class Motor {}
   motor: Motor
 
  construtor() {
-  ths.motor = new Motor()
+  this.motor = new Motor()
  }
 }
 
 -Neste cenário a Classe Carro dependência da Classe Motor. Então nada mais natural dentro do construtor você instanciar o Motor a parir da linha : ths.motor = new Motor(), ou seja, você acabou de instanciar um objeto Motor e atribuiu a variável dentro da Classe Carro, e tal forma de que quando Carro for instanciado o Carro terá automaticamente um Motor. Mas quem foi responsável por instanciar o Motor ? Foi a própria Classe Carro, ou seja, ai não houve Injeção de Dependência, porque a Classe Carro foi responsável por criar uma instancia da Classe Motor.
+
+
+- Se por algum motivo a Classe Motor tiver uma alteração, por exemplo, onde para criar um objeto Motor eu preciso dizer qual cilindrada aquele Motor tem. Só que uma vez que eu mexi na classe Motor, na Classe Carro gerou um impacto, pois como Carro cria o Motor agora você obrigatoriamente precisa passar uma cilindrada como parâmetro para a construção do Motor. Isso faz com que sempre que você mexa na Classe Motor, você também tenha que alterar a Classe Carro, gerando uma fragilidade, ou seja, a Classe Carro esta muito dependente da Classe Motor.
+
+CLASSE CARRO:
+class Carro {
+  motor: Motor
+
+  construtor() {
+    this.motor = new Motor()
+  }
+}
+
+
+CLASSE MOTOR ALTERADA: Gera um erro na Classe Carro, obrigando que a  Classe  Carro também seja alterada.
+class Motor {
+ cilindrada: number
+
+  construtor(cilindrada: number) {
+  this.cilindrada
+ }
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-EXEMPLO  DE UM CENÁRIO COM INJEÇÃO DE DEPENDÊNCIA:
+
+-Uma forma de resolver isso seria passar Motor como parâmetro para o Carro. Fazendo isso, significa que alguém externo, imagina que você tem uma classe chamada Fabrica e na hora de você criar o Carro você cria o Motor, sabe exatamente o que precisa passar para o Motor e ai sim você passa o Motor construído para dentro do Carro. Ou seja, uma fonte externa   
+
+  
+class Carro {
+  motor: Motor
+
+  construtor (motor: Motor) {
+    this.motor = motor
+  }
+}
+
+class Motor {
+ cilindrada: number
+
+  construtor(cilindrada: number) {
+  this.cilindrada
+ }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
