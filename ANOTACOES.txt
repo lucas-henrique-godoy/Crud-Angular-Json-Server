@@ -520,11 +520,19 @@ Falando a respeito do provideIn: "root". O "root" é um apelido(alias) para o Ap
 
 *SINGLETON: Services são sigletons(apenas uma única instncia) dentro do escopo de um injector.
 
--INJECTOR: Temos 2 grupos de injetores: ModuleInjector(injetor de módulo), ElementInjector(injetor de elemento).
-Quando usamos root, e o root aponta para o AppModule estamos usando o ModuleInjector
+-INJECTOR: Temos 2 grupos de injetores: 
+
+- ModuleInjector(injetor de módulo): Sempre que usamos @ngMoudle e dentro do módulo você define os providers e você referencia um determinado Service, você esta usando um injetor de modulo. Significa que dentro do escopo do seu modulo você vai ter apenas uma única instancia daquele serviço. Quando você usa um @Injectable da mesma forma você passar tanto o root que ai você tem a única instancia pra toda a sua aplicação como você ode usar dentro do Injectable o provideIn apontando para um modulo, ou seja, voe também esta usando um ModuleInjector, ou seja aquele Service vai ter apenas 1 única instancia dentro do escopo do modulo ou dentro do escopo  a sua aplicação se você estiver usado o injetor root, o raiz. Quando usamos root, e o root aponta para o AppModule estamos usando o ModuleInjector.
+
+ - ElementInjector(injetor de elemento):Quando você usa os providers dentro de Diretiva(@Directive) ou um Componente(@Component), você pode definir a partir da propriedade providers que você pode definir alguns serviços que você quer colocar dentro do seu componente, e ai sim você esta dizendo que você quer ter uma instancia própria dentro daquele componente  de um determinado Service. Então ao invés de você usar a instancia única que esta sendo compartilhada na sua aplicação inteira, você vai usar dentro de um determinado componente o Service, você pode querer uma instancia dedicada, ou seja, criar uma nova instancia para ser injetada naquele componente. Ai você usa dentro de @Componentou dentro de @Directive, você usa os providers para colocar quais são os serviços eu você quer eu sejam injetados novas instancias.
+
+-OBS: No lugar de root você pode colocar a referencia para um modulo. Vamos supor eu você tenha um módulo da sua aplicação de autenticação. Você criou um modulo chamado authModule e você quer dentro desse modulo de autenticação ter um determinado serviço dentro daquele escopo, então você pode dizer que o provideIn é o authModule, mas sem as aspas: @Injectable provideIn: authModule. As aspas em root só serve para ele ter um alias para o AppModule. Você vai ter que de fato fazer um import do modulo para dai você referenciar ao modulo aqui dentro do provideIn. Então no lugar do root você pode ter qualquer outro modulo da sua aplicação.
+
+-Por via de regra na nossa aplicação a gente vai estar sempre usando o ModuleInjector, especificamente usando a partir da notação @Injectable e o provieIn a gente vai usar o root, ou seja, nos vamos ter apenas uma única instancia em toda a nossa aplicação.
+
+Mas quando você tem aplicações mais complexas com vários módulos,  é interessante você ter também a capacidade de definir um escopo de um Service um pouco mais restrito. Então você pode  usar diferentes estratégias para que você possa definir o escopo do seu Service. Existem mais informações na documentação do Angular: https://angular.io/guide/hierarchical-dependency-inection.
 
 
--OBS: No lugar de root você pode colocar a referencia para um modulo. Vamos supor eu você tenha um módulo da sua aplicação de autenticação. Você criou um modulo chamado authModule e você quer dentro desse modulo de autenticação ter um determinado serviço dentro daquele escopo, então você dizer que o provideIn é o authModule, mas sem as aspas: @Injectable provideIn: authModule.
 
 
 
