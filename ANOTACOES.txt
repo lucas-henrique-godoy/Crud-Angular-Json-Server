@@ -451,7 +451,7 @@ Dependendo da linguagem, framework que você vai usar a forma  de implementar a 
 
 CLASSE CARRO   	  ===>                CLASSE MOTOR
 
-classCarro {                          class Motor {}
+class Carro {                          class Motor {}
   motor: Motor
 
  construtor() {
@@ -515,7 +515,12 @@ Depois que o Angular instanciar o ProductService, agora ele vai precisar instanc
 
 Então nos temos o framework(Angular) quando ele instancia ele cria  o ProductService, e quando ele for instancia o Componente(ProductCreateComponent) ele passa o ProductService que é injetado no Componente. Não necessariamente você vai ter apenas 1 única instancia do componente, sempre que você referenciar o componente a partir da sua tag ele vai criar uma nova instancia daquele componente, para cada tag você vai ter uma instancia. Portanto quem vai ser responsável por criar essas instancias é o Angular.
 
-Falando a respeito do provideIn: "root". O "root" é um apelido(alias) para o AppModule, chamado de root injector. Associado ao AppModule, que é o modulo inicial da aplicação, o root injector é responsável pela injeção de dependência e ele esta associado ao AppModule. Quando você diz que o seu provideIn vai ser o "root", você esta dizendo em outras palavras que o provideIn vai ser o AppModule 
+Falando a respeito do provideIn: "root". O "root" é um apelido(alias) para o AppModule, chamado de root injector. Associado ao AppModule, que é o modulo inicial da aplicação, o root injector é responsável pela injeção de dependência e ele esta associado ao AppModule. Quando você diz que o seu provideIn vai ser o "root", você esta dizendo em outras palavras que o provideIn vai ser o AppModule. Como só tem 1 AppModule dentro da sua aplicação, sempre que você criar alguma coisa que usa @Injectable  provideIn: "root", significa que esse Service por exemplo vai ter apenas uma única instancia em toda a sua aplicação.
+
+
+*SINGLETON: Services são sigletons dentro do escopo de um injector
+
+
 
 
 
