@@ -518,7 +518,13 @@ Então nos temos o framework(Angular) quando ele instancia ele cria  o ProductSe
 Falando a respeito do provideIn: "root". O "root" é um apelido(alias) para o AppModule, chamado de root injector. Associado ao AppModule, que é o modulo inicial da aplicação, o root injector é responsável pela injeção de dependência e ele esta associado ao AppModule. Quando você diz que o seu provideIn vai ser o "root", você esta dizendo em outras palavras que o provideIn vai ser o AppModule. Como só tem 1 AppModule dentro da sua aplicação, sempre que você criar alguma coisa que usa @Injectable  provideIn: "root", significa que esse Service por exemplo vai ter apenas uma única instancia em toda a sua aplicação.
 
 
-*SINGLETON: Services são sigletons dentro do escopo de um injector
+*SINGLETON: Services são sigletons(apenas uma única instncia) dentro do escopo de um injector.
+
+-INJECTOR: Temos 2 grupos de injetores: ModuleInjector(injetor de módulo), ElementInjector(injetor de elemento).
+Quando usamos root, e o root aponta para o AppModule estamos usando o ModuleInjector
+
+
+-OBS: No lugar de root você pode colocar a referencia para um modulo. Vamos supor eu você tenha um módulo da sua aplicação de autenticação. Você criou um modulo chamado authModule e você quer dentro desse modulo de autenticação ter um determinado serviço dentro daquele escopo, então você dizer que o provideIn é o authModule, mas sem as aspas: @Injectable provideIn: authModule.
 
 
 
