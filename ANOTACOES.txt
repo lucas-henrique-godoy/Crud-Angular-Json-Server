@@ -353,7 +353,7 @@ Mostra o símbolo da moeda e sempre com duas casas decimais (ex: R$ 1.000,00).
 </p>
 
 -Essa cadeia de pipes formata a data de vencimento (produto.vencimento) para o formato completo (fullDate) e depois transforma o texto todo em letras maiúsculas (uppercase).
-____________________________________________________________________________________________________________________________________________________
+_______________________________________________________________________________________________________________________________________________________________________
 **PROGRAMAÇÃO REATIVA(REACTIVEX): O Angular usa esse framework ReactiveX que trabalha com conceitos de programação reativa. Programação reativa tem o conceito de o código só será chamado de forma reativa, ou seja, precisa acontecer alguma coisa externa, no caso um evento para dai quando acontecer isso o código ser executado.
 
 -IMPORTAÇÃO DO OBSERVABLE NO ANGULAR: import { Observable } from "rxjs";
@@ -510,7 +510,10 @@ class Motor {
 -Principalmente no caso do Angular se a gente substituir Carro por Componente e substituir Motor por Service. Quem é responsável  por criar o Carro, ou seja o Componente , e quem é responsável por criar  Service é o Angular, então ele será capaz de prover essas dependências pra gente a partir da Injeção de Dependência.
 
 -Dentro do Framework Angular tem um módulo de Injeção de Dependência, ou seja, há um framework dentro do outro. Então quando você cria uma classe ProductService e diz que essa classe  é @Injectable, você esta dizendo em outras palavras que essa classe ode ser injetada  e ao mesmo tempo que você coloca um @Injectable você esta dizendo pro Angular que ele deve considerar essa classe, ele  deve instanciar essa classe para você. 
-Então o Angular vai instanciar essa classe criando uma instancia e ProductService. Num cenário comum eu tenho uma única instancia, isso não significa que eu não possa ter mais. Mas no cenário da nossa aplicação usando provideIn: "root", ele vai ter apenas uma instancia dessa classe para toda a aplicação(ProductService).
+Então o Angular vai instanciar essa classe criando uma instancia e ProductService. Num cenário comum eu tenho uma única instancia, isso não significa que eu não possa ter mais. Mas no cenário da nossa aplicação usando provideIn: "root", ele vai ter apenas uma instancia dessa classe para toda a aplicação(ProductService). Sempre que injetarmos ProductService ele vai pegar essa única instancia.
+Depois que o Angular instanciar o ProductService, agora ele vai precisar instanciar  o ProductCreateComponent(Componente de criação de produto) porque ele foi referenciado em algum ponto da sua aplicação. Quando Angular for gerar uma instancia desse Componente ele ira criar um Componente e vai passar como parâmetro e injetar o ProductService no Componente.
+
+Então nos temos o framework(Angular) quando ele instancia ele cria  o ProductService, e quando ele for instancia o Componente(ProductCreateComponent) ele passa o ProductService que é injetado no Componente. Não necessariamente você vai ter apenas 1 única instancia do componente, sempre que você referenciar o componente a partir da sua tag ele vai criar uma nova instancia daquele componente, para cada tag você vai ter uma instancia. Portanto quem vai ser responsável por criar essas instancias é o Angular.
 
 
 
