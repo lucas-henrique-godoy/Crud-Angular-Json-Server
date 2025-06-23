@@ -530,7 +530,7 @@ Falando a respeito do provideIn: "root". O "root" é um apelido(alias) para o Ap
 
 -Por via de regra na nossa aplicação a gente vai estar sempre usando o ModuleInjector, especificamente usando a partir da notação @Injectable e o provieIn a gente vai usar o root, ou seja, nos vamos ter apenas uma única instancia em toda a nossa aplicação.
 
-Mas quando você tem aplicações mais complexas com vários módulos,  é interessante você ter também a capacidade de definir um escopo de um Service um pouco mais restrito. Então você pode  usar diferentes estratégias para que você possa definir o escopo do seu Service. Existem mais informações na documentação do Angular: https://angular.io/guide/hierarchical-dependency-inection.
+Mas quando você tem aplicações mais complexas com vários módulos,  é interessante você ter também a capacidade de definir um escopo de um Service um pouco mais restrito. Então você pode  usar diferentes estratégias para que você possa definir o escopo do seu Service. Existem mais informações na documentação do Angular: https://angular.io/guide/hierarchical-dependency-injection.
 _______________________________________________________________________________________________________________________________________________________________________
 
 
