@@ -1,0 +1,10 @@
+.home .title {
+    font-size: 3rem;  /*Estilo para o titulo do home " Bem Vindo!"*/
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.home .subtittle {
+    font-size: 1.1rem; /*Estilo para o subtitulo, abaixo do "Bem Vindo!"*/
+
+}
