@@ -534,7 +534,7 @@ Mas quando você tem aplicações mais complexas com vários módulos,  é inter
 _______________________________________________________________________________________________________________________________________________________________________
 
 
-**Foi criado uma pasta chamada views e dentro foi colocada o componente home. Para organizar melhor as pastas do projeto, dentro da pasta componentes tudo aquilo que for trechos de componentes reutilizados que podem ser reutilizados em mais de 1 tela. E quando eu tenho uma tela inteira eu vou colcoar dentro do componente(pasta) view, como é o caso do home.component.
+**Foi criado uma pasta chamada views e dentro foi colocada o componente home. Para organizar melhor as pastas do projeto, quando eu tenho uma tela inteira eu vou colocar dentro do componente(pasta) view, como é o caso do home.component. Dentro da pasta componentes tudo aquilo que for trechos de componentes reutilizados que podem ser reutilizados em mais de 1 tela, como éo caso do header.component,nav.component, footer.component,etc. Que são apenas partes da tela.
 
 
 
