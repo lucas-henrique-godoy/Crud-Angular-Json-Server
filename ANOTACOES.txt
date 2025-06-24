@@ -354,120 +354,187 @@ Mostra o símbolo da moeda e sempre com duas casas decimais (ex: R$ 1.000,00).
 
 -Essa cadeia de pipes formata a data de vencimento (produto.vencimento) para o formato completo (fullDate) e depois transforma o texto todo em letras maiúsculas (uppercase).
 _______________________________________________________________________________________________________________________________________________________________________
-Programação Reativa e Angular - Resumo
+**PROGRAMAÇÃO REATIVA(REACTIVEX): O Angular usa esse framework ReactiveX que trabalha com conceitos de programação reativa. Programação reativa tem o conceito de o código só será chamado de forma reativa, ou seja, precisa acontecer alguma coisa externa, no caso um evento para dai quando acontecer isso o código ser executado.
 
-1. PROGRAMAÇÃO REATIVA
-- Paradigma onde o código é executado apenas quando um evento externo ocorre (reativo).
-- Angular usa o framework RxJS (ReactiveX) para programação reativa.
-- Exemplo: Código executado ao clicar em um botão.
-- Importação no Angular:
-  import { Observable } from 'rxjs';
+-IMPORTAÇÃO DO OBSERVABLE NO ANGULAR: import { Observable } from "rxjs";
 
-2. PADRÃO OBSERVER
-- Base da programação reativa, orientado a eventos.
-- Componentes:
-  - Subject: Monitora eventos e notifica Observers.
-  - Observer: Funções que reagem aos eventos.
-- Funcionamento:
-  1. Observers se registram no Subject ("Quero ser notificado do evento X").
-  2. Subject detecta o evento e notifica todos os Observers registrados.
-  3. Observers executam suas funções.
-- Exemplo: Compra online
-  - Evento: Compra realizada.
-  - Subject: Monitora a compra.
-  - Observers:
-    - Envia e-mail ao cliente.
-    - Dá baixa no estoque.
-    - Notifica sistema de separação.
-- Analogia: Aniversário surpresa
-  - Sem Observer: Namorada (Observer) fica na janela olhando (proativa, ineficiente).
-  - Com Observer: Namorada delega ao porteiro (Subject), que avisa quando o aniversariante chega (reativa, eficiente).
+*O PADRÃO OBSERVER: É o padrão de projeto mais utilizado na web. Tudo começa a partir do padrão Observer. É um padrão orientado Evento.
 
-3. OBSERVABLES (RxJS)
-- Implementação do padrão Observer no Angular.
-- Usados para eventos assíncronos e fluxos de dados (streams).
-- Comparação:
-  - Callbacks: Funções aninhadas (Callback Hell), difíceis de manter.
-  - Promises: Encadeáveis, mas usadas apenas uma vez, não lidam com streams.
-  - Observables: Reutilizáveis, lidam com streams, usam operadores (map, filter).
-- Vantagens:
-  - Reutilização: Um Observable pode ser usado várias vezes.
-  - Streams: Gerencia dados contínuos (ex.: votação presidencial com atualizações).
-  - Operadores: Manipulam dados (ex.: filtrar produtos).
-- Exemplo: Requisição HTTP
-  criarNoBackend(produto: Produto): Observable<Produto> {
-    return this.http.post<Produto>(this.url, produto);
-  }
-  criarProduto(): void {
-    this.criarNoBackend(this.produto).subscribe(() => {
-      this.exibirMensagem("Salvo com sucesso!");
-    });
-  }
-  - subscribe registra um Observer para processar a resposta do backend.
+-Subject: É quem tem a capacidade de monitorar e detectar quando um evento acontece.
+-Observer: São os códigos que estão interessados num determinado evento.
 
-4. SERVICES
-- Classes que organizam lógica e dados, compartilhados entre componentes.
-- Separam responsabilidades:
-  - Componentes: Interface visual (HTML, CSS, TS).
-  - Services: Lógica de negócios, acesso ao backend.
-- Criar Service:
-  ng g s services/product
-- Exemplo:
-  @Injectable({
-    providedIn: 'root'
-  })
-  export class ProductService {
-    private url = 'https://api.exemplo.com/produtos';
-    constructor(private http: HttpClient) {}
-    criarProduto(produto: Produto): Observable<Produto> {
-      return this.http.post<Produto>(this.url, produto);
-    }
-  }
-- Uso em Componente:
-  @Component({...})
-  export class ProductCreateComponent {
-    constructor(private productService: ProductService) {}
-    criar() {
-      this.productService.criarProduto({ nome: 'Produto X', preco: 100 }).subscribe(() => {
-        console.log('Produto criado!');
-      });
-    }
-  }
+*  O que acontece, se você tirar a figura do Subject, os observables(quem esta interessado em monitorar os eventos) precisam ficar monitorando os eventos, mas se você tiver alguém que vai ser capaz de monitorar os eventos, você pode delegar para esse Subject. Exemplo: "Monitore o evento tal, e  quando acontecer o evento me notifique" ou seja, me avise que o evento aconteceu. Por isso os observadores precisam se registrar no Subject dizendo que ele é interessado no evento, ou seja, para o padrão de projeto Observer existir, antes precisa haver um explicito desejo dizer "Eu estou interessado em receber notificações de um determinado evento", ou seja, há um registro do  Observador que é quem está interessado  no Subject.
+Depois que há esse registro o Subject vai detectar o Evento. O Evento aconteceu e ele é capaz de detectar e perceber que o determinado evento aconteceu, ou seja, uma vez que  Subject detectando que o Evento aconteceu e ele tem dentro dele uma lista de todos os Observadores(Observers) que estão interessados de ser notificados, ele vai notificar todos s Observadores dizendo: "O evento que vocês estavam esperando aconteceu". Quando o Subject notifica, é executado uma função dentro de cada Observador e ai ele vai fazer aquilo que é necessário de acordo com o evento que foi gerado.
+EXEMPLO: Imagine que você tem um evento de compra, e você tem um Observador que é para enviar um email para o usuário. Você tem outro Observador que é para dar baixa no estoque, você tem outro Observador que vai mandar uma mensagem para um outro sistema que via separar mercadoria. E ai aconteceu o evento da venda, alguém foi lá e comprou, e ai o Subject que é quem está monitorando esse evento da compra vai notificar para o Observador de email: "Olha aconteceu uma compra". Ai o Observador de email vai pegar aquela compra e enviar um email pro usuário: "Sua compra foi realizada com sucesso, estamos processando a sua compra e dentro de algumas horas iremos mandar novas notificações com o progresso no seu email". Ai esse evento foi passado para um outro Observador que quer dar uma baixa no estoque, ele vai lá e manda essa compra, e ele vai ver todos os produtos que estão dentro da compra,  e subtrai 1 do estoque. Ai o próximo Observador recebe o evento da compra e ele manda para um sistema de separação do produtos que o produto "tal", "tal" e "tal" podem ser separados. Então percebe-se que o Subject é quem detecta o evento, mas ele funciona como um intermediário, lê e entende que o evento aconteceu e notifica os interessados.
 
-5. INJEÇÃO DE DEPENDÊNCIA (DI)
-- Padrão onde classes recebem dependências de fontes externas (Angular gerencia).
-- Sem DI:
-  class Carro {
-    motor: Motor;
-    constructor() {
-      this.motor = new Motor(); // Carro cria Motor, acoplamento forte
-    }
-  }
-- Com DI:
-  class Carro {
-    constructor(private motor: Motor) {} // Motor injetado
-  }
-- No Angular:
-  - @Injectable({ providedIn: 'root' }): Service com uma única instância (Singleton).
-  - Angular injeta Services em Componentes via construtor.
-- Injetores:
-  - ModuleInjector: Instância única no módulo (ex.: providedIn: 'root' ou AuthModule).
-  - ElementInjector: Instância específica em Componente (via providers).
-- Exemplo:
-  @Component({
-    selector: 'app-meu-componente',
-    providers: [ProductService] // Instância exclusiva
-  })
+-EXEMPLO DE ANALOGIA DE OBSERVABLE E SUBJECT-ANIVERSÁRIO SURPRESA: Existem 2 personagens nesta história: A namorada que representa o Observer e o Porteiro que representa o Subject. Há também o Evento que é a chegada do aniversariante. Essa história terá 2 possibilidades.
 
-Dicas para Estudo:
-- Pratique criando Services e Observables em um projeto Angular.
-- Consulte: https://angular.io (DI e RxJS).
-- Teste operadores RxJS (map, filter) em requisições HTTP.
+-CENÁRIO 1-SEM  OBSERVER: A namorada não irá usar o padrão Observer e ela vai ficar de forma proativa na janela olhando os carros chegarem, quando chegar o carro amarelo do namorado, ela vai para dentro da sala e diz "Pessoal ele acabou de chegar, vamos apagaras luzes e ficar em silêncio para a gente fazer a surpresa". Neste primeiro cenário sem um Observer, quem estava interessada no evento(que era namorada), ela ficou parada sem curtir mais a festa olhando na janela até que o evento acontecesse para dai ela ser responsável por todo o processo de detectar o evento e avisar todos os convidados.  Neste caso como ela teve uma postura proativa, ficou muito  ruim para ela, porque ela ficou totalmente ocupada em detectar o evento e daí avisar os convidados.
 
+-CENÁRIO 2-COM OBSERVER: A namorada delegou a tarefa de ficar observando para o porteiro, aqui temos o uso do padrão Observer, porque o Porteiro é o Subject. Como ele esta na portaria ele tem a capacidade de detectar o Evento de uma forma muito mais fácil, até porque o Namorado vai ter que passar pelo prédio ou pela portaria, então ele tem a posição privilegiada pra detectar o Evento. Então o eu foi que a Namorada fez? Lembra que a ente disse que precisava fazer  um registro, ou seja o Observer que é o interessado, ele precisa se registrar om o Subject para dizer "Eu estou interessado em receber o Evento", para a Namorada avisar o Porteiro de que ele precisa ficar observando o Evento, ela precisou interfonar e pedir: "Você tem como observar a chegada do carro amarelo?", ai o Porteiro disse: "Ok, deixa comigo que assim eu o Evento acontecer eu notifico vocês de volta". Ou seja, esse notificar de volta, é o Porteiro depois de olhar e perceber que o Evento aconteceu e detectar o Evento, ele vai interfonar de volta dizendo que o Evento aconteceu, só então a Observadora que é a Namorada que é interessada pelo Evento ela vai fazer todo o procedimento para que o aniversario surpresa acontecer.
+Então 1º A Namorada precisou ligar pro Porteiro se registrando dizendo "Olha estou interessada no Evento X", o Porteiro deu um OK dizendo: "Pode deixar comigo, quando acontecer o Evento eu notifico de volta", daí o conceito de CALLBACK(chamada de volta) para notificar que o Evento aconteceu. Então ele liga de volta dizendo: "O Evento aconteceu", ai a Namorada  que já estava curtindo a festa e que não estava mais preocupada em ficar olhando pela janela, foi lá recebeu a notificação do Porteiro e ai sim ela fez todo o trabalho de prosseguir com os preparativos para a surpresa.
+Então deixa bem claro que trabalhar com o padrão Observer deixa o Observador que é o interessado livre para fazer outras coisas e nesse cenário houve uma chamada reativa, ela não estava querendo de forma proativa ficar na janela, ela quis ficar de forma reativa, ela só vai fazer as coisas quando um determinado Evento acontecer. Por isso que o padrão Observer é um padrão orientado a Evento.
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+*ENTENDENDO OBSERVABLES: Do ponto de vista do Javascript puro a gente começa a trabalhar com esse conceito de reatividade a partir de que você tem a possibilidade de passar uma função como parâmetro para outra função, e essas funções são chamadas também de CALLBACKS. Por exemplo: Você passa uma função para outra função como parâmetro para outra função dizendo: "Eu quero que você invoque essa função que eu estou passando como parâmetro, quando a resposta a requisição chegar". E ai ele vai lá e chama a CALLBACK. Um dos problemas da CALLBACK é quando você tem uma logica mais complexa e você vai acabar caindo num cenário que você precisa passar uma CALLBACK dentro de outra CALLBACK(CALLBACK HELL), uma  função dentro da outra, tornando assim o código de difícil leitura e também de difícil manutenção. Quanto mais outras CALLBACKS, outras logicas fossem adicionadas ficava ainda mais complicados a código.
+
+-A partir do ECMA Script 2015 surgiu um conceito de Promises onde também são usados os CALLBACKS, mas na Promisse tem a capacidade de encadear as varias chamadas, você consegue compor melhor varias chamadas de Promisses,  sem ter essa questão desse aninhamento que era causado pelo CALLBACK. Quais os problema da Promisse? A Promisse você usa apenas uma única vez. Se você executou um determinado código usando Promisse, depois que termina você não consegue reutilizar essa Promisse. E como evolução da Promisse, que você consegue ter os mesmos benefícios de ser fácil a composição, você consegue chamar varias funções encadeadas numa forma simples, só que com outros benefícios, você tem o Observable.
+
+-Os Observables que estão dentro do RXJS que o Angular usa como dependência, possuem algumas vantagens por exemplo: 
+1- Um Observable diferente da Promisse você consegue reusar ele.
+
+2- Consegue lidar com um STREAM DE DADOS, vamos supor que você precisa ficar monitorando uma determinada votação presidencial, e você pode criar um Observable para ficar de tempo em tempos consumindo essa informação do servidor, ou seja, com um único Observable você consegue ficar recebendo uma STREAM DE DADOS. Exemplo: "Foram apurados 20% da urna onde um candidato esta com 50% e outro esta com 50%". Daqui a pouco chega mais informações dizendo "Foram apuradas 40% das urnas e agora um candidato esta com 60%e o outro esta com 40%", depois chegam mais dados. E com 1 único Observable voce fica recebendo esse STREM DE DADOS, ou seja, um conjunto de dados em sequencia, sem necessariamente ficar criando novos objetos porque voce consegue reusar.
+
+3- Operadores: As Promises também tem um outro "poder" que são os Operadores, que são funções que podem ser usadas juntamente com os Observables. Por exemplo no caso da Promisse você tem basicamente o método then. No caso dos Obsevables você tem outros métodos como map. Você consegue fazer filtros que são tipo de funções(Operadores) que você consegue trabalhar com os seus dados. Por exemplo:  Eu acabei de receber uma lista de produtos do meu backend, você te como ficar trabalhando com esses dados a partir dos Observables de uma maneira muito interessante. Então tem uma serie de funções que ajudam a processar os dados. Em outras palavras por trás do Observable ele vai encapsular essa questão do padrão Observer. O padrão Observer é a base da programação reativa, ou seja só tem programação reativa a partir do padrão Observer. Quando o evento acontece ai sim é que o código vai de forma reativa agir por conta que um determinado evento que aconteceu.
+
+- Quando você trabalha com Observable, Promisse ou CALLBACK, via de regra você esta trabalhando com código assíncrono, ou seja, não há um resposta imediata na chamada do seu código. Um exemplo claro de chamada assíncrona, é quando você vai fazer uma chamada pro bakend da sua aplicação.
+
+EXEMPLO:
+
+criarNoBackend(produto: Produto): Observable<Produto> {
+  return this.http.post<Produto>(ths.url,produto);
+}
+
+-Esse método recebe um produto como parâmetro e faz uma chamada do tipo post para cadastrar esse produto no backend. Foi chamado o módulo http do Angular que serve para trabalhar com as requisições HTTP. Entretanto o backend da nossa aplicação demora as vezes alguns segundos para responder, então esse método não ira responder na hora que você chamou, ele via responder depois de algum tempo no futuro, por isso esse método retorna um Observable, e esse Observable que será retornado a partir desse método, podemos passar para ele registrar um Observador(exatamente o que esta acontecendo no código abaixo no subscribe). Você pode registrar um Observador:
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+criarProduto(): void {
+  this.criarNoBackend(this.produto).subscribe (() => {
+    this.exibirMensagem("Salvo com sucesso!");
+})
+}
+
+- Neste método eu chamei o criarNoBackend, passei o produto e como resposta dessa chamada eu recebo um Observable, ou seja,  na hora que eu chamo ele já retorna um Observable, só que a resposta do servidor anda não chegou, por isso que eu chamo o método subscribe e ai eu passo uma função para ser chamada quando a resposta do servidor chegar.
+
+-Neste método esta sendo registrado um Observador, que é a função Arrow que esta sendo passada como parâmetro para o subscribe. Ou seja, o subcribe é o método de registro. Neste caso o Observable é o meu Subject. Ou seja, o Observable tem a capacidade de detectar que um determinado evento aconteceu, que é o evento da resposta do meu servidor(backend) para minha requisição post que foi feita, e quando essa resposta chegar  método que eu passei para o subscribe será chamado e ai sim eu posso exibir uma mensagem por exemplo, de que o usuário foi salvo, ou chamar a navegação para ir para uma outra tela, ou seja, eu posso fazer qualquer coisa que eu queira em resposta da minha chamada ao backend.
 _______________________________________________________________________________________________________________________________________________________________________
 
 
+**SERVICES: São classes que tem como principal objetivo organizar e compartilhar métodos e dados entre componentes. É possível também utilizar Services dentro de Diretivas. A ideia é você separar responsabilidades.
+-Tudo aquilo que diz respeito a responsabilidade de mostrar algo visual na tela diz respeito ao componente. Mas sempre que você tem regras que não tem respeito diretamente com a parte visual, ou você quer encapsular o acesso a sua API(o backend da aplicação), o ideal é você separar as responsabilidades e colocar algumas responsabilidades no Service, porque diz respeito a parte não visual que não tem diretamente uma relação com aquilo que esta sendo exibido na tela, você também pode colocar toda a responsabilidade de acessar o backend da sua aplicação. O Angular não te força a criar os Services, você pode criar Service com essa ideia tanto de separar responsabilidades, como também viabilizar comunicação entre componentes. Por exemplo: Eu preciso de uma determinada informação e essa informação precisa ser compartilhada entre o Componente A e o Componente B, onde os componentes não estão próximos onde não há como passar essa informação de um componente para outro, par isso podemos usar Services como uma forma de compartilhar dados e métodos entre componentes.
 
+*MOTIVAÇÃO PARA O SERVICE: Imagine que temos o Componente 1 que possui seu HTML, CSS,TS. E dentro do TS nos temos um certo conjunto de lógica. E também temos o Componente 2 que também tem  seu HTML, CSS TS e dentro do TS também possui o seu conjunto de lógica. Usamos o Service para colocar as lógicas que não estão relacionadas com a parte visual dos componentes e que não são da responsabilidade dos componentes. Nem toda aplicação terá apenas 1 único Service com varias logicas dentro, tudo ira depender de você ter responsabilidades coerentes dentro de um Service. Não necessariamente você precisa ter um único método dentro de cada Service, mas você vai ter um Service responsável por um conjunto coerente de responsabilidades.
+-Por exemplo: um cadastro, onde eu vou criar um produto, alterar um produto, excluir um produto, consultar um produto por ID. Você pode colchoar isso tudo dentro de um Service só, mas você não vai colocar outras funcionalidades que não dizem respeito ao produtos, como cadastrar um cliente, alterar um cliente ou mexer num fornecedor dentro de um Service que esta focado para trabalhar nas coisas relacionadas aos produtos. Então é importante ter esse cuidado de ter Services que tem logicas que tem um coerência de estar juntas caso não haja essa coerência você cria mais de um Service. Para usar o Service dentro de um Componente precisamos usar Injeção de Dependência.
+
+-CRIAR UM SERVICE: ng g s services/product 
+Sintaxe: ng g s nome da pasta/nome do service
+
+
+
+-EXEMPLO DE UMA CLASSE QUE REPRESENTA UM SERVICE: Aqui o decorator @Injectable significa que essa classe vai ser detectada pelo Angular e ela vai ser possível de ser injetada em outras classes.
+
+ O provideIn: "root" significa que existe um injetor(Injector) e esse injetor é o injetor raiz da nossa aplicação. Basicamente só existe  1 injetor raiz da minha aplicação e uma vez definido que o meu produtoService vai ser provido pelo "root", significa que eu vou ter apenas uma única instância do ProdutoService em toda a minha aplicação, ou seja, sempre que eu injetar o meu produtoService dentro de um Componente, Diretiva o Angular vai me devolver a mesma instância.
+ 
+
+@Injectable({
+  provideIn: "root",
+})
+export class ProductService {
+  //...
+}
+
+
+-Quando usamos o comando para criar um Service: ng g s nome da pasta/nome do servisse. No exemplo acima , o nome do arquivo ficaria product.service.ts e o nome da classe ficou ProductService. No Angular existe todo um Guide Line relativo  nomenclatura dos Componentes, Services, Diretivas, então precisamos ficar atentos o máximo possível as Guides Lines porque isso ira nos ajudar a manter o nosso projeto, como se outros desenvolvedores vierem para o projeto eles irão estar muito mais familiarizados porque é uma forma padrão de se usar nomenclatura dentro do Angular.
+
+
+-OBS: Existe um padrão de projeto do Design Pattern chamado Sigleton, que consiste em criar apenas uma única instancia de uma classe, as vezes criando um construtor privado dependendo da linguagem, ou as vezes criando um método para devolver essa instância. Como o Angular ele vai  gerenciar a criação do Service e vai ser responsável por gerenciar a criação dos componentes, porque você não instancia uma classe produtoService, da mesma forma que você não vai instanciar uma classe correspondente a um componente, você não vai instanciar um componente. Quem vai fazer todo esse trabalho de instanciar essas classes gerenciadas como: Componente, Diretiva, Service é o Angular. Então como o Angular é responsável por gerenciar a criação desses objetos, ele também vai ser responsável por Injetar Dependência de um objeto no outro, como também é responsável por garantir que uma determinada instancia sempre será devolvida quando você pedir. Imagine que você tem um Service e esse Service tem um contador dentro dele, se você vai lá e aumenta esse contador para 10 em um determinado Componente A,  quando você injetar esse Service no Componente B, 
+o contador vale 10. E se lá no Componente B  você aumentar esse contador para 30, quando você injetar esse Service novamente dentro do Componente A, o contador agora vale 30. Se você aumentar esse contador novamente para 130 e você vai injetar esse Service no Componente C, o contador vale 130, porque estamos sempre trabalhando com a mesma instância do Service uma vez que você usa o provideIn: "root".
+_______________________________________________________________________________________________________________________________________________________________________
+
+**INJEÇAO DE DEPENDÊNCIA: É um padrão no qual a classe recebe as dependênciasde uma fonte externa ao invés de criar por conta própria.
+
+-Num cenário padrão quando uma Classe A precisa de uma Classe B, ouseja, a Classe A vai preisar da Clase B, então a Classe A vai criar a Classe B. É muito natural acontecer isso, mas na Injeção de Dependência ha uma inversão dessa logica, ou sej, é um padrão onde a classe recebe as dependências a partir de uma fonte externa ao invés de criar por conta própria. Ou seja, a Classe A precisa da Classe B, ao invés da Classe A criar por conta própria uma instância da Classe B, a Classe A vai receber a Classe B a partir do construtor ou a partir de algum outro mecanismo como é o caso da Injeção de Dependência.
+Dependendo da linguagem, framework que você vai usar a forma  de implementar a Injeção de Dependência é diferente.
+
+-EXEMPLO  DE UM CENÁRIO SEM INJEÇÃO DE DEPENDÊNCIA: A classe Carro depende da Classe Motor
+
+CLASSE CARRO   	  ===>                CLASSE MOTOR
+
+class Carro {                          class Motor {}
+  motor: Motor
+
+ construtor() {
+  this.motor = new Motor()
+ }
+}
+
+-Neste cenário a Classe Carro dependência da Classe Motor. Então nada mais natural dentro do construtor você instanciar o Motor a parir da linha : ths.motor = new Motor(), ou seja, você acabou de instanciar um objeto Motor e atribuiu a variável dentro da Classe Carro, e tal forma de que quando Carro for instanciado o Carro terá automaticamente um Motor. Mas quem foi responsável por instanciar o Motor ? Foi a própria Classe Carro, ou seja, ai não houve Injeção de Dependência, porque a Classe Carro foi responsável por criar uma instancia da Classe Motor.
+
+
+- Se por algum motivo a Classe Motor tiver uma alteração, por exemplo, onde para criar um objeto Motor eu preciso dizer qual cilindrada aquele Motor tem. Só que uma vez que eu mexi na classe Motor, na Classe Carro gerou um impacto, pois como Carro cria o Motor agora você obrigatoriamente precisa passar uma cilindrada como parâmetro para a construção do Motor. Isso faz com que sempre que você mexa na Classe Motor, você também tenha que alterar a Classe Carro, gerando uma fragilidade, ou seja, a Classe Carro esta muito dependente da Classe Motor.
+
+CLASSE CARRO:
+class Carro {
+  motor: Motor
+
+  construtor() {
+    this.motor = new Motor() --Gera erro aqui.
+  }
+}
+
+
+CLASSE MOTOR ALTERADA: Gera um erro na Classe Carro, obrigando que a  Classe  Carro também seja alterada.
+class Motor {
+ cilindrada: number
+
+  construtor(cilindrada: number) {
+  this.cilindrada
+ }
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-EXEMPLO  DE UM CENÁRIO COM INJEÇÃO DE DEPENDÊNCIA:
+
+-Uma forma de resolver isso seria passar Motor como parâmetro para o Carro. Fazendo isso, significa que alguém externo, imagina que você tem uma classe chamada Fabrica e na hora de você criar o Carro você cria o Motor, sabe exatamente o que precisa passar para o Motor e ai sim você passa o Motor construído para dentro do Carro. Ou seja, uma fonte externa passou a dependência para dentro do Carro. E ai você vai ter frameworks que vão te ajudar no processo de Injetar Dependência.
+
+  
+class Carro {
+  motor: Motor
+
+  construtor (motor: Motor) {  -Passando o Motor como parâmetro
+    this.motor = motor
+  }
+}
+
+class Motor {
+ cilindrada: number
+
+  construtor(cilindrada: number) {
+  this.cilindrada
+ }
+}
+
+
+
+-Principalmente no caso do Angular se a gente substituir Carro por Componente e substituir Motor por Service. Quem é responsável  por criar o Carro, ou seja o Componente , e quem é responsável por criar  Service é o Angular, então ele será capaz de prover essas dependências pra gente a partir da Injeção de Dependência.
+
+-Dentro do Framework Angular tem um módulo de Injeção de Dependência, ou seja, há um framework dentro do outro. Então quando você cria uma classe ProductService e diz que essa classe  é @Injectable, você esta dizendo em outras palavras que essa classe ode ser injetada  e ao mesmo tempo que você coloca um @Injectable você esta dizendo pro Angular que ele deve considerar essa classe, ele  deve instanciar essa classe para você. 
+Então o Angular vai instanciar essa classe criando uma instancia e ProductService. Num cenário comum eu tenho uma única instancia, isso não significa que eu não possa ter mais. Mas no cenário da nossa aplicação usando provideIn: "root", ele vai ter apenas uma instancia dessa classe para toda a aplicação(ProductService). Sempre que injetarmos ProductService ele vai pegar essa única instancia.
+Depois que o Angular instanciar o ProductService, agora ele vai precisar instanciar  o ProductCreateComponent(Componente de criação de produto) porque ele foi referenciado em algum ponto da sua aplicação. Quando Angular for gerar uma instancia desse Componente ele ira criar um Componente e vai passar como parâmetro e injetar o ProductService no Componente.
+
+Então nos temos o framework(Angular) quando ele instancia ele cria  o ProductService, e quando ele for instancia o Componente(ProductCreateComponent) ele passa o ProductService que é injetado no Componente. Não necessariamente você vai ter apenas 1 única instancia do componente, sempre que você referenciar o componente a partir da sua tag ele vai criar uma nova instancia daquele componente, para cada tag você vai ter uma instancia. Portanto quem vai ser responsável por criar essas instancias é o Angular.
+
+Falando a respeito do provideIn: "root". O "root" é um apelido(alias) para o AppModule, chamado de root injector. Associado ao AppModule, que é o modulo inicial da aplicação, o root injector é responsável pela injeção de dependência e ele esta associado ao AppModule. Quando você diz que o seu provideIn vai ser o "root", você esta dizendo em outras palavras que o provideIn vai ser o AppModule. Como só tem 1 AppModule dentro da sua aplicação, sempre que você criar alguma coisa que usa @Injectable  provideIn: "root", significa que esse Service por exemplo vai ter apenas uma única instancia em toda a sua aplicação.
+
+
+*SINGLETON: Services são sigletons(apenas uma única instncia) dentro do escopo de um injector.
+
+-INJECTOR: Temos 2 grupos de injetores: 
+
+- ModuleInjector(injetor de módulo): Sempre que usamos @ngMoudle e dentro do módulo você define os providers e você referencia um determinado Service, você esta usando um injetor de modulo. Significa que dentro do escopo do seu modulo você vai ter apenas uma única instancia daquele serviço. Quando você usa um @Injectable da mesma forma você passar tanto o root que ai você tem a única instancia pra toda a sua aplicação como você ode usar dentro do Injectable o provideIn apontando para um modulo, ou seja, voe também esta usando um ModuleInjector, ou seja aquele Service vai ter apenas 1 única instancia dentro do escopo do modulo ou dentro do escopo  a sua aplicação se você estiver usado o injetor root, o raiz. Quando usamos root, e o root aponta para o AppModule estamos usando o ModuleInjector.
+
+ - ElementInjector(injetor de elemento):Quando você usa os providers dentro de Diretiva(@Directive) ou um Componente(@Component), você pode definir a partir da propriedade providers que você pode definir alguns serviços que você quer colocar dentro do seu componente, e ai sim você esta dizendo que você quer ter uma instancia própria dentro daquele componente  de um determinado Service. Então ao invés de você usar a instancia única que esta sendo compartilhada na sua aplicação inteira, você vai usar dentro de um determinado componente o Service, você pode querer uma instancia dedicada, ou seja, criar uma nova instancia para ser injetada naquele componente. Ai você usa dentro de @Componentou dentro de @Directive, você usa os providers para colocar quais são os serviços eu você quer eu sejam injetados novas instancias.
+
+-OBS: No lugar de root você pode colocar a referencia para um modulo. Vamos supor eu você tenha um módulo da sua aplicação de autenticação. Você criou um modulo chamado authModule e você quer dentro desse modulo de autenticação ter um determinado serviço dentro daquele escopo, então você pode dizer que o provideIn é o authModule, mas sem as aspas: @Injectable provideIn: authModule. As aspas em root só serve para ele ter um alias para o AppModule. Você vai ter que de fato fazer um import do modulo para dai você referenciar ao modulo aqui dentro do provideIn. Então no lugar do root você pode ter qualquer outro modulo da sua aplicação.
+
+-Por via de regra na nossa aplicação a gente vai estar sempre usando o ModuleInjector, especificamente usando a partir da notação @Injectable e o provieIn a gente vai usar o root, ou seja, nos vamos ter apenas uma única instancia em toda a nossa aplicação.
+
+Mas quando você tem aplicações mais complexas com vários módulos,  é interessante você ter também a capacidade de definir um escopo de um Service um pouco mais restrito. Então você pode  usar diferentes estratégias para que você possa definir o escopo do seu Service. Existem mais informações na documentação do Angular: https://angular.io/guide/hierarchical-dependency-injection.
+_______________________________________________________________________________________________________________________________________________________________________
+
+
+**Foi criado uma pasta chamada views e dentro foi colocada o componente home. Para organizar melhor as pastas do projeto, dentro da pasta componentes tudo aquilo que for trechos de componentes reutilizados que podem ser reutilizados em mais de 1 tela. E quando eu tenho uma tela inteira eu vou colcoar dentro do componente(pasta) view, como é o caso do home.component.
 
 
 
