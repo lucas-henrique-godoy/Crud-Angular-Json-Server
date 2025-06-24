@@ -6,11 +6,11 @@ import { ProductCrudComponent } from './views/product-crud/product-crud.componen
 
 const routes: Routes = [  //Registrando as rotas dos componentes principais
 {
-  path: "",
+  path: "",   //Rota raiz da aplicação
   component: HomeComponent
 }, 
 {
-  path: "/product",
+  path: "products",
   component: ProductCrudComponent
 }
 ];
