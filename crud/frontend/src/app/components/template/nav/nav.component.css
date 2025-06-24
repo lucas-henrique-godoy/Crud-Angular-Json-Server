@@ -10,3 +10,8 @@
 .sidenav i {                /*Espaçamento entre o ícone e o titulo do menu*/
     padding-right: 10px;
 }
+
+.content {
+    padding: 16px;
+    background-color: #FFF;
+}
