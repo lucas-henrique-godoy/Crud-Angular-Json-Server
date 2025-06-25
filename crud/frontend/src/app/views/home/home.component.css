@@ -1,5 +1,7 @@
+
+/*Estilo para o titulo do home " Bem Vindo!"*/
 .home .title {
-    font-size: 3rem;  /*Estilo para o titulo do home " Bem Vindo!"*/
+    font-size: 3rem;  /*Unidade de medida padrão que foi configurado no browser, aqui esta 3 vezes o tamanho padrão */
     font-weight: 300;
     line-height: 1.2;
 }
