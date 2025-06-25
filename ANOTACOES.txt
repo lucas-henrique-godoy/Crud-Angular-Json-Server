@@ -599,10 +599,24 @@ O <router-outlet> fica dentro dele porque você quer que os componentes das rota
 
 Se ele estivesse fora, o conteúdo não estaria "dentro da estrutura do layout".
 
-Se quiser, posso montar um mini-projeto com você ou explicar como isso se encaixa no app.component.html. É só pedir!
 
+💡 Por que isso é importante?
+Porque com isso você consegue:
 
+Manter o menu lateral fixo (<mat-sidenav>),
 
+E ao mesmo tempo trocar apenas o conteúdo do meio da tela, sem recarregar a página toda.
+
+Aplicar estilos diferentes por rota, se quiser (por exemplo, mudar a cor do fundo dependendo do conteúdo renderizado).
+
+⚙️ Quando o usuário clica no menu:
+O routerLink="/products" muda a rota para /products.
+
+O Angular carrega o componente da rota correspondente.
+
+Esse componente é renderizado dentro do <router-outlet>, que está dentro do <mat-sidenav-content>.
+
+Resultado: o menu continua igual, e só o conteúdo da tela muda 🎯
 
 
 
