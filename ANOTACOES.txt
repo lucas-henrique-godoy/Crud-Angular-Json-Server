@@ -151,6 +151,9 @@ ________________________________________________________________________________
 
 **DIRETIVAS DE ATRIBUTO: Altera aparência(CSS) e o comportamento de um elemento, componente ou outra diretiva. Exemplo: alguma ação dentro de um botão, mudar a cor de algo, etc.
 
+-COMANDO PARA CRIAR UMA DIRETIVA: ng g d directives/red
+-SINTAXE: ng g d nome-da-pasta/nome-da-diretiva
+
 -EXEMPLO DE CÓDIGO DE UMA DIRETIVA DE ATRIBUTO:
 
 @Directive({
