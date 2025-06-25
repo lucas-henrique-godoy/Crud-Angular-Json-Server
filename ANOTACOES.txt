@@ -151,7 +151,7 @@ ________________________________________________________________________________
 
 **DIRETIVAS DE ATRIBUTO: Altera aparência(CSS) e o comportamento de um elemento, componente ou outra diretiva. Exemplo: alguma ação dentro de um botão, mudar a cor de algo, etc.
 
--COMANDO PARA CRIAR UMA DIRETIVA: ng g d directives/red
+-COMANDO PARA CRIAR UMA DIRETIVA DE ATRIBUTO: ng g d directives/red
 -SINTAXE: ng g d nome-da-pasta/nome-da-diretiva
 
 -EXEMPLO DE CÓDIGO DE UMA DIRETIVA DE ATRIBUTO:
@@ -178,6 +178,9 @@ export class RedDirective {
 
 **DIRETIVAS ESTRUTURAIS: Altera layout adicionando e removendo elementos da DOM(estrutura da página/HTML). A diferença visual entre a diretiva de atributo para a estrutural, é eu a diretiva estrutural usa asterisco na frente. Exemplo: *ngIf, *ngFor.
 
+-COMANDO PARA CRIAR UMA DIRETIVA DE ESTRUTURAL: ng g d directives/red
+-SINTAXE: ng g d nome-da-pasta/nome-da-diretiva
+
 -EXEMPLO DE CÓDIGO DE UMA DIRETIVA ESTRUTURAL:
 
 <form *ngIf="product" class="product-form">   
@@ -195,6 +198,8 @@ export class RedDirective {
 </ul>
 
 - Aqui ele irá acrescentar novos elementos. Temos uma UL(lista-não-ordenada) com LI,  e a partir desse LI ele irá fazer um laço FOR em cima  dos produtos, se tiver 10 produtos ele vai repetir o LI 10 vezes mostrando os nomes dos produtos. Esta diretiva estrutural ira adicionar novos elementos na DOM de acordo com a lista de produtos.
+
+OBS: O CÓDIGO PARA CRIAR TANTO UMA DIRETIVA DE ATRIUTO QUANTO UMA DIRETIVA ESTRUTURAL É O MESMO.
 _______________________________________________________________________________________________________________________________________________________________________
 
 **PROPERTY BININDG(BINDING DE ATRIBUTO): É uma das formas de comunicação entre o arquivo TS e o HTML dentro do componente. Binding quer dizer ligação,  e assim usando os colchetes associados a um atributo, ele vai fazer a ligação e pegar nome que colocamos na propriedade no HTML,  e vai procurar uma variável com esse nome, e ai sim ele pega o valor da variável e associa ao dataSource que é um atributo de tabela. O Material Design usa esse dataSource com mais frequência para renderizar tabelas.
