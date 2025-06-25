@@ -16,7 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 
 import { HomeComponent } from './views/home/home.component'
 import { ProductCrudComponent } from './views/product-crud/product-crud.component';
-import { RedDirective } from './directives/red.directive'
+import { RedDirective } from './directives/red.directive' //Diretiva criada para mudança de cor o icone de coração do compoennte footer
 
 @NgModule({
   declarations: [
