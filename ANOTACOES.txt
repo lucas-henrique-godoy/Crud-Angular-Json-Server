@@ -617,6 +617,9 @@ O Angular carrega o componente da rota correspondente.
 Esse componente é renderizado dentro do <router-outlet>, que está dentro do <mat-sidenav-content>.
 
 Resultado: o menu continua igual, e só o conteúdo da tela muda 🎯
+_______________________________________________________________________________________________________________________________________________________________________
+
+
 
 
 
