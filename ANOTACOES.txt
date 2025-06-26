@@ -627,7 +627,7 @@ Esse componente é renderizado dentro do <router-outlet>, que está dentro do <m
 Resultado: o menu continua igual, e só o conteúdo da tela muda 🎯
 _______________________________________________________________________________________________________________________________________________________________________
 
-
+*OnInt: É um ciclo de vida de inicialização
 
 
 
