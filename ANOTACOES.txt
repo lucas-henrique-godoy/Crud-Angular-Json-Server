@@ -639,7 +639,9 @@ ________________________________________________________________________________
 -Linha do Construtor: constructor(private router: Router) { }
 _______________________________________________________________________________________________________________________________________________________________________
 
-**
+*Neste passo, dentro de components/product criou um arquivo contendo uma classe de Modelo no Angular(Model) chamada product.model.ts.
+
+-EXPLICAÇÃO: Quando criamos nossas interações com o backend, neste caso quando a gente for mandar um produto para o backend, ou consumir um produto, nós esperamos fazer isso a partir de um modelo que tem atributos bem definidos.
 
 
 
