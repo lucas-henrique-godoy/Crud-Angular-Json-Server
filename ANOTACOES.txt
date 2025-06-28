@@ -649,6 +649,15 @@ ________________________________________________________________________________
 
 *Nesta passo fizemos a criação do Service.
 
+*EXEMPLOE MÉTODO PARA USAR SNACKBAR
+showMessage(msg: string): void {
+    this.snackbar.open(msg,'X', { //o parâmetro action esta com X que serve para fechar o snackbar(pode colocar qualquer texto, se ficar vazio voce tera que experaroduratn terminar)
+      duration: 3000,  //duração de 3 segundos
+      horizontalPosition: "right", //posição horizontal a direita
+      verticalPosition: "top"  //posião vertical em cima
+    })
+  }
+
 
 
 

@@ -1,3 +1,4 @@
+import { ProductService } from './../../components/product/product.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 

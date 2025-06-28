@@ -1,5 +1,6 @@
 import { ProductService } from './../product.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,10 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductCreateComponent implements OnInit {
 
-  constructor(private productService: ProductService) { } //Injetando o Productervice parapoder utiizar os métodos
+  constructor(private productService: ProductService, private router: Router) { } //Injetando o Productervice parapoder utiizar os métodos
 
   ngOnInit(): void {
-    this.productService.showOnConsole('Hello World!');
+    
   } 
+
+  createProduct(): void {
+    this.productService.showMessage('Produto criado!');
+  }
+
+  cancel(): void{
+    this.router.navigate(['/products'])
+  }
 
 }
