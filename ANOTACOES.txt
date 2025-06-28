@@ -634,7 +634,9 @@ ________________________________________________________________________________
 *Neste passo foi feita a criação do componente product-create
 _______________________________________________________________________________________________________________________________________________________________________
 
-*Neste passo foi criado um botão dentro de product-crud.component para navegar pra o product-create.component
+*Neste passo foi criado um botão usando MatButtonModule do Angular Material, dentro de product-crud.component para navegar pra o product-create.component. Para isso dentro de  product-crud.component.ts importamos o Router,  e injetamos ele no construtor para podermos usar as rotas de app.routing.module:
+-Importe do Router: import { Router } from '@angular/router';
+-Linha do Construtor: constructor(private router: Router) { }
 
 
 
