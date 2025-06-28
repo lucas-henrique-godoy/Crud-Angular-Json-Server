@@ -634,16 +634,20 @@ ________________________________________________________________________________
 *Neste passo foi feita a criação do componente product-create
 _______________________________________________________________________________________________________________________________________________________________________
 
-*Neste passo foi criado um botão usando MatButtonModule do Angular Material, dentro de product-crud.component para navegar pra o product-create.component. Para isso dentro de  product-crud.component.ts importamos o Router,  e injetamos ele no construtor para podermos usar as rotas de app.routing.module:
+*Neste passo foi criado um botão usando MatButtonModule(foi imporado no app.module) do Angular Material, dentro de product-crud.component para navegar pra o product-create.component. Para isso dentro de  product-crud.component.ts importamos o Router,  e injetamos ele no construtor para podermos usar as rotas de app.routing.module:
 -Importe do Router: import { Router } from '@angular/router';
 -Linha do Construtor: constructor(private router: Router) { }
 _______________________________________________________________________________________________________________________________________________________________________
 
-*Neste passo, dentro de components/product criou um arquivo contendo uma classe(Interface) de Modelo no Angular(Model) chamada product.model.ts. Sempre que formos criar um produto, ele deverá conter os taributos listados neste arquivo, sendo eles opcionais ou não. Neste caso o id é opcional.
--Para definir um atributo como opcional no TypesCript, é usar usar o operador ? EXEMPLO: id?: number.
+*Neste passo, dentro de components/product criou um arquivo contendo uma classe(Interface) de Modelo no Angular(Model) chamada product.model.ts. Sempre que formos criar um produto, ele deverá conter os atributos listados neste arquivo, sendo eles opcionais ou não. Neste caso o id é opcional, pois não é sempre que iremos precisar dele. Ou seja, quando nós formos criar um produto, nós somente iremos fornecer o nome e o preço sem fornecer um id, para quando eu mandar para o backend, ai sim ele ira me devolver um produto com id, nome e preço.
+Quando nós estivermos alterando, excluindo ou consultando um produto nós vamos ter id, nome, preço.
+
+-Para definir um atributo como opcional no TypesCript, é usar o operador ? EXEMPLO: id?: number.
 
 -EXPLICAÇÃO: Quando criamos nossas interações com o backend, neste caso quando a gente for mandar um produto para o backend, ou consumir um produto, nós esperamos fazer isso a partir de um modelo que tem atributos bem definidos.
+_______________________________________________________________________________________________________________________________________________________________________
 
+*Nesta passo fizemos a criação do Service.
 
 
 
