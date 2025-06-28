@@ -13,8 +13,8 @@ export class ProductCrudComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  criarProduto():void {
-    
-  }
+  navigateToProductCreate():void {
+    console.log('Navegando...')
+}
 
 }
