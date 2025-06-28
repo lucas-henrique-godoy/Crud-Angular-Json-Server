@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
 })
 export class ProductCrudComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) { } //Injetando o Router para poder usar as rotas
 
   ngOnInit(): void {
   }
 
   navigateToProductCreate():void {
-    console.log('Navegando...')
+    this.router.navigate(['/products/create'])
 }
 
 }
