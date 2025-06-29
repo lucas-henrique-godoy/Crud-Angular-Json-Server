@@ -649,7 +649,17 @@ Quando nós estivermos alterando, excluindo ou consultando um produto nós vamos
 -EXPLICAÇÃO: Quando criamos nossas interações com o backend, neste caso quando a gente for mandar um produto para o backend, ou consumir um produto, nós esperamos fazer isso a partir de um modelo que tem atributos bem definidos.
 _______________________________________________________________________________________________________________________________________________________________________
 
-*Nesta passo fizemos a criação do Service, dentro de componentes/product, criamos o product.service.ts
+*Nesta passo fizemos a criação do Service, dentro de componentes/product, criamos o product.service.ts e importamos o HttpClientModule dentro do app.module para podermos fazer requisições Http.
+_______________________________________________________________________________________________________________________________________________________________________
+
+*Neste passo criamos o método para criar um produto
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+*Neste passo criamos o formulário para criar um produto dentro de product-create
+
+
+
 _______________________________________________________________________________________________________________________________________________________________________
 
 *EXEMPLO DE MÉTODO PARA USAR SNACKBAR (COMO FOI FEITO NO NOSSO SERVICE)
@@ -660,10 +670,6 @@ showMessage(msg: string): void {
       verticalPosition: "top"  //posião vertical em cima
     })
   }
-
-_______________________________________________________________________________________________________________________________________________________________________
-
-
 
 
 _______________________________________________________________________________________________________________________________________________________________________
