@@ -695,7 +695,7 @@ ________________________________________________________________________________
 *Nesta passo fizemos a criação do Service, dentro de componentes/product, criamos o product.service.ts e importamos o HttpClientModule dentro do app.module para podermos fazer requisições Http.
 _______________________________________________________________________________________________________________________________________________________________________
 
-Explicação do método create para criar um produto:
+EXPLICAÇÃO DO MÉTODO create PARA CRIAR UM PRODUTO VIA POST NO SERVICE:
 
 Neste passo, criamos um método responsável por cadastrar um novo produto na API. Primeiro, importamos o HttpClient do Angular e o injetamos no construtor da classe (por meio da injeção de dependência). Em seguida, declaramos o atributo baseUrl, que armazena a URL base da API: 'http://localhost:3100/products'.
 
@@ -703,12 +703,47 @@ O método create recebe como parâmetro um objeto do tipo Product (modelo de pro
 
 Dentro do método, utilizamos o método post do HttpClient, passando como argumentos a URL da API (this.baseUrl) e o objeto product. Isso realiza uma requisição POST para cadastrar o produto no backend.
 
-ts
-Copiar
-Editar
+*MÉTODO QUE ESTA O SERVICE
 create(product: Product): Observable<Product> {
   return this.http.post<Product>(this.baseUrl, product);
 }
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EXPLICAÇÃO DO MÉTODO createProduct DO COMPONENTE:
+Este método é responsável por acionar a criação de um novo produto quando o usuário envia o formulário (por exemplo, clicando em "Salvar").
+
+Chamada do service:
+O método chama o create do productService, passando o objeto this.product, que representa o produto preenchido pelo usuário.
+
+Inscrição (subscribe):
+Como o método create retorna um Observable, usamos .subscribe() para esperar a resposta da API e executar ações após a criação do produto.
+
+Mensagem de confirmação:
+Dentro do .subscribe(), logo após a confirmação de que o produto foi criado com sucesso, chamamos productService.showMessage('Produto criado!').
+Essa função geralmente exibe uma notificação visual para o usuário (como um MatSnackBar).
+
+Navegação:
+Em seguida, usamos o this.router.navigate(['/products']) para redirecionar o usuário de volta para a lista de produtos, após o cadastro.
+
+CÓDIO DO MÉTODO createProduct QUE ESTA NO TS O COMPONENTE:
+
+createProduct(): void {
+  this.productService.create(this.product).subscribe(() => {
+    this.productService.showMessage('Produto criado!'); 
+    this.router.navigate(['/products']); 
+  });
+}
+
+✅ Resumo do que ele faz:
+Etapa				Ação
+1. Chama o service		this.productService.create(...) envia o produto para a API
+2. Espera a resposta		.subscribe(...) aguarda o resultado da operação
+3. Exibe mensagem		showMessage('Produto criado!') avisa o usuário
+4. Redireciona a página		this.router.navigate(['/products']) leva o usuário para a listagem
+_______________________________________________________________________________________________________________________________________________________________________
+
+
+
 _______________________________________________________________________________________________________________________________________________________________________
 
 *Neste passo criamos o formulário para criar um produto dentro de product-create
