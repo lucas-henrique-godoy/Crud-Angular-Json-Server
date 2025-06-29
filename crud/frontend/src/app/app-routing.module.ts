@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './views/home/home.component';
 import { ProductCrudComponent } from './views/product-crud/product-crud.component';
 import { ProductCreateComponent } from './components/product/product-create/product-create.component';
+import { ProductReadComponent } from './components/product/product-read/product-read.component';
 
 const routes: Routes = [  //Registrando as rotas dos componentes principais
 {
@@ -17,7 +18,11 @@ const routes: Routes = [  //Registrando as rotas dos componentes principais
 {
   path: "products/create",
   component: ProductCreateComponent
-}
+ },
+// {
+//   path: "products/read",
+//   component: ProductReadComponent
+// }
 ];
 
 @NgModule({

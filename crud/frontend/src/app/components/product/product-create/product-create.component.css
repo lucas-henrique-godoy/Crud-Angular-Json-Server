@@ -1,9 +1,10 @@
 /*Coloca os elementos do formulário um embaixo do outro*/
 form {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;    
 }
 
+/*Coloca espaço entre os botões e em relação ao formulario*/
 button {
     margin: 20px, 15px, 0px, 0px;    
 }
