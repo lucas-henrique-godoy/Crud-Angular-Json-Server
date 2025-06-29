@@ -647,13 +647,68 @@ Quando nós estivermos alterando, excluindo ou consultando um produto nós vamos
 -Para definir um atributo como opcional no TypesCript, é usar o operador ? EXEMPLO: id?: number.
 
 -EXPLICAÇÃO: Quando criamos nossas interações com o backend, neste caso quando a gente for mandar um produto para o backend, ou consumir um produto, nós esperamos fazer isso a partir de um modelo que tem atributos bem definidos.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+PERGUNTA: POR QUE NUMA MODEL POR EXEMPLO DE PRODUTOS O ID SERIA OPCIONAL?
+
+RESPOSTA: Ótima pergunta! Em uma model (modelo) de produto no Angular/TypeScript, o id geralmente é marcado como opcional (id?: number) por uma razão muito prática relacionada à criação de novos dados.
+
+✅ Explicação simples
+Quando você cria um novo produto, você ainda não tem um id, porque:
+
+O id normalmente é gerado automaticamente pelo backend (ex: banco de dados).
+
+No momento da criação (antes de salvar), seu objeto ainda não tem esse valor.
+
+🧠 Exemplo real
+Model de Produto:
+
+export interface Product {
+  id?: number;          // ID opcional
+  name: string;
+  price: number;
+}
+
+
+Criando um novo produto no Angular:
+
+const novoProduto: Product = {
+  name: 'Mouse Gamer',
+  price: 199.90,
+  // sem id!
+};
+
+Quando você envia isso para a API usando POST, o backend insere no banco e gera um id automaticamente, e então pode te retornar o produto completo com id preenchido.
+
+🧩 Se o id não fosse opcional?
+Você teria que sempre fornecer um id, o que não faz sentido ao criar algo novo — já que o frontend não sabe qual será o próximo ID.
+
+✅ Em resumo:
+Situação			O que acontece?
+Criar novo item			O id é omitido (opcional)
+Editar item existente		O id já existe e é usado normalmente
+id não for opcional		Você teria que colocar um valor falso ou inválido
+
 _______________________________________________________________________________________________________________________________________________________________________
 
 *Nesta passo fizemos a criação do Service, dentro de componentes/product, criamos o product.service.ts e importamos o HttpClientModule dentro do app.module para podermos fazer requisições Http.
 _______________________________________________________________________________________________________________________________________________________________________
 
-*Neste passo criamos o método para criar um produto
+Explicação do método create para criar um produto:
 
+Neste passo, criamos um método responsável por cadastrar um novo produto na API. Primeiro, importamos o HttpClient do Angular e o injetamos no construtor da classe (por meio da injeção de dependência). Em seguida, declaramos o atributo baseUrl, que armazena a URL base da API: 'http://localhost:3100/products'.
+
+O método create recebe como parâmetro um objeto do tipo Product (modelo de produto) e retorna um Observable<Product>, que representa a resposta da requisição HTTP.
+
+Dentro do método, utilizamos o método post do HttpClient, passando como argumentos a URL da API (this.baseUrl) e o objeto product. Isso realiza uma requisição POST para cadastrar o produto no backend.
+
+ts
+Copiar
+Editar
+create(product: Product): Observable<Product> {
+  return this.http.post<Product>(this.baseUrl, product);
+}
 _______________________________________________________________________________________________________________________________________________________________________
 
 *Neste passo criamos o formulário para criar um produto dentro de product-create
@@ -664,7 +719,7 @@ ________________________________________________________________________________
 
 *EXEMPLO DE MÉTODO PARA USAR SNACKBAR (COMO FOI FEITO NO NOSSO SERVICE)
 showMessage(msg: string): void {
-    this.snackbar.open(msg,'X', { //o parâmetro action esta com X que serve para fechar o snackbar(pode colocar qualquer texto, se ficar vazio voce tera que experaroduratn terminar)
+    this.snackbar.open(msg,'X', { //o parâmetro action esta com X que serve para fechar o snackbar(pode colocar qualquer texto, se ficar vazio você terá que experaroduratn terminar)
       duration: 3000,  //duração de 3 segundos
       horizontalPosition: "right", //posição horizontal a direita
       verticalPosition: "top"  //posição vertical em cima

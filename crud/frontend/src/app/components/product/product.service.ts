@@ -11,7 +11,7 @@ export class ProductService {
 
   baseUrl = "http://localhost:3001/products" //Url da api no backend
 
-  constructor(private snackbar: MatSnackBar, private http: HttpClient) { }
+  constructor(private snackbar: MatSnackBar, private http: HttpClient) { } //Injetamos snackbar e HttpClient
 
   //Métod para mostrar uma mensagem usando snackbar
   showMessage(msg: string): void {
@@ -22,6 +22,7 @@ export class ProductService {
     })
   }
 
+  //Método para criação de Produto
   create(product: Product): Observable<Product> {
     return this.http.post<Product>(this.baseUrl, product)
   }
