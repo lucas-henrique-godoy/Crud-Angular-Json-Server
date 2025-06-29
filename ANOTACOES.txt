@@ -908,7 +908,7 @@ Envia para API					this.productService.create(this.product)	this.productService.
 
 _______________________________________________________________________________________________________________________________________________________________________
 
-*Neste passo criamos o formulário para criar um produto dentro de product-create. Nesse passo para trabalhar com formulários, foi necessário importar dentro  de app.module os seguintes módulos:
+*Neste passo criamos o formulário para criar um produto dentro de product-create. Nesse passo para trabalhar com formulários, foi necessário importar dentro  de app.module (e colcoar em imports também)os seguintes módulos:
 
 import  { FormsModule }  from '@angular/forms'
 import  { MatFormFieldModule }  from '@angular/material/form-field';
