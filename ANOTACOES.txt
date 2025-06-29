@@ -749,9 +749,8 @@ product: Product = {
   }
 Ótima dúvida! Essa parte que você viu:
 
-ts
-Copiar
-Editar
+TS:
+
 product: Product = {
   name: '',
   price: null
@@ -804,10 +803,13 @@ Por que inicializar product?	  Para quê serve?
 Evitar erro de undefined	  O template precisa do objeto definido para funcionar
 Preparar objeto para envio	  Já fica pronto para enviar no método create()
 Ajudar o TypeScript com tipagem	  Garante que está seguindo a interface Product
+
+-OBS: Essa forma onde usa [(ngModel)] no HTML e um objeto product no componente é chamada de Template-driven Forms.
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
- VAMOS VER COMO CRIAR E USAR UM FORMULÁRIO REATIVO (REACTIVE FORMS) NO ANGULAR, PASSO A PASSO, USANDO O MESMO EXEMPLO DE PRODUCT (PODUCT COM NAME E PRICE).
+ **VAMOS VER COMO CRIAR E USAR UM FORMULÁRIO REATIVO (REACTIVE FORMS) NO ANGULAR, PASSO A PASSO, USANDO O MESMO EXEMPLO DE PRODUCT (PODUCT COM NAME E PRICE).
 
 ✅ 1. Pré-requisitos
 No seu módulo (app.module.ts ou outro onde está o componente), você precisa importar:
@@ -821,6 +823,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 
 export class AppModule { }
+----------------------------------------------------------------------------------------------------
 
 ✅ 2. Model de Produto (interface)
 
@@ -830,6 +833,7 @@ export interface Product {
   price: number;
 }
 
+----------------------------------------------------------------------------------------------------
 ✅ 3. Componente: configurando o FormGroup
 
 import { Component } from '@angular/core';
@@ -866,7 +870,7 @@ export class ProductCreateComponent {
     }
   }
 }
-
+----------------------------------------------------------------------------------------------------
 ✅ 4. HTML do formulário (product-create.component.html)
 
 <form [formGroup]="form" (ngSubmit)="createProduct()">
@@ -904,7 +908,11 @@ Envia para API					this.productService.create(this.product)	this.productService.
 
 _______________________________________________________________________________________________________________________________________________________________________
 
-*Neste passo criamos o formulário para criar um produto dentro de product-create
+*Neste passo criamos o formulário para criar um produto dentro de product-create. Nesse passo para trabalhar com formulários, foi necessário importar dentro  de app.module os seguintes módulos:
+
+import  { FormsModule }  from '@angular/forms'
+import  { MatFormFieldModule }  from '@angular/material/form-field';
+import  { MatInputModule }  from '@angular/material/input';
 
 
 

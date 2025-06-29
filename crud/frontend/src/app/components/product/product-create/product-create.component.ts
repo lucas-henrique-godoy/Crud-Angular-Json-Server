@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ProductCreateComponent implements OnInit {
 
+  // Inicializa os campos do objeto para uso com Template-driven Forms
   product: Product = {
     name: '',
     price: null
@@ -24,12 +25,10 @@ export class ProductCreateComponent implements OnInit {
   } 
 
   createProduct(): void {
-    this.productService.create(this.product).subscribe(() => {
-      this.productService.showMessage('Produto criado!'); 
-      this.router.navigate(['/products']) 
-    })
-    
-    
+    this.productService.create(this.product).subscribe(() => { //Subscribe Será notificado quando a resposta chegar
+      this.productService.showMessage('Produto criado!');  //Chama a função de mensagem quando receber a resposta da API
+      this.router.navigate(['/products'])     //Navega para product-crud que é a lista de produtos
+    })   
   }
 
   cancel(): void{
