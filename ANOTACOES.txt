@@ -368,6 +368,8 @@ ________________________________________________________________________________
 
 *O PADRÃO OBSERVER: É o padrão de projeto mais utilizado na web. Tudo começa a partir do padrão Observer. É um padrão orientado Evento.
 
+
+
 -Subject: É quem tem a capacidade de monitorar e detectar quando um evento acontece.
 -Observer: São os códigos que estão interessados num determinado evento.
 
@@ -647,10 +649,10 @@ Quando nós estivermos alterando, excluindo ou consultando um produto nós vamos
 -EXPLICAÇÃO: Quando criamos nossas interações com o backend, neste caso quando a gente for mandar um produto para o backend, ou consumir um produto, nós esperamos fazer isso a partir de um modelo que tem atributos bem definidos.
 _______________________________________________________________________________________________________________________________________________________________________
 
-*Nesta passo fizemos a criação do Service.
+*Nesta passo fizemos a criação do Service, dentro de componentes/product, criamos o product.service.ts
 _______________________________________________________________________________________________________________________________________________________________________
 
-*EXEMPLOE MÉTODO PARA USAR SNACKBAR
+*EXEMPLO DE MÉTODO PARA USAR SNACKBAR (COMO FOI FEITO NO NOSSO SERVICE)
 showMessage(msg: string): void {
     this.snackbar.open(msg,'X', { //o parâmetro action esta com X que serve para fechar o snackbar(pode colocar qualquer texto, se ficar vazio voce tera que experaroduratn terminar)
       duration: 3000,  //duração de 3 segundos
@@ -659,6 +661,12 @@ showMessage(msg: string): void {
     })
   }
 
+_______________________________________________________________________________________________________________________________________________________________________
+
+
+
+
+_______________________________________________________________________________________________________________________________________________________________________
 
 
 
