@@ -12,7 +12,7 @@ export class ProductService {
     this.snackbar.open(msg,'X', { //o parâmetro action esta com X que serve para fechar o snackbar
       duration: 3000,  //duração de 3 segundos
       horizontalPosition: "right", //posição horizontal a direita
-      verticalPosition: "top"  //posião vertical em cima
+      verticalPosition: "top"  //posição vertical em cima
     })
   }
 }
