@@ -44,7 +44,7 @@ Desinstalamos a versão atual do json-server e instalamos uma versão mais antig
 -Instala aversão do jso-server compatível com o Node 12: npm install json-server@0.16.3 --save-dev
 
 Depois disso, npm start funcionou corretamente com a sua versão atual do Node.js.
-_____________________________________________________________________________________________________________________________________________________________________________________________________________________________
+_______________________________________________________________________________________________________________________________________________________________________
 
 			# SEÇÃO - FRONTEND DO PROJETO
 
@@ -633,7 +633,7 @@ ________________________________________________________________________________
 
 _______________________________________________________________________________________________________________________________________________________________________
 
-*Neste passo foi feita a criação do componente product-create
+*Neste passo foi feita a criação do componente que é o ormuláio ara criação de um produto. Dentro de componentes/product/product-create.
 _______________________________________________________________________________________________________________________________________________________________________
 
 *Neste passo foi criado um botão usando MatButtonModule(foi imporado no app.module) do Angular Material, dentro de product-crud.component para navegar pra o product-create.component. Para isso dentro de  product-crud.component.ts importamos o Router,  e injetamos ele no construtor para podermos usar as rotas de app.routing.module:
@@ -742,11 +742,12 @@ Etapa				Ação
 4. Redireciona a página		this.router.navigate(['/products']) leva o usuário para a listagem
 _______________________________________________________________________________________________________________________________________________________________________
 
-*PERGUNTA: POR QUE NA SEÇÃO DE PROPRIEDADES DA CLASSE  DO COMPONENTE ESE MÉTODO FOI CRIADO FOI COLCADO ISSO?:
+*PERGUNTA: POR QUE NA SEÇÃO DE PROPRIEDADES DA CLASSE  DO COMPONENTE ESSE MÉTODO FOI CRIADO FOI COLOCADO ISSO?:
 product: Product = {
     name: '',
     price: null
   }
+
 Ótima dúvida! Essa parte que você viu:
 
 TS:
@@ -908,7 +909,7 @@ Envia para API					this.productService.create(this.product)	this.productService.
 
 _______________________________________________________________________________________________________________________________________________________________________
 
-*Neste passo criamos o formulário para criar um produto dentro de product-create. Nesse passo para trabalhar com formulários, foi necessário importar dentro  de app.module (e colcoar em imports também)os seguintes módulos:
+*Neste passo criamos o formulário para criar um produto dentro de product-create. Nesse passo para trabalhar com formulários, foi necessário importar dentro  de app.module (e colocar em imports também)os seguintes módulos:
 
 import  { FormsModule }  from '@angular/forms'
 import  { MatFormFieldModule }  from '@angular/material/form-field';
@@ -1029,7 +1030,7 @@ read(): Observable<Product[]> {
   }
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-*USANDO O MÉTODO READ DENTRO DO COMPOENNTE DE LISTAGEM DE PRODUTOS: product-read
+*USANDO O MÉTODO READ DENTRO DO COMPONENTE DE LISTAGEM DE PRODUTOS: product-read
 
 export class ProductReadComponent implements OnInit {
 
