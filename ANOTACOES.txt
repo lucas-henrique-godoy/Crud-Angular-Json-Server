@@ -545,7 +545,7 @@ ________________________________________________________________________________
 
 
 **Foi criado uma pasta chamada views e dentro foi colocada o componente home.
--Para organizar melhor as pastas do projeto, quando eu tenho uma tela inteira eu vou colocar dentro do componente(pasta) view, como é o caso do home.component. Dentro da pasta componentes tudo aquilo que for trechos de componentes reutilizados que podem ser reutilizados em mais de 1 tela, como é o caso do header.component,nav.component, footer.component,etc. Que são apenas partes da tela.
+-Para organizar melhor as pastas do projeto, quando eu tenho uma tela inteira eu vou colocar dentro da pasta view, como é o caso do home.component. Dentro da pasta componentes tudo aquilo que for trechos de componentes reutilizados que podem ser reutilizados em mais de 1 tela, como é o caso do header.component,nav.component, footer.component,etc. Que são apenas partes da tela.
 
 ✅ O que o routerLink faz?
 O atributo routerLink é uma diretiva do Angular Router. Ele funciona como o href de um <a>, mas de forma mais inteligente e integrada ao sistema de rotas do Angular.
