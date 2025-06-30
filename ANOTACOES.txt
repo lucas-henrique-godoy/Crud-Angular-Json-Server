@@ -1060,7 +1060,11 @@ ________________________________________________________________________________
 
 -Comando: ng generate @angular/material:table components/product/product-read2. Neste caso criamos apenas uma tabela de exemplo usando shematics do angular material, que gera um componente inteiro automaticamente. A tabela de exemplo já vem com os módulos módulo da tabela, o de ordenação, paginação,  e eles  já são importados no appmodule automaticamente.
 
--Existem outros tipos de shematic como:  Navigation Schematic, Dashboard Schematic, Table Schematic, cada um com seu respectivo comando e criação. Ou seja, podemos usar os schematics para gerar componentes prontos, e a partir desses componentes prontos, nós conseguimos criar nossos componentes de uma forma muito simples. 
+-Existem outros tipos de shematic como:  Navigation Schematic, Dashboard Schematic, Table Schematic, cada um com seu respectivo comando e criação. Ou seja, podemos usar os schematics para gerar componentes prontos, e a partir desses componentes prontos, nós conseguimos criar nossos componentes de uma forma muito simples.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+*ENTENDENDO COMPONENTE PRONTO DE UMA TABELA QUE FOI GERADO UTILIZANDO OS SCHEMATICS DO ANGULARMATERIAL:
+-O nome do componente é: product-read2. E foi gerado no caminho: componentes/product/product-read2
 
 
 _______________________________________________________________________________________________________________________________________________________________________
