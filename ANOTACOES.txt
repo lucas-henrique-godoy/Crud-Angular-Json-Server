@@ -1056,6 +1056,12 @@ Quando os dados chegam, atribui à variável products, que será usada no HTML (
 _______________________________________________________________________________________________________________________________________________________________________
 
 
+*Neste passo foi sugerido uma forma de criar os componentes de uma maneira mais simples utilizando angular material schematics. É só entrar no site: https://v6.material.angular.dev/guide/schematics.
+
+-Comando: ng generate @angular/material:table components/product/product-read2. Neste caso criamos apenas uma tabela de exemplo usando shematics do angular material, que gera um componente inteiro automaticamente. A tabela de exemplo já vem com os módulos módulo da tabela, o de ordenação, paginação,  e eles  já são importados no appmodule automaticamente.
+
+-Existem outros tipos de shematic como:  Navigation Schematic, Dashboard Schematic, Table Schematic,cada u com seu respectivo comando e criação. Ou seja, podemos usar os schematics para gerar componentes prontos, e a partir desses componentes prontos, nós conseguimos criar nossos componentes de uma forma muito simples. 
+
 
 _______________________________________________________________________________________________________________________________________________________________________
 
