@@ -3,7 +3,7 @@
 Tecnologias utilizadas:
 - Angular CLI: 9.1.15
 - Node: 12.22.12
-_________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+_______________________________________________________________________________________________________________________________________________________________________
 		
 #SEÇÃO - BACKEND DO PROJETO
 
@@ -452,9 +452,9 @@ export class ProductService {
 o contador vale 10. E se lá no Componente B  você aumentar esse contador para 30, quando você injetar esse Service novamente dentro do Componente A, o contador agora vale 30. Se você aumentar esse contador novamente para 130 e você vai injetar esse Service no Componente C, o contador vale 130, porque estamos sempre trabalhando com a mesma instância do Service uma vez que você usa o provideIn: "root".
 _______________________________________________________________________________________________________________________________________________________________________
 
-**INJEÇAO DE DEPENDÊNCIA: É um padrão no qual a classe recebe as dependênciasde uma fonte externa ao invés de criar por conta própria.
+**INJEÇAO DE DEPENDÊNCIA: É um padrão no qual a classe recebe as dependências de uma fonte externa ao invés de criar por conta própria.
 
--Num cenário padrão quando uma Classe A precisa de uma Classe B, ouseja, a Classe A vai preisar da Clase B, então a Classe A vai criar a Classe B. É muito natural acontecer isso, mas na Injeção de Dependência ha uma inversão dessa logica, ou sej, é um padrão onde a classe recebe as dependências a partir de uma fonte externa ao invés de criar por conta própria. Ou seja, a Classe A precisa da Classe B, ao invés da Classe A criar por conta própria uma instância da Classe B, a Classe A vai receber a Classe B a partir do construtor ou a partir de algum outro mecanismo como é o caso da Injeção de Dependência.
+-Num cenário padrão quando uma Classe A precisa de uma Classe B, ou seja, a Classe A vai precisar da Clase B, então a Classe A vai criar a Classe B. É muito natural acontecer isso, mas na Injeção de Dependência ha uma inversão dessa logica, ou seja, é um padrão onde a classe recebe as dependências a partir de uma fonte externa ao invés de criar por conta própria. Ou seja, a Classe A precisa da Classe B, ao invés da Classe A criar por conta própria uma instância da Classe B, a Classe A vai receber a Classe B a partir do construtor ou a partir de algum outro mecanismo como é o caso da Injeção de Dependência.
 Dependendo da linguagem, framework que você vai usar a forma  de implementar a Injeção de Dependência é diferente.
 
 -EXEMPLO  DE UM CENÁRIO SEM INJEÇÃO DE DEPENDÊNCIA: A classe Carro depende da Classe Motor
@@ -528,7 +528,7 @@ Então nos temos o framework(Angular) quando ele instancia ele cria  o ProductSe
 Falando a respeito do provideIn: "root". O "root" é um apelido(alias) para o AppModule, chamado de root injector. Associado ao AppModule, que é o modulo inicial da aplicação, o root injector é responsável pela injeção de dependência e ele esta associado ao AppModule. Quando você diz que o seu provideIn vai ser o "root", você esta dizendo em outras palavras que o provideIn vai ser o AppModule. Como só tem 1 AppModule dentro da sua aplicação, sempre que você criar alguma coisa que usa @Injectable  provideIn: "root", significa que esse Service por exemplo vai ter apenas uma única instancia em toda a sua aplicação.
 
 
-*SINGLETON: Services são sigletons(apenas uma única instncia) dentro do escopo de um injector.
+*SINGLETON: Services são sigletons(apenas uma única instância) dentro do escopo de um injector.
 
 -INJECTOR: Temos 2 grupos de injetores: 
 
@@ -544,7 +544,7 @@ Mas quando você tem aplicações mais complexas com vários módulos,  é inter
 _______________________________________________________________________________________________________________________________________________________________________
 
 
-**Foi criado uma pasta chamada views e dentro foi colocada o componente home. Para organizar melhor as pastas do projeto, quando eu tenho uma tela inteira eu vou colocar dentro do componente(pasta) view, como é o caso do home.component. Dentro da pasta componentes tudo aquilo que for trechos de componentes reutilizados que podem ser reutilizados em mais de 1 tela, como éo caso do header.component,nav.component, footer.component,etc. Que são apenas partes da tela.
+**Foi criado uma pasta chamada views e dentro foi colocada o componente home. Para organizar melhor as pastas do projeto, quando eu tenho uma tela inteira eu vou colocar dentro do componente(pasta) view, como é o caso do home.component. Dentro da pasta componentes tudo aquilo que for trechos de componentes reutilizados que podem ser reutilizados em mais de 1 tela, como é o caso do header.component,nav.component, footer.component,etc. Que são apenas partes da tela.
 
 ✅ O que o routerLink faz?
 O atributo routerLink é uma diretiva do Angular Router. Ele funciona como o href de um <a>, mas de forma mais inteligente e integrada ao sistema de rotas do Angular.
@@ -563,9 +563,7 @@ Um conteúdo principal (<mat-sidenav-content>)
 Esse layout é muito comum em sistemas, tipo painel administrativo ou sistemas internos.
 
  Estrutura básica:
-html
-Copiar
-Editar
+
 <mat-sidenav-container>
   <mat-sidenav> MENU </mat-sidenav>
   <mat-sidenav-content> CONTEÚDO PRINCIPAL </mat-sidenav-content>
@@ -633,10 +631,10 @@ ________________________________________________________________________________
 
 _______________________________________________________________________________________________________________________________________________________________________
 
-*Neste passo foi feita a criação do componente que é o ormuláio ara criação de um produto. Dentro de componentes/product/product-create.
+*Neste passo foi feita a criação do componente que é o formulário para criação de um produto. Dentro de componentes/product/product-create.
 _______________________________________________________________________________________________________________________________________________________________________
 
-*Neste passo foi criado um botão usando MatButtonModule(foi imporado no app.module) do Angular Material, dentro de product-crud.component para navegar pra o product-create.component. Para isso dentro de  product-crud.component.ts importamos o Router,  e injetamos ele no construtor para podermos usar as rotas de app.routing.module:
+*Neste passo foi criado um botão usando MatButtonModule(foi importado no app.module) do Angular Material, dentro de product-crud.component para navegar para o product-create.component. Para isso dentro de  product-crud.component.ts importamos o Router,  e injetamos ele no construtor para podermos usar as rotas de app.routing.module:
 -Importe do Router: import { Router } from '@angular/router';
 -Linha do Construtor: constructor(private router: Router) { }
 _______________________________________________________________________________________________________________________________________________________________________
@@ -697,7 +695,7 @@ ________________________________________________________________________________
 
 EXPLICAÇÃO DO MÉTODO create PARA CRIAR UM PRODUTO VIA POST NO SERVICE:
 
-Neste passo, criamos um método responsável por cadastrar um novo produto na API. Primeiro, importamos o HttpClient do Angular e o injetamos no construtor da classe (por meio da injeção de dependência). Em seguida, declaramos o atributo baseUrl, que armazena a URL base da API: 'http://localhost:3100/products'.
+*Neste passo, criamos um método responsável por cadastrar um novo produto na API. Primeiro, importamos o HttpClient do Angular e o injetamos no construtor da classe (por meio da injeção de dependência). Em seguida, declaramos o atributo baseUrl, que armazena a URL base da API: 'http://localhost:3100/products'.
 
 O método create recebe como parâmetro um objeto do tipo Product (modelo de produto) e retorna um Observable<Product>, que representa a resposta da requisição HTTP.
 
