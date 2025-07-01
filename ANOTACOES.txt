@@ -1111,7 +1111,7 @@ ________________________________________________________________________________
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *ENTENDENDO O COMPONENTE PRONTO  DE UMA TABELA QUE FOI GERADO UTILIZANDO OS SCHEMATICS DO ANGULAR MATERIAL:
--O nome do componente é: product-read2. E foi gerado no caminho: componentes/product/product-read2
+- O nome do componente é: product-read2. E foi gerado no caminho: componentes/product/product-read2
 
 
 _______________________________________________________________________________________________________________________________________________________________________
