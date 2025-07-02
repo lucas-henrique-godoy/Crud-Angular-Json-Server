@@ -1113,6 +1113,10 @@ ________________________________________________________________________________
 *ENTENDENDO O COMPONENTE PRONTO  DE UMA TABELA QUE FOI GERADO UTILIZANDO OS SCHEMATICS DO ANGULAR MATERIAL:
 - O nome do componente é: product-read2. E foi gerado no caminho: componentes/product/product-read2
 
+-PERGUNTA: Como é que os componentes paginator, sort(que estão dentro de produt-read2-datasource) são colocados dentro do componente data source, já que o construtor não recebe nenhum parâmetro? R: Dentro do componente product-read2.component.ts, tem o decorator @ViewChild.
+
+-@ViewChild: É o filho da minha tela-template-view-visão, e nele é passado o tipo de componente que você quer que seja selecionado, e ele vai percorrer o HTML, vai ver onde esta o componente, Exemplo: @ViewChild(MatPaginator) paginator: MatPaginator, e vai pegar o primeiro componente paginator e colocar dentro da variável paginator. Ou seja, quando  você usa o decorator @ViewChild encima de uma variável o próprio Angular vai percorrer o seu template e vai pegar a primeira ocorrência desse componente. Ele vai entrar no HTML  e vai perceber eu existe o elemento paginator, vai pegar a instancia desse elemento e vai jogar para a variável dentro do TS,de tal forma que quem vai responsável por resolver esse atributo paginator: MatPaginator é o Angular a partir desse decorator @ViewChild.
+
 
 _______________________________________________________________________________________________________________________________________________________________________
 
