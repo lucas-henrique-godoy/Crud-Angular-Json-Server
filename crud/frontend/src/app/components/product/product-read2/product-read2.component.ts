@@ -26,6 +26,6 @@ export class ProductRead2Component implements AfterViewInit, OnInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+    //this.table.dataSource = this.dataSource;
   }
 }

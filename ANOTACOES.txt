@@ -1115,7 +1115,35 @@ ________________________________________________________________________________
 
 -PERGUNTA: Como é que os componentes paginator, sort(que estão dentro de produt-read2-datasource) são colocados dentro do componente data source, já que o construtor não recebe nenhum parâmetro? R: Dentro do componente product-read2.component.ts, tem o decorator @ViewChild.
 
--@ViewChild: É o filho da minha tela-template-view-visão, e nele é passado o tipo de componente que você quer que seja selecionado, e ele vai percorrer o HTML, vai ver onde esta o componente, Exemplo: @ViewChild(MatPaginator) paginator: MatPaginator, e vai pegar o primeiro componente paginator e colocar dentro da variável paginator. Ou seja, quando  você usa o decorator @ViewChild encima de uma variável o próprio Angular vai percorrer o seu template e vai pegar a primeira ocorrência desse componente. Ele vai entrar no HTML  e vai perceber eu existe o elemento paginator, vai pegar a instancia desse elemento e vai jogar para a variável dentro do TS,de tal forma que quem vai responsável por resolver esse atributo paginator: MatPaginator é o Angular a partir desse decorator @ViewChild.
+-@ViewChild: É o filho da minha tela-template-view-visão, e nele é passado o tipo de componente que você quer que seja selecionado, e ele vai percorrer o HTML, vai ver onde esta o componente, Exemplo: @ViewChild(MatPaginator) paginator: MatPaginator, e vai pegar o primeiro componente paginator e colocar dentro da variável paginator. Ou seja, quando  você usa o decorator @ViewChild encima de uma variável o próprio Angular vai percorrer o seu template e vai pegar a primeira ocorrência desse componente. Ele vai entrar no HTML  e vai perceber eu existe o elemento paginator, vai pegar a instancia desse elemento e vai jogar para a variável dentro do TS,de tal forma que quem vai responsável por resolver esse atributo paginator: MatPaginator é o Angular a partir desse decorator @ViewChild.Essa é forma que conseguimos pegar da nossa view(HTM) os elementos: paginator,sort e table.
+
+
+-EXEMLO DIRETO DO CODIGO:
+export class ProductRead2Component implements AfterViewInit, OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatTable) table: MatTable<Product>;
+  dataSource: ProductRead2DataSource;
+
+ngOnInit() {
+    this.dataSource = new ProductRead2DataSource();
+  }
+ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.table.dataSource = this.dataSource; // Aqui seta os dados da tabela, se essa linha for comentada os dados não são mais exibidos na tabela.
+  }
+
+-O elemento dataSource esta endo criado no ngOnInit, e depois que a tela é inicializada após todos os componentes serem instanciados na tela, ai sim ele vai pegar setar os atributos dentro de ngAfterViewInit, fazendo a ligação tanto do sort e paginator dentro do dataSource, como ele atribui o dataSource para a tabela, ai sim os dados são renderizados.
+
+
+- No HTML podemos usar um property binding [dataSource]= "" n HTML pra mostrar os dados também.
+EXEMPLO:  <table mat-table class="full-width-table" matSort aria-label="Elements" [dataSource]="dataSource.data">
+
+
+- No TS tem um atributo que são as colunas que estão visíveis na tabela: displayedColumns = ['id', 'name']; 
+- E no HTML ele usa asdiretivas *matHeaderCellDef="displayedColumns" que cria o cabeçalho da tabela que mostra as colunas que serão exibidas.
+
 
 
 _______________________________________________________________________________________________________________________________________________________________________
