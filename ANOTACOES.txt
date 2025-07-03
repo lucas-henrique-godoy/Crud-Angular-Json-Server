@@ -1142,7 +1142,11 @@ EXEMPLO:  <table mat-table class="full-width-table" matSort aria-label="Elements
 
 
 - No TS tem um atributo que são as colunas que estão visíveis na tabela: displayedColumns = ['id', 'name']; 
-- E no HTML ele usa asdiretivas *matHeaderCellDef="displayedColumns" que cria o cabeçalho da tabela que mostra as colunas que serão exibidas.
+
+- E no HTML ele usa as diretivas que cria o cabeçalho da tabela que mostra as colunas que serão exibidas: <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+
+- Esse mostra os dados da tabela:<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 
 
