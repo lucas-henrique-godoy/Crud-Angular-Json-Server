@@ -1118,7 +1118,7 @@ ________________________________________________________________________________
 -@ViewChild: É o filho da minha tela-template-view-visão, e nele é passado o tipo de componente que você quer que seja selecionado, e ele vai percorrer o HTML, vai ver onde esta o componente, Exemplo: @ViewChild(MatPaginator) paginator: MatPaginator, e vai pegar o primeiro componente paginator e colocar dentro da variável paginator. Ou seja, quando  você usa o decorator @ViewChild encima de uma variável o próprio Angular vai percorrer o seu template e vai pegar a primeira ocorrência desse componente. Ele vai entrar no HTML  e vai perceber eu existe o elemento paginator, vai pegar a instancia desse elemento e vai jogar para a variável dentro do TS,de tal forma que quem vai responsável por resolver esse atributo paginator: MatPaginator é o Angular a partir desse decorator @ViewChild.Essa é forma que conseguimos pegar da nossa view(HTM) os elementos: paginator,sort e table.
 
 
--EXEMLO DIRETO DO CODIGO:
+-EXEMPLO DIRETO DO CODIGO:
 export class ProductRead2Component implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -1134,10 +1134,10 @@ ngAfterViewInit() {
     this.table.dataSource = this.dataSource; // Aqui seta os dados da tabela, se essa linha for comentada os dados não são mais exibidos na tabela.
   }
 
--O elemento dataSource esta endo criado no ngOnInit, e depois que a tela é inicializada após todos os componentes serem instanciados na tela, ai sim ele vai pegar setar os atributos dentro de ngAfterViewInit, fazendo a ligação tanto do sort e paginator dentro do dataSource, como ele atribui o dataSource para a tabela, ai sim os dados são renderizados.
+-O elemento dataSource esta sendo criado no ngOnInit, e depois que a tela é inicializada após todos os componentes serem instanciados na tela, ai sim ele vai pegar setar os atributos dentro de ngAfterViewInit, fazendo a ligação tanto do sort e paginator dentro do dataSource, como ele atribui o dataSource para a tabela, ai sim os dados são renderizados.
 
 
-- No HTML podemos usar um property binding [dataSource]= "" n HTML pra mostrar os dados também.
+- No HTML podemos usar um property binding [dataSource]= "" no HTML pra mostrar os dados também.
 EXEMPLO:  <table mat-table class="full-width-table" matSort aria-label="Elements" [dataSource]="dataSource.data">
 
 
@@ -1163,6 +1163,14 @@ EXEMPLO:  <table mat-table class="full-width-table" matSort aria-label="Elements
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
       <td mat-cell *matCellDef="let row">{{row.name}}</td>
     </ng-container>
+
+- ng-container é um agrupador de elementos, onde definimos como vai ser o cabeçalho da coluna e como vai ser o conteúdo da coluna:
+<!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
 
 
 
