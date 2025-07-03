@@ -1148,6 +1148,22 @@ EXEMPLO:  <table mat-table class="full-width-table" matSort aria-label="Elements
 
 - Esse mostra os dados da tabela:<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
+- Definição e colunas da tabela: O nomes de  matColumnDef precisa ser exatamente nomes que estão no displayedColumns. Exemplo: displayedColumns = ['id', 'name']; por sua vez matColumnDef="id" e matColumnDef="name"
+
+
+-EXEMPLO DE CÓDIGO DE COLUNAS DE UMA TABELA.
+<!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{row.name}}</td>
+    </ng-container>
+
 
 
 _______________________________________________________________________________________________________________________________________________________________________
