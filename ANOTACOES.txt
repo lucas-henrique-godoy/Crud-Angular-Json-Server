@@ -1170,8 +1170,27 @@ EXEMPLO:  <table mat-table class="full-width-table" matSort aria-label="Elements
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
       <td mat-cell *matCellDef="let row">{{row.id}}</td>
     </ng-container>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+*OU SEJA ESSA PARTE SERIA O TEMPLATE DE CADA COLUNA:
 
+<!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let prod">{{row.id}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let prod">{{row.name}}</td>
+    </ng-container>
+
+---------------------------------------------------------------------------------
+*E ESSE SERIA O TEMPLATE DA TABELA TODA:
+
+<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>  --Define quais colunas serão exibidas no cabeçalho
+<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> --Define quais colunas serão exibidas nos dados e tem um variável row pra cada uma das linhas da tabela.
 
 
 _______________________________________________________________________________________________________________________________________________________________________
