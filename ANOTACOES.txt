@@ -1155,7 +1155,7 @@ EXEMPLO:  <table mat-table class="full-width-table" matSort aria-label="Elements
 <!-- Id Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>  
     </ng-container>
 
     <!-- Name Column -->
@@ -1170,6 +1170,9 @@ EXEMPLO:  <table mat-table class="full-width-table" matSort aria-label="Elements
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
       <td mat-cell *matCellDef="let row">{{row.id}}</td>
     </ng-container>
+
+
+//OBS: A variável row é somente para representar as linhas a tabela, pode ser qualquer nome e não precisa ser o mesmo nome que esta dentro de {{}}
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *OU SEJA ESSA PARTE SERIA O TEMPLATE DE CADA COLUNA:
