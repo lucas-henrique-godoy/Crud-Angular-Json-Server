@@ -12,27 +12,18 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./product-read.component.css']
 })
 export class ProductReadComponent implements OnInit {
+  product: Product = {
+    name: '',
+    price: null
+  };
 
-  products:Product[]= [] //Lista de produtos
-  displayedColumns = ['id', 'name', 'price'];
-  dataSource = new MatTableDataSource<Product>(this.products);
-
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-  @ViewChild(MatSort) sort: MatSort | undefined;
+  products:Product[]= [] //Lista de produtos 
 
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void { //Método que sempre é chamado automaticamente quando o componente é inicializado.
-    
-    this.productService.read().subscribe(data => {
-      this.products = data;
-      this.dataSource.data = data;     
+    this.productService.read().subscribe(products => {
+    this.products = products;          
     })
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator= this.paginator!;
-    this.dataSource.sort = this.sort!;
-  }
-  
+  }  
 }

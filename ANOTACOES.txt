@@ -1192,9 +1192,9 @@ EXEMPLO:  <table mat-table class="full-width-table" matSort aria-label="Elements
 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>  --Define quais colunas serão exibidas no cabeçalho
 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> --Define quais colunas serão exibidas nos dados e tem um variável row pra cada uma das linhas da tabela.
 
-
 _______________________________________________________________________________________________________________________________________________________________________
 
+**Neste passo criamos de fato a tabela de listagem de produtos
 
 
 _______________________________________________________________________________________________________________________________________________________________________
