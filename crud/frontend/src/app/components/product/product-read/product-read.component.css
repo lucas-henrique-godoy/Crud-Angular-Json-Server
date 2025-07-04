@@ -1,0 +1,18 @@
+/*A largura da tabela ocupa a tela inteira*/
+table {
+  width: 100%;
+}
+
+/*Estilos para os botões de editar e excluir dentro  da tabela*/
+
+.edit {
+  margin-right: 10px;
+}
+
+.edit > i {
+  color: #d9cd26;
+}
+
+.delete > i {
+  color: #e35e6b;
+}

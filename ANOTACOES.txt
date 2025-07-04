@@ -1197,11 +1197,27 @@ EXEMPLO:  <table mat-table class="full-width-table" matSort aria-label="Elements
 
 _______________________________________________________________________________________________________________________________________________________________________
 
-**Neste passo criamos de fato a tabela de listagem de produtos
+**Neste passo criamos de fato a tabela de listagem de produtos, criamos o displayedColumns com os nomes das colunas: displayedColumns= ['id', 'name', 'price'];
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- Criamos uma lista de produtos: products:Product[];
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- Chamamos  método read no ngOnInit, ou seja sempre que a pagina de listagem de produtos for carregada, os produtos também serão carregados:
+ngOnInit(): void { //Método que sempre é chamado automaticamente quando o componente é inicializado.
+    this.productService.read().subscribe(products => {
+      this.products = products;          
+    })
+  } 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+-DataSource: Origem de dados.
+
+-Property Binding DataSource: Vinculamos os produtos, displayedColumns e a tabela, mostrando os dados na tabela.
+<table mat-table [dataSource]="products">
 _______________________________________________________________________________________________________________________________________________________________________
 
+
+**Neste passo colocamos mais uma coluna de ações na tabela de produtos com ícones de editar e excluir que serão usados para chamar os componentes de edição e exclusão. Esses ícones irão funcionar como se fossem botões.
 
 
 
