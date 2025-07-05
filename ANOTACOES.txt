@@ -1245,10 +1245,6 @@ update(product: Product): Observable<Product> {
 
 -Aqui também precisamos utilizar a url modificada, mas dessa vez passando o id do produto.
 
-
-
-
-
 _______________________________________________________________________________________________________________________________________________________________________
 
 **Próximo passo:  Antes de navegar para o componente de atualização de produto, a gente precisa nessa transição quando for carregar esse produto, já mandar um produto carregado. Quando formos fazer essa transição para a tela de atualização de produto no formulário, o formulário precisa inicializar já preenchido, e pra eu inicializar esse produto preenchido o formulário pronto para o usuário alterar, eu preciso fazer uma consulta no backend e pegar os dados daquele produto específico e ai sim  carregar o formulário com o dados preenchidos, para só então depois que tiver o formulário preenchido, o usuário alterar o que quiser e mandar um  update(requisição do tipo PUT). Para fazer esses passos precisaremos tanto do método de ler por id (readyById()), quanto do método de update().
@@ -1256,7 +1252,15 @@ ________________________________________________________________________________
 
 _______________________________________________________________________________________________________________________________________________________________________
 
+**Neste passo criamos  componente de atualização de produto: ProductUpdateComponent
 
+-Criei rota para o componente de atualização/edição, e para isso temos que passar um id na rota:
+ {
+  path: "products/update/:id", 
+  component: ProductUpdateComponent
+ }
+
+-Os dois pontos na frente de id, o Angular entende que é um parâmetro, na rota não terá os dois pontos literalmente mas sim um numero de id.
 
 _______________________________________________________________________________________________________________________________________________________________________
 

@@ -33,6 +33,7 @@ import { MatSortModule } from '@angular/material/sort';
 //Usado para usar a formatação local de valores monetários(no caso Brsail-Real) com ponto e vírgula do Real no pipe.Ex: R$ 12.000,89
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { ProductUpdateComponent } from './components/product/product-update/product-update.component';
 
 registerLocaleData(localePt);
 
@@ -49,7 +50,8 @@ registerLocaleData(localePt);
     ForDirective,
     ProductCreateComponent,
     ProductReadComponent,
-    ProductRead2Component
+    ProductRead2Component,
+    ProductUpdateComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Product } from '../product.model';
 import { ProductService } from './../product.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +13,7 @@ export class ProductReadComponent implements OnInit {
 
   products:Product[]; //Lista de produtos 
   displayedColumns= ['id', 'name', 'price', 'action']; //Colunas da tabela
-
+  
   
   constructor(private productService: ProductService) { }
 
@@ -22,9 +23,14 @@ export class ProductReadComponent implements OnInit {
     })
   }  
 
-  onEditar(): void {
+  Editar(): void {    
   }
 
-  onExcluir(): void {
+  Excluir(): void {
+
   }
 }
+
+
+  
+
