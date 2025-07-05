@@ -1223,7 +1223,16 @@ ________________________________________________________________________________
 
 _______________________________________________________________________________________________________________________________________________________________________
 
-**Neste passo, criamos os métodos
+**Neste passo, no service criamos o método reaById que retorna um produto pelo id.
+readyById(id: string): Observable<Product> {
+    const url = `${this.baseUrl}/${id}`
+    return this.http.get<Product>(url)
+  }
+
+-Aqui precisamos modificar a baseUrl para adicionar o id que era assim: baseUrl "http://localhost:3001/products".
+
+Para que ela seja assim: "http://localhost:3001/products/numero-id.Para isso concatenamos e usamos interpolação para criar a nova url.
+
 
 
 

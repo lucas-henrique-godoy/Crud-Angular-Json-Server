@@ -31,4 +31,10 @@ export class ProductService {
   read(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl)
   }
+
+  //Método para ler por id
+  readyById(id: string): Observable<Product> {
+    const url = `${this.baseUrl}/${id}`
+    return this.http.get<Product>(url)
+  }
 }
