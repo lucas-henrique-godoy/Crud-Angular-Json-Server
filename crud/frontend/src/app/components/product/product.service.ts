@@ -13,7 +13,7 @@ export class ProductService {
 
   constructor(private snackbar: MatSnackBar, private http: HttpClient) { } //Injetamos snackbar e HttpClient
 
-  //Métod para mostrar uma mensagem usando snackbar
+  //Método para mostrar uma mensagem usando snackbar
   showMessage(msg: string): void {
     this.snackbar.open(msg,'X', { //o parâmetro action esta com X que serve para fechar o snackbar
       duration: 3000,  //duração de 3 segundos

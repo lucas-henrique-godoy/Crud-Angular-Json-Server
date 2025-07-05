@@ -25,7 +25,7 @@ export class ProductCreateComponent implements OnInit {
   } 
 
   createProduct(): void {
-    this.productService.create(this.product).subscribe(() => { //Subscribe Será notificado quando a resposta chegar
+    this.productService.create(this.product).subscribe(() => { //Subscribe será notificado quando a resposta chegar
       this.productService.showMessage('Produto criado!');  //Chama a função de mensagem quando receber a resposta da API
       this.router.navigate(['/products'])     //Navega para product-crud que é a lista de produtos
     })   
