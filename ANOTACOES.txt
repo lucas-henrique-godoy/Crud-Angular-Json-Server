@@ -1223,7 +1223,8 @@ ________________________________________________________________________________
 
 _______________________________________________________________________________________________________________________________________________________________________
 
-**Neste passo, no service criamos o método reaById que retorna um produto pelo id.
+**Neste passo, no service criamos o método reaById() que retorna um produto pelo id.
+
 readyById(id: string): Observable<Product> {
     const url = `${this.baseUrl}/${id}`
     return this.http.get<Product>(url)
@@ -1233,19 +1234,24 @@ readyById(id: string): Observable<Product> {
 
 Para que ela seja assim: "http://localhost:3001/products/numero-id.Para isso concatenamos e usamos interpolação para criar a nova url.
 
+_______________________________________________________________________________________________________________________________________________________________________
+
+**Neste passo  criamos o método update(), para atualizar um produto.
+
+update(product: Product): Observable<Product> {
+    const url = `${this.baseUrl}/${product.id}`
+    return this.http.put<Product>(url, product)
+  }
+
+-Aqui também precisamos utilizar a url modificada, mas dessa vez passando o id do produto.
+
+
 
 
 
 _______________________________________________________________________________________________________________________________________________________________________
 
-
-
-
-
-
-_______________________________________________________________________________________________________________________________________________________________________
-
-
+**Próximo passo:  Antes de navegar para o componente de atualização de produto, a gente precisa nessa transição quando for carregar esse produto, já mandar um produto carregado. Quando formos fazer essa transição para a tela de atualização de produto no formulário, o formulário precisa inicializar já preenchido, e pra eu inicializar esse produto preenchido o formulário pronto para o usuário alterar, eu preciso fazer uma consulta no backend e pegar os dados daquele produto específico e ai sim  carregar o formulário com o dados preenchidos, para só então depois que tiver o formulário preenchido, o usuário alterar o que quiser e mandar um  update(requisição do tipo PUT). Para fazer esses passos precisaremos tanto do método de ler por id (readyById()), quanto do método de update().
 
 
 _______________________________________________________________________________________________________________________________________________________________________

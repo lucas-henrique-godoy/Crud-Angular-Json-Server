@@ -22,11 +22,9 @@ export class ProductReadComponent implements OnInit {
     })
   }  
 
-  onEditar(){
-
+  onEditar(): void {
   }
 
-  onExcluir() {
-    
+  onExcluir(): void {
   }
 }

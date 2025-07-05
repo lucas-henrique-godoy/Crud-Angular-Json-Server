@@ -37,4 +37,16 @@ export class ProductService {
     const url = `${this.baseUrl}/${id}`
     return this.http.get<Product>(url)
   }
+
+  //Método para atualizar um produto
+  update(product: Product): Observable<Product> {
+    const url = `${this.baseUrl}/${product.id}`
+    return this.http.put<Product>(url, product)
+  }
+
+  //Método para deletar um produto
+  delete(product: Product): Observable<Product> {
+    const url = `${this.baseUrl}/${product.id}`
+    return this.http.delete<Product>(url)
+  }
 }
