@@ -21,7 +21,7 @@ const routes: Routes = [  //Registrando as rotas dos componentes principais
   component: ProductCreateComponent
  },
  {
-  path: "products/update/:id",
+  path: "products/update/:id", //Paassando um parâmetro de id na rota
   component: ProductUpdateComponent
  }
 ];

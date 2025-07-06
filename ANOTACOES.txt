@@ -1262,6 +1262,76 @@ ________________________________________________________________________________
 
 -Os dois pontos na frente de id, o Angular entende que é um parâmetro, na rota não terá os dois pontos literalmente mas sim um numero de id.
 
+-Para trazer os dados carregados  preenchidos para o formulário de atualização, precisamos:
+
+export class ProductUpdateComponent implements OnInit {
+  product: Product 
+
+
+  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id')
+    this.productService.readyById(id).subscribe(product => {
+      this.product = product;
+    })
+  }
+
+*EXPLICAÇÃO DO CÓDIGO: 📦 export class ProductUpdateComponent implements OnInit
+Define um componente Angular chamado ProductUpdateComponent, usado para editar um produto existente.
+
+🧱 product: Product
+Declara uma variável product do tipo Product. Essa variável irá armazenar os dados do produto que será editado.
+
+🔧 Construtor
+
+constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
+Injeta três dependências:
+
+ProductService: usado para acessar os dados do produto (ex: buscar por ID).
+
+Router: permite navegar para outras rotas após salvar/editar.
+
+ActivatedRoute: acessa os parâmetros da rota atual (como o id do produto) que neste caso é o esmo id definido nas rotas
+
+🚀 ngOnInit()
+Este método é executado automaticamente ao carregar o componente.
+
+
+const id = this.route.snapshot.paramMap.get('id')
+Pega o ID do produto da URL (ex: /produtos/editar/5 → id = 5)
+
+
+this.productService.readyById(id).subscribe(product => {
+  this.product = product;
+})
+
+Usa o serviço para buscar o produto com aquele ID.
+
+Quando a resposta chega (com .subscribe), os dados do produto são armazenados na variável product.
+
+✅ Em resumo:
+Esse componente:
+
+Lê o ID do produto na URL.
+
+Busca o produto no backend com esse ID.
+
+Armazena os dados para exibir no formulário e permitir a edição.
+
+Se quiser, posso mostrar o HTML típico que acompanha esse componente.
+
+-Após isso usamos o servisse para criar o método do ts de atualizar produto:
+
+updateProduct(): void {
+    this.productService.update(this.product).subscribe(() => {
+      this.productService.showMessage('Produto atualizado com sucesso!')
+      this.router.navigate(['/products']);
+    });
+  }
+
+
+
 _______________________________________________________________________________________________________________________________________________________________________
 
 

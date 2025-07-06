@@ -22,13 +22,7 @@ export class ProductReadComponent implements OnInit {
       this.products = products;          
     })
   }  
-
-  Editar(): void {    
-  }
-
-  Excluir(): void {
-
-  }
+  
 }
 
 
