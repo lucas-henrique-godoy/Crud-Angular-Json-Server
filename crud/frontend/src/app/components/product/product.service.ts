@@ -20,7 +20,7 @@ export class ProductService {
       duration: 3000,  //duração de 3 segundos
       horizontalPosition: "right", //posição horizontal a direita
       verticalPosition: "top",  //posição vertical em cima
-      panelClass: isError ? ['msg-error']: ['msg-success'] //Usando a classe para mensagens de sucesso
+      panelClass: isError ? ['msg-error']: ['msg-success']  //Se for mensagem de erro usa a classe msg-error, senão usa a classe msg-success
     })
   }
 
