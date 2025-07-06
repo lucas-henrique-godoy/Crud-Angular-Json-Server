@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar} from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { Product } from './product.model';
-import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({ //Essa classe pode ser injetada em outras classes
   providedIn: 'root'
@@ -15,17 +15,27 @@ export class ProductService {
   constructor(private snackbar: MatSnackBar, private http: HttpClient) { } //Injetamos snackbar e HttpClient
 
   //Método para mostrar uma mensagem usando snackbar
-  showMessage(msg: string): void {
+  showMessage(msg: string, isError: boolean = false): void {
     this.snackbar.open(msg,'X', { //o parâmetro action esta com X que serve para fechar o snackbar
       duration: 3000,  //duração de 3 segundos
       horizontalPosition: "right", //posição horizontal a direita
-      verticalPosition: "top"  //posição vertical em cima
+      verticalPosition: "top",  //posição vertical em cima
+      panelClass: isError ? ['msg-error']: ['msg-success'] //Usando a classe para mensagens de sucesso
     })
   }
 
   //Método para criação de Produto
   create(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.baseUrl, product);
+    return this.http.post<Product>(this.baseUrl, product).pipe(
+      map((obj) => obj),
+      catchError(e => this.errorHandler(e))
+    );
+  }
+
+  errorHandler(e: any):  Observable<any> {
+    console.log(e);
+    this.showMessage('Ocorreu um erro!', true);
+    return EMPTY;
   }
 
   //Método para leitura  dos produtos
