@@ -26,7 +26,7 @@ Basicamente esse script chama o json-server que foi instalado anteriormente, col
 
 -Dentro da pasta backend, colocar o comando npm start para rodar a API.
 
-______________________________________________________________________________________________________________________________________________________________________________________________________________________
+_______________________________________________________________________________________________________________________________________________________________________
 *TIVE UM ERRO DEPOIS DE CRIAR O DB.JSON E RODAR A API:
 
 ✅ Resumo do erro e solução
@@ -1321,6 +1321,7 @@ Armazena os dados para exibir no formulário e permitir a edição.
 
 Se quiser, posso mostrar o HTML típico que acompanha esse componente.
 
+
 -Após isso usamos o servisse para criar o método do ts de atualizar produto:
 
 updateProduct(): void {
@@ -1333,6 +1334,61 @@ updateProduct(): void {
 
 
 _______________________________________________________________________________________________________________________________________________________________________
+
+**Neste passo criamos  componente e exclusão de produto ProductDeleteComponent e criamos os métodos:
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../product.service';
+import { Product } from '../product.model';
+import { ActivatedRoute, Router } from '@angular/router';
+
+@Component({
+  selector: 'app-product-delete',
+  templateUrl: './product-delete.component.html',
+  styleUrls: ['./product-delete.component.css']
+})
+export class ProductDeleteComponent implements OnInit {
+  product: Product
+
+
+  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.productService.readyById(id).subscribe(product => {
+      this.product = product;
+    })
+  }
+
+  deleteProduct(): void {
+    this.productService.delete(this.product.id).subscribe(() => {
+      this.productService.showMessage('Produto excluído com sucesso!');
+      this.router.navigate(['/products']);
+    })
+  }
+
+  cancel(): void {
+    this.router.navigate(['/products']);
+  }
+}
+-----------------------------------------------------------------------------------------------------------------------
+- const id = +this.route.snapshot.paramMap.get('id');
+
+
+✅ Explicação
+📌 this.route.snapshot.paramMap.get('id')
+Isso pega o valor do parâmetro da rota chamado 'id'.
+
+Exemplo: se a URL for /produtos/editar/5, isso retorna "5" (uma string).
+
+📌 +this.route.snapshot.paramMap.get('id')
+Esse sinal de mais (+) converte a string "5" em número 5.
+
+Isso se chama coerção numérica em JavaScript/TypeScript.
+
+🧠 Por que isso é feito?
+Porque a maioria dos ids nos modelos e no backend são do tipo number (como no seu caso).
+
+E se você passar uma string onde a função espera um number, pode dar erro ou não encontrar nada.
 
 
 

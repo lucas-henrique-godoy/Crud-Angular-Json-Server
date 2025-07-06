@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { Product } from './product.model';
+import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 
 @Injectable({ //Essa classe pode ser injetada em outras classes
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class ProductService {
 
   //Método para criação de Produto
   create(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.baseUrl, product)
+    return this.http.post<Product>(this.baseUrl, product);
   }
 
   //Método para leitura  dos produtos
@@ -33,20 +34,20 @@ export class ProductService {
   }
 
   //Método para ler por id
-  readyById(id: string): Observable<Product> {
-    const url = `${this.baseUrl}/${id}`
-    return this.http.get<Product>(url)
+  readyById(id: number): Observable<Product> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.get<Product>(url);
   }
 
   //Método para atualizar um produto
   update(product: Product): Observable<Product> {
-    const url = `${this.baseUrl}/${product.id}`
-    return this.http.put<Product>(url, product)
+    const url = `${this.baseUrl}/${product.id}`;
+    return this.http.put<Product>(url, product);
   }
 
   //Método para deletar um produto
-  delete(product: Product): Observable<Product> {
-    const url = `${this.baseUrl}/${product.id}`
-    return this.http.delete<Product>(url)
+  delete(id: number): Observable<Product> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.delete<Product>(url);
   }
 }

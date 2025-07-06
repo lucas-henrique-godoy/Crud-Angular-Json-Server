@@ -16,7 +16,7 @@ export class ProductUpdateComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id') //Mesmo id definido nas rotas
+    const id = +this.route.snapshot.paramMap.get('id') //Mesmo id definido nas rotas
     this.productService.readyById(id).subscribe(product => {
       this.product = product;
     })

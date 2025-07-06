@@ -14,21 +14,6 @@
       "id": 3,
       "name": "Samsung S20+",
       "price": 5000.89
-    },
-    {
-      "name": "Geladeira",
-      "price": "1840.94",
-      "id": 4
-    },
-    {
-      "name": "Televisão",
-      "price": "3000",
-      "id": 5
-    },
-    {
-      "name": "Mesa",
-      "price": "1500",
-      "id": 6
     }
   ]
 }
