@@ -28,6 +28,7 @@ import { ProductRead2Component } from './components/product/product-read2/produc
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatIconModule} from '@angular/material/icon'
 
 
 //Usado para usar a formatação local de valores monetários(no caso Brsail-Real) com ponto e vírgula do Real no pipe.Ex: R$ 12.000,89
@@ -72,7 +73,8 @@ registerLocaleData(localePt);
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatIconModule
   ],
   providers: [{
     provide: LOCALE_ID, useValue: 'pt-BR' //Precisamos prover o LOCALE_ID

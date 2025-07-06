@@ -1399,67 +1399,6 @@ ________________________________________________________________________________
 
 _______________________________________________________________________________________________________________________________________________________________________
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 *EXEMPLO DE MÉTODO PARA USAR SNACKBAR (COMO FOI FEITO NO NOSSO SERVICE)
 showMessage(msg: string): void {
     this.snackbar.open(msg,'X', { //o parâmetro action esta com X que serve para fechar o snackbar(pode colocar qualquer texto, se ficar vazio você terá que experaroduratn terminar)
