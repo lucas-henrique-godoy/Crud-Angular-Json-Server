@@ -1,0 +1,3354 @@
+&nbsp;						**\*\*PROJETO CRUD ANGULAR E JSON SERVER - CADASTRO DE PRODUTOS**
+
+
+
+Tecnologias utilizadas:
+
+\- Angular CLI: 9.1.15
+
+\- Node: 12.22.12
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+&nbsp;		
+
+**#SEÇÃO - BACKEND DO PROJETO**
+
+
+
+\- Criar uma pasta raiz para o projeto, neste caso foi crud.
+
+
+
+\- Dentro da pasta crud, criar uma pasta chamada backend.
+
+
+
+-Dentro da pasta backend, rodar o comando para criar o arquivo package.json, que contem as dependências do projeto, com os valores padrão: npm init -y.
+
+
+
+-Também dentro da pasta backend, rodar o comando npm i json-server: instala localmente na pasta o pacote json-server, que permite criar uma API REST fake rapidinho para testes e prototipação, e já o coloca no arquivo package.json criado anteriormente.
+
+
+
+-Dentro da pasta backend, criar  arquivo db.json, onde criamos um objeto, e dentro deste objeto vai ter todos os endpoints da API. Criou 3 objetos(produtos) com as propriedades de id, nome, preço. O arquivo db.json funciona como um banco de dados fake quando usado com o json-server. Ele simula uma API REST completa (com rotas GET, POST, PUT, DELETE) sem precisar de backend real. É útil para testes e protótipos de frontend.
+
+
+
+-Dentro do arquivo package.json criou um script para iniciar o db.json. Comando: 
+
+"scripts": {
+
+&nbsp;   "start": "json-server --watch db.json --port 3001"    
+
+&nbsp; },
+
+
+
+Basicamente esse script chama o json-server que foi instalado anteriormente, colocou para ele ficar monitorando o arquivo db.jon na porta 3001. Agora a API esta funcional.
+
+
+
+-Dentro da pasta backend, colocar o comando npm start para rodar a API.
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\*TIVE UM ERRO DEPOIS DE CRIAR O DB.JSON E RODAR A API:
+
+
+
+✅ Resumo do erro e solução
+
+Erro:
+
+Você recebeu o erro SyntaxError: Unexpected token '?' ao rodar npm start. Isso aconteceu porque o pacote json-server usa o operador ?? (nullish coalescing), que não é suportado pelo Node.js 12, a versão que você está usando.
+
+
+
+Causa:
+
+Seu Node.js está desatualizado (versão 12), e o json-server instalado foi desenvolvido para versões mais recentes do Node (14+).
+
+
+
+Solução aplicada:
+
+Desinstalamos a versão atual do json-server e instalamos uma versão mais antiga e compatível com Node 12, assim:
+
+
+
+-Desinstala a versão atual do json-erver: npm uninstall json-server
+
+
+
+-Instala aversão do jso-server compatível com o Node 12: npm install json-server@0.16.3 --save-dev
+
+
+
+Depois disso, npm start funcionou corretamente com a sua versão atual do Node.js.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+&nbsp;			**# SEÇÃO - FRONTEND DO PROJETO**
+
+
+
+**\*\*VISÃO GERAL ANGULAR**
+
+
+
+\- O que é Angular? Um framework JavaScript desenvolvido pelo Google para criação de aplicações Web SPA(Single Page Application) baseada em componentes.
+
+
+
+\- Command Line Interface(CLI)- Interface de linha de comando do Angular. Para instalar rodar  comando: npm i -g @angular/cli.
+
+
+
+-Para criar um novo projeto Angular, rodar o comando: ng new minha-app.
+
+
+
+\- Typescript: Linguagem criada pela Microsoft, que é um superset do JavaScript, onde possuí todas as funcionalidades do JavaScript, mas tem outras como Tipagem Forte e é Orientada a Objetos. No Angular, o código escrito em Typescript é compilado para JavaScript.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+\*\*Árvore de Componentes: A partir do componente principal(raiz ou pai) que no Angular normalmente se chama app.component, você referencia outros componentes como: Formulário, Header, um componente de navegação, um componente que representa o conteúdo, etc.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+\*\*Conceitos Essenciais- Inicialização da Aplicação:
+
+
+
+\- Arquivo main.ts: É o primeiro arquivo que será chamado para inicializar a aplicação Angular.
+
+
+
+\- Arquivo app.module: Arquivo que é chamado pelo main.ts para inicializar a aplicação. A aplicação Angular é organizada em componentes, ou seja uma grande árvore de componentes. Esses componentes são organizados dentro de módulos, a aplicação é modularizada. Os módulos por sua vez, nos dão alguns "poderes", como por exemplo criar determinados componentes que estão visíveis apenas dentro do módulo. Isso traz um maior nível de encapsulamento. Exemplo: Imagine que você tem um determinado componente que é um componente que não pode ser usado fora de determinada situação(ele não pode ser usado no sistema inteiro), então podemos coloca-lo dentro de um módulo e ele ficar visível apenas dentro daquele módulo. Dentro do arquivo app.module tem a um atributo chamado bootstrap que também serve para inicializar a aplicação e aponta para o app.component que é o que é criado por padrão.
+
+
+
+\- Arquivo app.component: É o componente que é criado por padrão, onde a partir dele  toda a árvore de componentes será chamada.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\*\*O que é um componente? É como um pedaço da aplicação, um trecho de código que representa um componente visual da sua tela. Um componente é composto por um arquivo HTML, CSS e TS. Ou seja,  estrutura(HTML), estilo(CSS), comportamento(TS). Quando um componente é criado, é gerado uma tag personalizada, exemplo o componente home.component gera a tag <app-home><app-home>,essa é a forma para referenciar todo o código HTML, CSS  e TS que foi criado. A ideia é encapsular dentro desse componente as três tecnologias da WEB.
+
+
+
+-Arquivo TS: É o arquivo de comportamento do componente, a partir dele é que o Angular irá encontrar os arquivos HTML e CSS, pois ele faz uma referencia, então quando criamos um componentes pelo menos devemos ter o arquivo TS.
+
+
+
+\*\*Organização Usando Módulo: O Angular não organiza a aplicação somente em componentes, mas também em módulos, isso significa que todos os componentes irão estar dentro de algum módulo, seja um único módulo para toda a aplicação, como numa aplicação pequena todos os componentes podem ficar dentro de app.module(módulo principal criado por padrão), como é o caso deste projeto. Mas podemos organizar nossa aplicação em diversos módulos. Desse modo, quando você criar um componente dentro do módulo, você tem a escolha de dizer se aquele componente ficará visível para fora do módulo, ou seja alguém de fora do módulo pode referenciar aquele componente, ou seja ,você pode dizer que aquele componente vai ficar visível  apenas dentro do módulo.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+\*\*Anatomia do módulo: 
+
+
+
+\- Dentro do arquivo app.module tem 5 atributos: Declarations, Imports, Exports, Providers, Bootstrap.
+
+
+
+O que devemos colocar dentro de cada um desses atributos?
+
+
+
+-Declarations: Declara todos os componentes que fazem parte daquele módulo; declarar diretivas que fazem parte daquele módulo; declarar os pipes que fazem parte daquele módulo. Neste projeto, será usado para declarar principalmente os componentes que fazem parte daquele módulo. Quando dizemos que um componente faz patê de um módulo, não necessariamente ele é visível para fora do módulo, você deve colocar esse componente também dentro de exports.
+
+
+
+-Imports: Serve para importar outros módulos, ou seja, um módulo pode depender de outro módulo, podendo ser um módulo da própria aplicação ou um módulo externo. Podemos importar dependências e bibliotecas.
+
+
+
+-Exports: Serve para declarar componentes, diretivas e pipes que podem ser visíveis para fora do módulo.
+
+
+
+-Providers: Serve para declarar os services.
+
+
+
+-Bootstrap: É onde tem a referência do componente principal que será carregado, sendo necessário apenas para 1 único módulo, que é o módulo inicial da aplicação, o app.module. No caso do app.module, não precisamos exportar nada, os outros módulos é que vão exportar para o app.module utilizar, ou seja o app.module importa os outros módulos.
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+-OBS: Quando dizemos que um componente faz parte de um módulo, não necessariamente ele é visível para fora do módulo. Para tornar um componente visível para fora do módulo, ele deve ser colocado dentro de exports. 
+
+-Quando criamos um componente ele já é registrado dentro de app.module automaticamente, ou seja se estamos trabalhando dentro de um módulo app.module, só vai ser possível usar componentes que estejam carregados dentro do ap.module.
+
+
+
+
+
+\*\*DECORATOR: É um padrão de projeto eu tem como objetivo evitar herança, o invés de trabalhar como herança, você trabalha com composição para estender um determinado objeto. Exemplo: @Directive, @NgModule, @Component, etc. O Angular usa para definir que aquele classe exerce algum tipo de papel dentro do framework. Exemplo: Se queremos que uma classe seja um componente, usamos o @Component.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\*\*Instalando e criando projeto Angular
+
+
+
+-Instalando a cli do Angular. Comando: npm i -g @angular/cli
+
+
+
+\- Criando um projeto Angular: ng new nome-projeto
+
+\- Criando um projeto Angular sem arquivos desnecessários como arquivos de teste: ng new nome-projeto --minimal
+
+\- Rodar o projeto Angular: ng serve ou npm start, ambos funcionam.
+
+\- Instalando a dependência do Angular Material: ng add @angular/material
+
+\- Criar um componente: ng generate componente nome-do-componente
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+\*\*Arquivos dentro de um projeto Angular:
+
+
+
+\- Arquivo angular.json: Possui algumas configurações do Angular.
+
+✅ Explicação Corrigida e Completa:
+
+Dependendo da versão do Angular (e também das configurações padrão do projeto), ao gerar um novo componente com o Angular CLI (ng generate component), os arquivos de template (HTML) e estilo (CSS/SCSS) podem ser criados dentro do próprio arquivo .ts — o que é chamado de inline template e inline style. Para alterar esse comportamento padrão, você pode configurar o arquivo angular.json (ou workspace.json, dependendo da estrutura do projeto), adicionando ou modificando as seguintes opções:
+
+
+
+"@schematics/angular:component": {
+
+&nbsp; "inlineTemplate": false,
+
+&nbsp; "inlineStyle": false
+
+}
+
+O que isso faz:
+
+"inlineTemplate": false → Garante que o Angular CLI crie um arquivo HTML separado.
+
+
+
+"inlineStyle": false → Garante que o Angular CLI crie um arquivo CSS/SCSS separado.
+
+
+
+Observação importante:
+
+Essa configuração define o comportamento padrão para quando você gerar componentes. No entanto, você ainda pode sobrescrever isso com flags no comando, por exemplo:
+
+
+
+ng generate component nome-do-componente --inline-template --inline-style
+
+Ou para desativar inline no comando (mesmo que esteja ativado por padrão):
+
+
+
+ng generate component nome-do-componente --inline-template=false --inline-style=false 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+\- Arquivo assets: Serve para colocar arquivos estáticos, arquivos de imagem e  fontes.
+
+\- Arquivo Enviroments: Local onde é colocado as variáveis de ambiente.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+\- Nesta etapa depois de criar o componente de Header,  nós iremos importar dentro do  app.module o MatToolbarModule(barra de ferramentas). Estilizamos o header também.
+
+\- Criamos e estilizamos também o componente footer. Aqui foi usado também o MatToolbar.
+
+\- Criamos e estilizamos o componente NAV(navegação). E iImportei o MatSidenavModule e o MatListModule dentro de app.modulepara usar no componente nav.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+
+
+&nbsp;			**# SEÇÃO - ELEMENTOS DO ANGULAR - Mini Curso: Componentes, Rotas, Diretivas, Pipes, Observables, Services, Injeção de Dependência.**
+
+
+
+
+
+\*\*COMPONENTE ANGULAR: É formado em via de regra por 3 partes: HTML, CSS, TS. Não necessariamente precisamos ter estilo no componente. Também não é obrigatório ter o arquivo HTML,  podemos colocar o template dentro do arquivo TS. Existe um escopo("mundo") dentro do componente, ou seja, o componente tem o seu próprio "mundo" interno, como e fosse uma pequena aplicação. Exemplo: Se aplicarmos um estilo CSS em um seletor genérico(link, titulo, etc), esta estilização será aplicada somente dentro do componente. Existem os arquivos globais, onde são aplicados regras que valem para todos os componentes(index.html, styles.css, etc).
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+\*\*DIRETIVAS DE ATRIBUTO: Altera aparência(CSS) e o comportamento de um elemento, componente ou outra diretiva. Exemplo: alguma ação dentro de um botão, mudar a cor de algo, etc.
+
+
+
+-COMANDO PARA CRIAR UMA DIRETIVA DE ATRIBUTO: ng g d directives/red
+
+-SINTAXE: ng g d nome-da-pasta/nome-da-diretiva
+
+
+
+-EXEMPLO DE CÓDIGO DE UMA DIRETIVA DE ATRIBUTO:
+
+
+
+@Directive({
+
+&nbsp;   selector: '\[appRed]'
+
+})
+
+export class RedDirective {
+
+&nbsp;   constructor(el: ElementRef) {
+
+&nbsp;       el.nativeElement.style.color = '#e35e6b';
+
+&nbsp;   }
+
+}
+
+
+
+\- A Diretiva acima, esta pegando o elemento da DOM, pegando atributo style e color(dentro de style), e alterando a cor para vermelho.
+
+
+
+
+
+
+
+-USO DA DIRETIVA NO HTML:
+
+<i class="material-icons v-middle" appRed>  -Aqui a Diretiva altera a cor do ícone para vermelho.
+
+&nbsp;   favorite
+
+</i>
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+**\*\*DIRETIVAS ESTRUTURAIS:** Altera layout adicionando e removendo elementos da DOM(estrutura da página/HTML). A diferença visual entre a diretiva de atributo para a estrutural, é eu a diretiva estrutural usa asterisco na frente. Exemplo: \*ngIf, \*ngFor.
+
+
+
+-COMANDO PARA CRIAR UMA DIRETIVA DE ESTRUTURAL: ng g d directives/red
+
+-SINTAXE: ng g d nome-da-pasta/nome-da-diretiva
+
+
+
+-EXEMPLO DE CÓDIGO DE UMA DIRETIVA ESTRUTURAL:
+
+
+
+<form \*ngIf="product" class="product-form">   
+
+
+
+</form>
+
+
+
+-Aqui irá exibir ou não o elemento formulário se o produto estiver definido/setado. Aqui ele  altera a estrutura, porque ele irá ou suprimir um determinado elemento ou  mostrar, de acordo com a expressão colocada no \*ngIf. Ou seja, estamos fazendo uma condicional baseada em uma variável, ele irá mostrar o formulário se o produto estiver setado, ou ele simplesmente vai remover o formulário da DOM caso produto não esteja setado. Por isso é uma diretiva estrutural, pois irá mexer na DOM, vai remover um elemento caso a expressão seja falsa.
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+<ul>
+
+&nbsp;   <li \*ngFor="let product of products">   
+
+&nbsp;       {{ product.name }}
+
+&nbsp;   </li>
+
+</ul>
+
+
+
+\- Aqui ele irá acrescentar novos elementos. Temos uma UL(lista-não-ordenada) com LI,  e a partir desse LI ele irá fazer um laço FOR em cima  dos produtos, se tiver 10 produtos ele vai repetir o LI 10 vezes mostrando os nomes dos produtos. Esta diretiva estrutural ira adicionar novos elementos na DOM de acordo com a lista de produtos.
+
+
+
+OBS: O CÓDIGO PARA CRIAR TANTO UMA DIRETIVA DE ATRIUTO QUANTO UMA DIRETIVA ESTRUTURAL É O MESMO.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+**\*\*PROPERTY BININDG(BINDING DE ATRIBUTO):** É uma das formas de comunicação entre o arquivo TS e o HTML dentro do componente. Binding quer dizer ligação,  e assim usando os colchetes associados a um atributo, ele vai fazer a ligação e pegar nome que colocamos na propriedade no HTML,  e vai procurar uma variável com esse nome, e ai sim ele pega o valor da variável e associa ao dataSource que é um atributo de tabela. O Material Design usa esse dataSource com mais frequência para renderizar tabelas.
+
+
+
+**-EXEMPLO DE PROPERTY BINDING:**
+
+
+
+HTML:
+
+<table \[dataSource]="products">  
+
+&nbsp;   
+
+</table>
+
+
+
+-Aqui o atributo dataSource irá no TS buscar a variável products que é uma lista(Array) e usar essa variável para montar a tabela. O dataSource deve estar dentro de colchetes para funcionar.
+
+
+
+
+
+TS:
+
+@Component({
+
+&nbsp;   selector: 'app-product-read',
+
+&nbsp;   templateUrl: './product-read.compnent.html',
+
+&nbsp;   styleUrl: \['./product-read.component.css']			
+
+})
+
+export class ProductReadComonent
+
+implements OnInit {
+
+
+
+&nbsp;   products: Product\[];  -Aqui definimos uma  variável que é uma lista de produtos no TS,  e será usada pelo dataSorce para construir a tabela no HTML.
+
+}
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+**\*\*EVENT BINDING:** Usado para fazer ligação entre um evento do HTML pra um método que esta no arquivo TS. Para fazer isso é usado a sintaxe dos parênteses.
+
+
+
+-EXEMPLO DE EVENT BINDING:
+
+
+
+HTML:
+
+<button mat-raised-button (click)="createProduct()" color="primary"> - Aqui é a chamada do método que esta no TS por meio de um evento click, dentro de parênteses.
+
+&nbsp;   Salvar
+
+</button>
+
+
+
+
+
+TS:
+
+@Component({
+
+&nbsp;   selector: 'app-product-create',
+
+&nbsp;   templateUrl: './product-create.compnent.html',
+
+&nbsp;   styleUrl: \['./product-create.component.css']
+
+})
+
+export class ProductCreateComponent implements OnInit {
+
+
+
+&nbsp;   createProduct() {    - Aqui é o método criado no TS que será chamado no HTML pelo evento de click.
+
+&nbsp;       //...
+
+&nbsp;   }
+
+}
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+**\*\*ONE WAY DATA BINDING(DATA BINDING DE UMA ÚNICA DIREÇÃO):** One-Way Data Binding (ligação de dados unidirecional) significa que os dados vão de um único sentido: do componente(TS) para a view (HTML). É quando você exibe dados na tela, mas não os altera diretamente a partir da tela. A view apenas reflete o estado do componente. Imagine que no HTML você tem um input de nome,  e lá no arquivo TS você tem uma variável chamada nome. Vamos supor que você coloque na variável nome o valor Rebeca(nome = "Rebeca"). Por conta do  One-Way Data Binding, ele irá aplicar esse nome(Rebeca) para o Input no HTML mostrando o nome Rebeca.
+
+Vamos supor que houvesse uma outra mudança na variável do TS de Rebeca para Ana, ele vai mandar uma notificação e atualizar o componente para Ana, porque o valor da variável no TS mudou.
+
+
+
+**-EXEMPLO DE ONE WAY DATABINING(EXPLICADO ACIMA):**
+
+
+
+HTML:
+
+<input \[value]="nome">  -Aqui mostra o valor que for colocado na variável do TS. Tem que usar colchetes pois é um binding de atributo.
+
+
+
+
+
+TS:
+
+@Component({
+
+&nbsp;   selector: 'app-product-create',
+
+&nbsp;   templateUrl: './product-create.compnent.html',
+
+&nbsp;   styleUrl: \['./product-create.component.css']
+
+})
+
+export class ProductCreateComponent implements OnInit {
+
+
+
+&nbsp;   nome: string = "Rebeca";  	-Variável que é mostrada no input, se mudar o valor, lá também muda.  
+
+}
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+**\*\*TWO WAY DATA BINDING(DATA BINDING DE DUAS DIREÇÕES):** Two-Way Data Binding significa que os dados vão do componente (TS) para a view (HTML) e também da view (HTML) de volta para o componente (TS), ou seja, qualquer alteração feita na variável do componente será refletida automaticamente na tela, e qualquer alteração feita na tela (como digitar em um input) atualizará a variável no componente. É muito usado no Angular quando trabalhamos com formulários. Exemplo: Criar usuário, Alterar usuário. Assim tanto se alterarmos no HTML, como no código Typescript, os dados vão  ficar sincronizados.   
+
+
+
+**-EXEMPLO DE TWO WAY DATABINING(EXPLCIADO ACIMA):**
+
+
+
+HTML:
+
+<input \[(ngModel)]="nome"> -Essa é a sintaxe para se usar o Two Way Data Binding, assim os dados podem ser alterados tanto no HTML quanto no TS.
+
+
+
+
+
+TS:
+
+@Component({
+
+&nbsp;   selector: 'app-product-create',
+
+&nbsp;   templateUrl: './product-create.compnent.html',
+
+&nbsp;   styleUrl: \['./product-create.component.css']
+
+})
+
+export class ProductCreateComponent implements OnInit {
+
+
+
+&nbsp;   nome: string = "Rebeca";  	-Variável que é mostrada no input, se mudar o valor, lá também muda e vice versa.  
+
+}
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+**\*\*ANGULAR ROUTER:** O Angular Router é o sistema de navegação de páginas do Angular.
+
+Ele permite que você troque de componentes na tela sem recarregar a página, como se fosse um site de várias páginas — mas tudo acontece dentro do Angular.
+
+🧠 Por que usar? Imagine um app com várias "telas": Home, Produto, Usuário, você não quer criar um HTML diferente para cada um, mas sim mudar o conteúdo dinamicamente. É isso que o Angular Router faz. Ele funciona com rotas: você define qual componente deve ser mostrado quando o usuário acessa uma determinada URL.
+
+&nbsp;
+
+-Por exemplo, quando o usuário clica o menu HOME e a URL HOME é selecionada, automaticamente o componente HOME vai ser carregado no Router Outlet que é um componente que faz parte do Angular Router, onde irá injetar dentro dele os componentes de acordo com a navegação que foi feita. O que vai dizer a navegação é exatamente a URL do componente que foi mapeada, como houve um mapeamento de /home para o componente Home, automaticamente quando você navega para ele, ele vai colocar o componente no local especificado que você disse. Se o usuário for lá e navegar para /produto, automaticamente ele vai trocar os componentes e vai carregar nesse mesmo local que você previamente definiu com o componente do Router(Router-Outlet) ele vai substituir o produto. Da mesma forma se o usuário for lá e navegar para /usuário, seja clicando o menu ou mesmo colocando direto na URL, ele vai substituir o componente produto pelo componente usuário. Então sempre que você for navegando na sua aplicação, basicamente vai ter um mapeamento entre a rota e o componente, e ai tendo um mapeamento entre a rota e o componente ele coloca dentro desse elemento no Router Outlet o componente selecionado a partir da rota.
+
+
+
+**-EXEMPLO DE ROUTER:**
+
+
+
+HTML:
+
+<a routerLink="/products"> -Link da URL da rota do componente onde o usuário poderá acessar na aplicação.
+
+&nbsp; Produtos
+
+</a>
+
+
+
+
+
+TS:
+
+const routes: Routes = \[{
+
+&nbsp; path: "products",   			- Aqui é definido a rota para o componente products. Path é o caminho.
+
+&nbsp; componente: ProductCrudComponent 
+
+}, {
+
+&nbsp; path: "products/create",
+
+&nbsp; component: ProductCreateComponent
+
+}]; 
+
+
+
+
+
+ROUTER OUTLET:
+
+<mat-sidenav-content>
+
+&nbsp; <router-outlet></router-outlet> -Aqui dentro de <router-outlet></router-outlet> é onde as rotas serão carregadas.
+
+</mat-sidenav-content>
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+**\*\*PIPES:** São processamentos que você faz em cima de variáveis. Ou seja, você pode usar pipes para fazer a formatação de dados. Por exemplo, digamos que  eventualmente o formato que você recebeu de um banco de dados, não é o formato que você quer exibir, e para isso você ode usar um pipe para formatação de um dado. Por exemplo, eu recebi um valor numérico e eu quero formatar esse valor como um valor de moeda, em real colocando o símbolo de real e quero colocar duas casas decimais. Então você pode passar esse valor e colocando um pipe | (barra reta), onde terá um método que será chamado e irá processar esse valor para transformar esse dado o formato que você quer. 
+
+
+
+**-EXEMPLO DE PIPE:**
+
+<p>
+
+&nbsp;   O vencimento é 
+
+&nbsp;   {{ produto.vencimento | date }}
+
+</p>
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+**-EXEMPLO DE PIPE COM PARÂMETRO:**
+
+<td mat-cell \*matCellDef="let product">
+
+&nbsp;   {{ product.price | currency: 'BRL' }}
+
+</td>
+
+
+
+&nbsp;-Aqui estamos exibindo a propriedade price do objeto product, utilizando o pipe currency para formatar o valor como uma moeda.
+
+O parâmetro 'BRL' indica que a moeda usada deve ser o Real brasileiro (R$).
+
+Ou seja, o valor será exibido no formato de moeda brasileira, como por exemplo: R$ 1.000,00.
+
+
+
+📌 Observações extras (se quiser aprofundar):
+
+Se você não passar parâmetro, o Angular usa a moeda padrão do sistema.
+
+
+
+É possível também passar mais parâmetros para personalizar, como o número de casas decimais.
+
+
+
+Exemplo com mais opções:
+
+
+
+{{ product.price | currency:'BRL':'symbol':'1.2-2' }}
+
+Mostra o símbolo da moeda e sempre com duas casas decimais (ex: R$ 1.000,00).
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+**-EXEMPLO DE UMA CADEIA DE PROCESSAMENTO/CADEIA DE PIPES- Também chamada de CHAINING:**
+
+<p>
+
+&nbsp;   O vencimento é 
+
+&nbsp;   {{ produto.vencimento | date: 'fullDate' | uppercase }}
+
+</p>
+
+
+
+-Essa cadeia de pipes formata a data de vencimento (produto.vencimento) para o formato completo (fullDate) e depois transforma o texto todo em letras maiúsculas (uppercase).
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+**\*\*PROGRAMAÇÃO REATIVA(REACTIVEX):** O Angular usa esse framework ReactiveX que trabalha com conceitos de programação reativa. Programação reativa tem o conceito de o código só será chamado de forma reativa, ou seja, precisa acontecer alguma coisa externa, no caso um evento para dai quando acontecer isso o código ser executado.
+
+
+
+**-IMPORTAÇÃO DO OBSERVABLE NO ANGULAR:** import { Observable } from "rxjs";
+
+
+
+**\*O PADRÃO OBSERVER:** É o padrão de projeto mais utilizado na web. Tudo começa a partir do padrão Observer. É um padrão orientado Evento.
+
+
+
+
+
+
+
+-Subject: É quem tem a capacidade de monitorar e detectar quando um evento acontece.
+
+-Observer: São os códigos que estão interessados num determinado evento.
+
+
+
+\*  O que acontece, se você tirar a figura do Subject, os observables(quem esta interessado em monitorar os eventos) precisam ficar monitorando os eventos, mas se você tiver alguém que vai ser capaz de monitorar os eventos, você pode delegar para esse Subject. Exemplo: "Monitore o evento tal, e  quando acontecer o evento me notifique" ou seja, me avise que o evento aconteceu. Por isso os observadores precisam se registrar no Subject dizendo que ele é interessado no evento, ou seja, para o padrão de projeto Observer existir, antes precisa haver um explicito desejo dizer "Eu estou interessado em receber notificações de um determinado evento", ou seja, há um registro do  Observador que é quem está interessado  no Subject.
+
+Depois que há esse registro o Subject vai detectar o Evento. O Evento aconteceu e ele é capaz de detectar e perceber que o determinado evento aconteceu, ou seja, uma vez que  Subject detectando que o Evento aconteceu e ele tem dentro dele uma lista de todos os Observadores(Observers) que estão interessados de ser notificados, ele vai notificar todos s Observadores dizendo: "O evento que vocês estavam esperando aconteceu". Quando o Subject notifica, é executado uma função dentro de cada Observador e ai ele vai fazer aquilo que é necessário de acordo com o evento que foi gerado.
+
+EXEMPLO: Imagine que você tem um evento de compra, e você tem um Observador que é para enviar um email para o usuário. Você tem outro Observador que é para dar baixa no estoque, você tem outro Observador que vai mandar uma mensagem para um outro sistema que via separar mercadoria. E ai aconteceu o evento da venda, alguém foi lá e comprou, e ai o Subject que é quem está monitorando esse evento da compra vai notificar para o Observador de email: "Olha aconteceu uma compra". Ai o Observador de email vai pegar aquela compra e enviar um email pro usuário: "Sua compra foi realizada com sucesso, estamos processando a sua compra e dentro de algumas horas iremos mandar novas notificações com o progresso no seu email". Ai esse evento foi passado para um outro Observador que quer dar uma baixa no estoque, ele vai lá e manda essa compra, e ele vai ver todos os produtos que estão dentro da compra,  e subtrai 1 do estoque. Ai o próximo Observador recebe o evento da compra e ele manda para um sistema de separação do produtos que o produto "tal", "tal" e "tal" podem ser separados. Então percebe-se que o Subject é quem detecta o evento, mas ele funciona como um intermediário, lê e entende que o evento aconteceu e notifica os interessados.
+
+
+
+-EXEMPLO DE ANALOGIA DE OBSERVABLE E SUBJECT-ANIVERSÁRIO SURPRESA: Existem 2 personagens nesta história: A namorada que representa o Observer e o Porteiro que representa o Subject. Há também o Evento que é a chegada do aniversariante. Essa história terá 2 possibilidades.
+
+
+
+-CENÁRIO 1-SEM  OBSERVER: A namorada não irá usar o padrão Observer e ela vai ficar de forma proativa na janela olhando os carros chegarem, quando chegar o carro amarelo do namorado, ela vai para dentro da sala e diz "Pessoal ele acabou de chegar, vamos apagaras luzes e ficar em silêncio para a gente fazer a surpresa". Neste primeiro cenário sem um Observer, quem estava interessada no evento(que era namorada), ela ficou parada sem curtir mais a festa olhando na janela até que o evento acontecesse para dai ela ser responsável por todo o processo de detectar o evento e avisar todos os convidados.  Neste caso como ela teve uma postura proativa, ficou muito  ruim para ela, porque ela ficou totalmente ocupada em detectar o evento e daí avisar os convidados.
+
+
+
+-CENÁRIO 2-COM OBSERVER: A namorada delegou a tarefa de ficar observando para o porteiro, aqui temos o uso do padrão Observer, porque o Porteiro é o Subject. Como ele esta na portaria ele tem a capacidade de detectar o Evento de uma forma muito mais fácil, até porque o Namorado vai ter que passar pelo prédio ou pela portaria, então ele tem a posição privilegiada pra detectar o Evento. Então o eu foi que a Namorada fez? Lembra que a ente disse que precisava fazer  um registro, ou seja o Observer que é o interessado, ele precisa se registrar om o Subject para dizer "Eu estou interessado em receber o Evento", para a Namorada avisar o Porteiro de que ele precisa ficar observando o Evento, ela precisou interfonar e pedir: "Você tem como observar a chegada do carro amarelo?", ai o Porteiro disse: "Ok, deixa comigo que assim eu o Evento acontecer eu notifico vocês de volta". Ou seja, esse notificar de volta, é o Porteiro depois de olhar e perceber que o Evento aconteceu e detectar o Evento, ele vai interfonar de volta dizendo que o Evento aconteceu, só então a Observadora que é a Namorada que é interessada pelo Evento ela vai fazer todo o procedimento para que o aniversario surpresa acontecer.
+
+Então 1º A Namorada precisou ligar pro Porteiro se registrando dizendo "Olha estou interessada no Evento X", o Porteiro deu um OK dizendo: "Pode deixar comigo, quando acontecer o Evento eu notifico de volta", daí o conceito de CALLBACK(chamada de volta) para notificar que o Evento aconteceu. Então ele liga de volta dizendo: "O Evento aconteceu", ai a Namorada  que já estava curtindo a festa e que não estava mais preocupada em ficar olhando pela janela, foi lá recebeu a notificação do Porteiro e ai sim ela fez todo o trabalho de prosseguir com os preparativos para a surpresa.
+
+Então deixa bem claro que trabalhar com o padrão Observer deixa o Observador que é o interessado livre para fazer outras coisas e nesse cenário houve uma chamada reativa, ela não estava querendo de forma proativa ficar na janela, ela quis ficar de forma reativa, ela só vai fazer as coisas quando um determinado Evento acontecer. Por isso que o padrão Observer é um padrão orientado a Evento.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+**\*ENTENDENDO OBSERVABLES:** Do ponto de vista do Javascript puro a gente começa a trabalhar com esse conceito de reatividade a partir de que você tem a possibilidade de passar uma função como parâmetro para outra função, e essas funções são chamadas também de CALLBACKS. Por exemplo: Você passa uma função para outra função como parâmetro para outra função dizendo: "Eu quero que você invoque essa função que eu estou passando como parâmetro, quando a resposta a requisição chegar". E ai ele vai lá e chama a CALLBACK. Um dos problemas da CALLBACK é quando você tem uma logica mais complexa e você vai acabar caindo num cenário que você precisa passar uma CALLBACK dentro de outra CALLBACK(CALLBACK HELL), uma  função dentro da outra, tornando assim o código de difícil leitura e também de difícil manutenção. Quanto mais outras CALLBACKS, outras logicas fossem adicionadas ficava ainda mais complicados a código.
+
+
+
+-A partir do ECMA Script 2015 surgiu um conceito de Promises onde também são usados os CALLBACKS, mas na Promisse tem a capacidade de encadear as varias chamadas, você consegue compor melhor varias chamadas de Promisses,  sem ter essa questão desse aninhamento que era causado pelo CALLBACK. Quais os problema da Promisse? A Promisse você usa apenas uma única vez. Se você executou um determinado código usando Promisse, depois que termina você não consegue reutilizar essa Promisse. E como evolução da Promisse, que você consegue ter os mesmos benefícios de ser fácil a composição, você consegue chamar varias funções encadeadas numa forma simples, só que com outros benefícios, você tem o Observable.
+
+
+
+-Os Observables que estão dentro do RXJS que o Angular usa como dependência, possuem algumas vantagens por exemplo: 
+
+1- Um Observable diferente da Promisse você consegue reusar ele.
+
+
+
+2- Consegue lidar com um STREAM DE DADOS, vamos supor que você precisa ficar monitorando uma determinada votação presidencial, e você pode criar um Observable para ficar de tempo em tempos consumindo essa informação do servidor, ou seja, com um único Observable você consegue ficar recebendo uma STREAM DE DADOS. Exemplo: "Foram apurados 20% da urna onde um candidato esta com 50% e outro esta com 50%". Daqui a pouco chega mais informações dizendo "Foram apuradas 40% das urnas e agora um candidato esta com 60%e o outro esta com 40%", depois chegam mais dados. E com 1 único Observable voce fica recebendo esse STREM DE DADOS, ou seja, um conjunto de dados em sequencia, sem necessariamente ficar criando novos objetos porque voce consegue reusar.
+
+
+
+3- Operadores: As Promises também tem um outro "poder" que são os Operadores, que são funções que podem ser usadas juntamente com os Observables. Por exemplo no caso da Promisse você tem basicamente o método then. No caso dos Obsevables você tem outros métodos como map. Você consegue fazer filtros que são tipo de funções(Operadores) que você consegue trabalhar com os seus dados. Por exemplo:  Eu acabei de receber uma lista de produtos do meu backend, você te como ficar trabalhando com esses dados a partir dos Observables de uma maneira muito interessante. Então tem uma serie de funções que ajudam a processar os dados. Em outras palavras por trás do Observable ele vai encapsular essa questão do padrão Observer. O padrão Observer é a base da programação reativa, ou seja só tem programação reativa a partir do padrão Observer. Quando o evento acontece ai sim é que o código vai de forma reativa agir por conta que um determinado evento que aconteceu.
+
+
+
+\- Quando você trabalha com Observable, Promisse ou CALLBACK, via de regra você esta trabalhando com código assíncrono, ou seja, não há um resposta imediata na chamada do seu código. Um exemplo claro de chamada assíncrona, é quando você vai fazer uma chamada pro bakend da sua aplicação.
+
+
+
+EXEMPLO:
+
+
+
+criarNoBackend(produto: Produto): Observable<Produto> {
+
+&nbsp; return this.http.post<Produto>(ths.url,produto);
+
+}
+
+
+
+-Esse método recebe um produto como parâmetro e faz uma chamada do tipo post para cadastrar esse produto no backend. Foi chamado o módulo http do Angular que serve para trabalhar com as requisições HTTP. Entretanto o backend da nossa aplicação demora as vezes alguns segundos para responder, então esse método não ira responder na hora que você chamou, ele via responder depois de algum tempo no futuro, por isso esse método retorna um Observable, e esse Observable que será retornado a partir desse método, podemos passar para ele registrar um Observador(exatamente o que esta acontecendo no código abaixo no subscribe). Você pode registrar um Observador:
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+criarProduto(): void {
+
+&nbsp; this.criarNoBackend(this.produto).subscribe (() => {
+
+&nbsp;   this.exibirMensagem("Salvo com sucesso!");
+
+})
+
+}
+
+
+
+\- Neste método eu chamei o criarNoBackend, passei o produto e como resposta dessa chamada eu recebo um Observable, ou seja,  na hora que eu chamo ele já retorna um Observable, só que a resposta do servidor anda não chegou, por isso que eu chamo o método subscribe e ai eu passo uma função para ser chamada quando a resposta do servidor chegar.
+
+
+
+-Neste método esta sendo registrado um Observador, que é a função Arrow que esta sendo passada como parâmetro para o subscribe. Ou seja, o subcribe é o método de registro. Neste caso o Observable é o meu Subject. Ou seja, o Observable tem a capacidade de detectar que um determinado evento aconteceu, que é o evento da resposta do meu servidor(backend) para minha requisição post que foi feita, e quando essa resposta chegar  método que eu passei para o subscribe será chamado e ai sim eu posso exibir uma mensagem por exemplo, de que o usuário foi salvo, ou chamar a navegação para ir para uma outra tela, ou seja, eu posso fazer qualquer coisa que eu queira em resposta da minha chamada ao backend.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+
+
+**\*\*SERVICES:** São classes que tem como principal objetivo organizar e compartilhar métodos e dados entre componentes. É possível também utilizar Services dentro de Diretivas. A ideia é você separar responsabilidades.
+
+-Tudo aquilo que diz respeito a responsabilidade de mostrar algo visual na tela diz respeito ao componente. Mas sempre que você tem regras que não tem respeito diretamente com a parte visual, ou você quer encapsular o acesso a sua API(o backend da aplicação), o ideal é você separar as responsabilidades e colocar algumas responsabilidades no Service, porque diz respeito a parte não visual que não tem diretamente uma relação com aquilo que esta sendo exibido na tela, você também pode colocar toda a responsabilidade de acessar o backend da sua aplicação. O Angular não te força a criar os Services, você pode criar Service com essa ideia tanto de separar responsabilidades, como também viabilizar comunicação entre componentes. Por exemplo: Eu preciso de uma determinada informação e essa informação precisa ser compartilhada entre o Componente A e o Componente B, onde os componentes não estão próximos onde não há como passar essa informação de um componente para outro, par isso podemos usar Services como uma forma de compartilhar dados e métodos entre componentes.
+
+
+
+\*MOTIVAÇÃO PARA O SERVICE: Imagine que temos o Componente 1 que possui seu HTML, CSS,TS. E dentro do TS nos temos um certo conjunto de lógica. E também temos o Componente 2 que também tem  seu HTML, CSS TS e dentro do TS também possui o seu conjunto de lógica. Usamos o Service para colocar as lógicas que não estão relacionadas com a parte visual dos componentes e que não são da responsabilidade dos componentes. Nem toda aplicação terá apenas 1 único Service com varias logicas dentro, tudo ira depender de você ter responsabilidades coerentes dentro de um Service. Não necessariamente você precisa ter um único método dentro de cada Service, mas você vai ter um Service responsável por um conjunto coerente de responsabilidades.
+
+-Por exemplo: um cadastro, onde eu vou criar um produto, alterar um produto, excluir um produto, consultar um produto por ID. Você pode colchoar isso tudo dentro de um Service só, mas você não vai colocar outras funcionalidades que não dizem respeito ao produtos, como cadastrar um cliente, alterar um cliente ou mexer num fornecedor dentro de um Service que esta focado para trabalhar nas coisas relacionadas aos produtos. Então é importante ter esse cuidado de ter Services que tem logicas que tem um coerência de estar juntas caso não haja essa coerência você cria mais de um Service. Para usar o Service dentro de um Componente precisamos usar Injeção de Dependência.
+
+
+
+**-CRIAR UM SERVICE:** ng g s services/product 
+
+Sintaxe: ng g s nome da pasta/nome do service
+
+
+
+
+
+
+
+**-EXEMPLO DE UMA CLASSE QUE REPRESENTA UM SERVICE:** Aqui o decorator @Injectable significa que essa classe vai ser detectada pelo Angular e ela vai ser possível de ser injetada em outras classes.
+
+
+
+&nbsp;O provideIn: "root" significa que existe um injetor(Injector) e esse injetor é o injetor raiz da nossa aplicação. Basicamente só existe  1 injetor raiz da minha aplicação e uma vez definido que o meu produtoService vai ser provido pelo "root", significa que eu vou ter apenas uma única instância do ProdutoService em toda a minha aplicação, ou seja, sempre que eu injetar o meu produtoService dentro de um Componente, Diretiva o Angular vai me devolver a mesma instância.
+
+&nbsp;
+
+
+
+@Injectable({
+
+&nbsp; provideIn: "root",
+
+})
+
+export class ProductService {
+
+&nbsp; //...
+
+}
+
+
+
+
+
+-Quando usamos o comando para criar um Service: ng g s nome da pasta/nome do servisse. No exemplo acima , o nome do arquivo ficaria product.service.ts e o nome da classe ficou ProductService. No Angular existe todo um Guide Line relativo  nomenclatura dos Componentes, Services, Diretivas, então precisamos ficar atentos o máximo possível as Guides Lines porque isso ira nos ajudar a manter o nosso projeto, como se outros desenvolvedores vierem para o projeto eles irão estar muito mais familiarizados porque é uma forma padrão de se usar nomenclatura dentro do Angular.
+
+
+
+
+
+-OBS: Existe um padrão de projeto do Design Pattern chamado Sigleton, que consiste em criar apenas uma única instancia de uma classe, as vezes criando um construtor privado dependendo da linguagem, ou as vezes criando um método para devolver essa instância. Como o Angular ele vai  gerenciar a criação do Service e vai ser responsável por gerenciar a criação dos componentes, porque você não instancia uma classe produtoService, da mesma forma que você não vai instanciar uma classe correspondente a um componente, você não vai instanciar um componente. Quem vai fazer todo esse trabalho de instanciar essas classes gerenciadas como: Componente, Diretiva, Service é o Angular. Então como o Angular é responsável por gerenciar a criação desses objetos, ele também vai ser responsável por Injetar Dependência de um objeto no outro, como também é responsável por garantir que uma determinada instancia sempre será devolvida quando você pedir. Imagine que você tem um Service e esse Service tem um contador dentro dele, se você vai lá e aumenta esse contador para 10 em um determinado Componente A,  quando você injetar esse Service no Componente B, 
+
+o contador vale 10. E se lá no Componente B  você aumentar esse contador para 30, quando você injetar esse Service novamente dentro do Componente A, o contador agora vale 30. Se você aumentar esse contador novamente para 130 e você vai injetar esse Service no Componente C, o contador vale 130, porque estamos sempre trabalhando com a mesma instância do Service uma vez que você usa o provideIn: "root".
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+**\*\*INJEÇAO DE DEPENDÊNCIA:** É um padrão no qual a classe recebe as dependências de uma fonte externa ao invés de criar por conta própria.
+
+
+
+-Num cenário padrão quando uma Classe A precisa de uma Classe B, ou seja, a Classe A vai precisar da Clase B, então a Classe A vai criar a Classe B. É muito natural acontecer isso, mas na Injeção de Dependência ha uma inversão dessa logica, ou seja, é um padrão onde a classe recebe as dependências a partir de uma fonte externa ao invés de criar por conta própria. Ou seja, a Classe A precisa da Classe B, ao invés da Classe A criar por conta própria uma instância da Classe B, a Classe A vai receber a Classe B a partir do construtor ou a partir de algum outro mecanismo como é o caso da Injeção de Dependência.
+
+Dependendo da linguagem, framework que você vai usar a forma  de implementar a Injeção de Dependência é diferente.
+
+
+
+**-EXEMPLO  DE UM CENÁRIO SEM INJEÇÃO DE DEPENDÊNCIA:** A classe Carro depende da Classe Motor
+
+
+
+CLASSE CARRO   	  ===>                CLASSE MOTOR
+
+
+
+class Carro {                          class Motor {}
+
+&nbsp; motor: Motor
+
+
+
+&nbsp;construtor() {
+
+&nbsp; this.motor = new Motor()
+
+&nbsp;}
+
+}
+
+
+
+-Neste cenário a Classe Carro dependência da Classe Motor. Então nada mais natural dentro do construtor você instanciar o Motor a parir da linha : ths.motor = new Motor(), ou seja, você acabou de instanciar um objeto Motor e atribuiu a variável dentro da Classe Carro, e tal forma de que quando Carro for instanciado o Carro terá automaticamente um Motor. Mas quem foi responsável por instanciar o Motor ? Foi a própria Classe Carro, ou seja, ai não houve Injeção de Dependência, porque a Classe Carro foi responsável por criar uma instancia da Classe Motor.
+
+
+
+
+
+\- Se por algum motivo a Classe Motor tiver uma alteração, por exemplo, onde para criar um objeto Motor eu preciso dizer qual cilindrada aquele Motor tem. Só que uma vez que eu mexi na classe Motor, na Classe Carro gerou um impacto, pois como Carro cria o Motor agora você obrigatoriamente precisa passar uma cilindrada como parâmetro para a construção do Motor. Isso faz com que sempre que você mexa na Classe Motor, você também tenha que alterar a Classe Carro, gerando uma fragilidade, ou seja, a Classe Carro esta muito dependente da Classe Motor.
+
+
+
+CLASSE CARRO:
+
+class Carro {
+
+&nbsp; motor: Motor
+
+
+
+&nbsp; construtor() {
+
+&nbsp;   this.motor = new Motor() --Gera erro aqui.
+
+&nbsp; }
+
+}
+
+
+
+
+
+CLASSE MOTOR ALTERADA: Gera um erro na Classe Carro, obrigando que a  Classe  Carro também seja alterada.
+
+class Motor {
+
+&nbsp;cilindrada: number
+
+
+
+&nbsp; construtor(cilindrada: number) {
+
+&nbsp; this.cilindrada
+
+&nbsp;}
+
+}
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**-EXEMPLO  DE UM CENÁRIO COM INJEÇÃO DE DEPENDÊNCIA:**
+
+
+
+-Uma forma de resolver isso seria passar Motor como parâmetro para o Carro. Fazendo isso, significa que alguém externo, imagina que você tem uma classe chamada Fabrica e na hora de você criar o Carro você cria o Motor, sabe exatamente o que precisa passar para o Motor e ai sim você passa o Motor construído para dentro do Carro. Ou seja, uma fonte externa passou a dependência para dentro do Carro. E ai você vai ter frameworks que vão te ajudar no processo de Injetar Dependência.
+
+
+
+&nbsp; 
+
+class Carro {
+
+&nbsp; motor: Motor
+
+
+
+&nbsp; construtor (motor: Motor) {  -Passando o Motor como parâmetro
+
+&nbsp;   this.motor = motor
+
+&nbsp; }
+
+}
+
+
+
+class Motor {
+
+&nbsp;cilindrada: number
+
+
+
+&nbsp; construtor(cilindrada: number) {
+
+&nbsp; this.cilindrada
+
+&nbsp;}
+
+}
+
+
+
+
+
+
+
+-Principalmente no caso do Angular se a gente substituir Carro por Componente e substituir Motor por Service. Quem é responsável  por criar o Carro, ou seja o Componente , e quem é responsável por criar  Service é o Angular, então ele será capaz de prover essas dependências pra gente a partir da Injeção de Dependência.
+
+
+
+-Dentro do Framework Angular tem um módulo de Injeção de Dependência, ou seja, há um framework dentro do outro. Então quando você cria uma classe ProductService e diz que essa classe  é @Injectable, você esta dizendo em outras palavras que essa classe ode ser injetada  e ao mesmo tempo que você coloca um @Injectable você esta dizendo pro Angular que ele deve considerar essa classe, ele  deve instanciar essa classe para você. 
+
+Então o Angular vai instanciar essa classe criando uma instancia e ProductService. Num cenário comum eu tenho uma única instancia, isso não significa que eu não possa ter mais. Mas no cenário da nossa aplicação usando provideIn: "root", ele vai ter apenas uma instancia dessa classe para toda a aplicação(ProductService). Sempre que injetarmos ProductService ele vai pegar essa única instancia.
+
+Depois que o Angular instanciar o ProductService, agora ele vai precisar instanciar  o ProductCreateComponent(Componente de criação de produto) porque ele foi referenciado em algum ponto da sua aplicação. Quando Angular for gerar uma instancia desse Componente ele ira criar um Componente e vai passar como parâmetro e injetar o ProductService no Componente.
+
+
+
+Então nos temos o framework(Angular) quando ele instancia ele cria  o ProductService, e quando ele for instancia o Componente(ProductCreateComponent) ele passa o ProductService que é injetado no Componente. Não necessariamente você vai ter apenas 1 única instancia do componente, sempre que você referenciar o componente a partir da sua tag ele vai criar uma nova instancia daquele componente, para cada tag você vai ter uma instancia. Portanto quem vai ser responsável por criar essas instancias é o Angular.
+
+
+
+Falando a respeito do provideIn: "root". O "root" é um apelido(alias) para o AppModule, chamado de root injector. Associado ao AppModule, que é o modulo inicial da aplicação, o root injector é responsável pela injeção de dependência e ele esta associado ao AppModule. Quando você diz que o seu provideIn vai ser o "root", você esta dizendo em outras palavras que o provideIn vai ser o AppModule. Como só tem 1 AppModule dentro da sua aplicação, sempre que você criar alguma coisa que usa @Injectable  provideIn: "root", significa que esse Service por exemplo vai ter apenas uma única instancia em toda a sua aplicação.
+
+
+
+
+
+**\*SINGLETON:** Services são sigletons(apenas uma única instância) dentro do escopo de um injector.
+
+
+
+**-INJECTOR:** Temos 2 grupos de injetores: 
+
+
+
+\- ModuleInjector(injetor de módulo): Sempre que usamos @ngMoudle e dentro do módulo você define os providers e você referencia um determinado Service, você esta usando um injetor de modulo. Significa que dentro do escopo do seu modulo você vai ter apenas uma única instancia daquele serviço. Quando você usa um @Injectable da mesma forma você passar tanto o root que ai você tem a única instancia pra toda a sua aplicação como você ode usar dentro do Injectable o provideIn apontando para um modulo, ou seja, voe também esta usando um ModuleInjector, ou seja aquele Service vai ter apenas 1 única instancia dentro do escopo do modulo ou dentro do escopo  a sua aplicação se você estiver usado o injetor root, o raiz. Quando usamos root, e o root aponta para o AppModule estamos usando o ModuleInjector.
+
+
+
+&nbsp;- ElementInjector(injetor de elemento):Quando você usa os providers dentro de Diretiva(@Directive) ou um Componente(@Component), você pode definir a partir da propriedade providers que você pode definir alguns serviços que você quer colocar dentro do seu componente, e ai sim você esta dizendo que você quer ter uma instancia própria dentro daquele componente  de um determinado Service. Então ao invés de você usar a instancia única que esta sendo compartilhada na sua aplicação inteira, você vai usar dentro de um determinado componente o Service, você pode querer uma instancia dedicada, ou seja, criar uma nova instancia para ser injetada naquele componente. Ai você usa dentro de @Componentou dentro de @Directive, você usa os providers para colocar quais são os serviços eu você quer eu sejam injetados novas instancias.
+
+
+
+-OBS: No lugar de root você pode colocar a referencia para um modulo. Vamos supor eu você tenha um módulo da sua aplicação de autenticação. Você criou um modulo chamado authModule e você quer dentro desse modulo de autenticação ter um determinado serviço dentro daquele escopo, então você pode dizer que o provideIn é o authModule, mas sem as aspas: @Injectable provideIn: authModule. As aspas em root só serve para ele ter um alias para o AppModule. Você vai ter que de fato fazer um import do modulo para dai você referenciar ao modulo aqui dentro do provideIn. Então no lugar do root você pode ter qualquer outro modulo da sua aplicação.
+
+
+
+-Por via de regra na nossa aplicação a gente vai estar sempre usando o ModuleInjector, especificamente usando a partir da notação @Injectable e o provieIn a gente vai usar o root, ou seja, nos vamos ter apenas uma única instancia em toda a nossa aplicação.
+
+
+
+Mas quando você tem aplicações mais complexas com vários módulos,  é interessante você ter também a capacidade de definir um escopo de um Service um pouco mais restrito. Então você pode  usar diferentes estratégias para que você possa definir o escopo do seu Service. Existem mais informações na documentação do Angular: https://angular.io/guide/hierarchical-dependency-injection.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+
+
+\*\*Foi criado uma pasta chamada views e dentro foi colocada o componente home.
+
+-Para organizar melhor as pastas do projeto, quando eu tenho uma tela inteira eu vou colocar dentro da pasta view, como é o caso do home.component. Dentro da pasta componentes tudo aquilo que for trechos de componentes reutilizados que podem ser reutilizados em mais de 1 tela, como é o caso do header.component,nav.component, footer.component,etc. Que são apenas partes da tela.
+
+
+
+✅ O que o routerLink faz?
+
+O atributo routerLink é uma diretiva do Angular Router. Ele funciona como o href de um <a>, mas de forma mais inteligente e integrada ao sistema de rotas do Angular.
+
+
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+
+
+**🔷 O que é <mat-sidenav-container>?**
+
+O <mat-sidenav-container> é um componente do Angular Material que cria uma estrutura de layout com:
+
+
+
+Um menu lateral (<mat-sidenav>)
+
+
+
+Um conteúdo principal (<mat-sidenav-content>)
+
+
+
+Esse layout é muito comum em sistemas, tipo painel administrativo ou sistemas internos.
+
+
+
+&nbsp;Estrutura básica:
+
+
+
+<mat-sidenav-container>
+
+&nbsp; <mat-sidenav> MENU </mat-sidenav>
+
+&nbsp; <mat-sidenav-content> CONTEÚDO PRINCIPAL </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+**✅ O que é <mat-sidenav-content>?**
+
+Esse é o local principal onde o conteúdo da sua aplicação será exibido. É o "corpo" da página.
+
+
+
+Então tudo que muda conforme a rota (página atual) — como Produtos, Início, etc — deve ser renderizado dentro do <mat-sidenav-content>.
+
+
+
+🤔 Por que o <router-outlet> está aqui dentro?
+
+O <router-outlet> é onde o Angular renderiza o componente da rota atual. Ele precisa estar dentro do local onde você quer que o conteúdo mude quando o usuário clicar nos links do menu.
+
+
+
+Se você colocasse o <router-outlet> lá no app.component.html, fora do <mat-sidenav-content>, o conteúdo renderizado poderia aparecer fora do layout, bagunçando tudo.
+
+
+
+🧠 Analogia simples:
+
+Pense assim:
+
+
+
+<mat-sidenav> = o menu fixo do lado.
+
+
+
+<mat-sidenav-content> = a tela que muda conforme você navega.
+
+
+
+<router-outlet> = o lugar onde essa "tela que muda" será renderizada.
+
+
+
+🧩 Exemplo visual:
+
+
+
+┌───────────────────────────┬────────────────────────────┐
+
+│        mat-sidenav        │     mat-sidenav-content    │
+
+│     (menu lateral)        │                            │
+
+│   - Início                │   <router-outlet> aqui     │
+
+│   - Produtos              │   mostra os componentes    │
+
+│                           │   conforme a rota.         │
+
+└───────────────────────────┴────────────────────────────┘
+
+
+
+**🔚 Resumindo:**
+
+O <mat-sidenav-content> serve para conter o conteúdo principal que muda com a navegação.
+
+
+
+O <router-outlet> fica dentro dele porque você quer que os componentes das rotas apareçam ali, junto com o layout bonitinho da página.
+
+
+
+Se ele estivesse fora, o conteúdo não estaria "dentro da estrutura do layout".
+
+
+
+
+
+💡 **Por que isso é importante?**
+
+Porque com isso você consegue:
+
+
+
+Manter o menu lateral fixo (<mat-sidenav>),
+
+
+
+E ao mesmo tempo trocar apenas o conteúdo do meio da tela, sem recarregar a página toda.
+
+
+
+Aplicar estilos diferentes por rota, se quiser (por exemplo, mudar a cor do fundo dependendo do conteúdo renderizado).
+
+
+
+⚙️ Quando o usuário clica no menu:
+
+O routerLink="/products" muda a rota para /products.
+
+
+
+O Angular carrega o componente da rota correspondente.
+
+
+
+Esse componente é renderizado dentro do <router-outlet>, que está dentro do <mat-sidenav-content>.
+
+
+
+Resultado: o menu continua igual, e só o conteúdo da tela muda 🎯
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+**\*OnInt:** É um ciclo de vida de inicialização, ou seja, que roda assim que o componente é iniciado. Método que sempre é chamado automaticamente quando o componente é inicializado.
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+**\*Neste passo** foi feita a criação do componente product-crud.component. Caminho:  views/product-crud
+
+
+
+&nbsp;O ProductCrudComponent não é o responsável direto por criar ou listar produtos.
+
+
+
+Ele é um componente “container”, ou seja:
+
+
+
+Ele organiza e centraliza a tela de produtos, e reúne os componentes que fazem o CRUD de fato, como ProductRead, ProductCreate, etc.
+
+
+
+🔧 **Analogia prática:**
+
+Imagine que seu sistema tem uma área chamada "Produtos".
+
+Essa área precisa mostrar:
+
+
+
+Um botão de "Novo Produto"
+
+
+
+Uma lista de produtos
+
+
+
+(Talvez futuramente) filtros, ordenações, ou abas
+
+
+
+Tudo isso fica agrupado na rota /products, e quem monta essa tela principal é o ProductCrudComponent.
+
+
+
+✅ **Funções típicas do ProductCrudComponent:**
+
+Função	O que ele faz
+
+Tela principal da área "Produtos"	Responsável por organizar tudo relacionado à tela de produtos
+
+Usa botão para criar produtos	Tem um botão que navega para /products/create
+
+Mostra componentes filhos	Exibe ProductReadComponent para listar, por exemplo
+
+Mantém o layout da área	Serve como base para expandir no futuro (filtros, busca, etc.)
+
+
+
+🧩 **Por que ele é necessário se já temos outros?**
+
+Porque ele serve como o ponto central da funcionalidade de produtos.
+
+Se você fosse direto da home para ProductCreateComponent, você não teria onde listar, navegar ou controlar o CRUD.
+
+
+
+🧠 **Exemplo de rota:**
+
+/products → mostra o ProductCrudComponent com o botão + lista
+
+
+
+/products/create → vai para ProductCreateComponent com o formulário
+
+
+
+/products/update/:id → (futuramente) pode ir para ProductUpdateComponent
+
+
+
+✅ **Em resumo:**
+
+
+
+O ProductCrudComponent é como uma "página principal da seção de produtos".
+
+Ele não cria nem lê diretamente, mas reúne os componentes que fazem isso e organiza o fluxo da tela.
+
+
+
+🧩 **Agora, para esclarecer sua dúvida:**
+
+❓ Qual é a utilidade do ProductCrudComponent?
+
+Esse componente atua como um container (estrutura base) para o módulo de produtos.
+
+
+
+Ele organiza a tela de produtos, geralmente com botão de "criar" e espaço para listar os produtos (tabela ou lista).
+
+Ele não faz o CRUD diretamente, mas centraliza o acesso às ações como "listar" e "criar" produtos.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+**\*Neste passo** criamos o product-create.component. Dentro de componentes/product/product-create. O ProductCreateComponent é o componente responsável por cadastrar (criar) um novo produto no sistema.
+
+Ele exibe um formulário com campos, e os botões de salvar ou cancelar.\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+\*Neste passo foi criado um botão usando MatButtonModule(foi importado no app.module) do Angular Material, dentro de product-crud.component para navegar para o product-create.component. Para isso dentro de  product-crud.component.ts importamos o Router,  e injetamos ele no construtor para podermos usar as rotas de app.routing.module:
+
+-Importe do Router: import { Router } from '@angular/router';
+
+-Linha do Construtor: constructor(private router: Router) { }
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+**\*Neste passo**, dentro de components/product criou um arquivo contendo uma classe(Interface) de Modelo no Angular(Model) chamada product.model.ts. Sempre que formos criar um produto, ele deverá conter os atributos listados neste arquivo, sendo eles opcionais ou não. Neste caso o id é opcional, pois não é sempre que iremos precisar dele. Ou seja, quando nós formos criar um produto, nós somente iremos fornecer o nome e o preço sem fornecer um id, para quando eu mandar para o backend, ai sim ele ira me devolver um produto com id, nome e preço.
+
+Quando nós estivermos alterando, excluindo ou consultando um produto nós vamos ter id, nome, preço.
+
+
+
+-Para definir um atributo como opcional no TypesCript, é usar o operador ? EXEMPLO: id?: number.
+
+
+
+**-EXPLICAÇÃO:** Quando criamos nossas interações com o backend, neste caso quando a gente for mandar um produto para o backend, ou consumir um produto, nós esperamos fazer isso a partir de um modelo que tem atributos bem definidos.
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+**PERGUNTA: POR QUE NUMA MODEL POR EXEMPLO DE PRODUTOS O ID SERIA OPCIONAL?**
+
+
+
+**RESPOSTA:** Ótima pergunta! Em uma model (modelo) de produto no Angular/TypeScript, o id geralmente é marcado como opcional (id?: number) por uma razão muito prática relacionada à criação de novos dados.
+
+
+
+✅ Explicação simples
+
+Quando você cria um novo produto, você ainda não tem um id, porque:
+
+
+
+O id normalmente é gerado automaticamente pelo backend (ex: banco de dados).
+
+
+
+No momento da criação (antes de salvar), seu objeto ainda não tem esse valor.
+
+
+
+🧠 Exemplo real
+
+Model de Produto:
+
+
+
+export interface Product {
+
+&nbsp; id?: number;          // ID opcional
+
+&nbsp; name: string;
+
+&nbsp; price: number;
+
+}
+
+
+
+
+
+Criando um novo produto no Angular:
+
+
+
+const novoProduto: Product = {
+
+&nbsp; name: 'Mouse Gamer',
+
+&nbsp; price: 199.90,
+
+&nbsp; // sem id!
+
+};
+
+
+
+Quando você envia isso para a API usando POST, o backend insere no banco e gera um id automaticamente, e então pode te retornar o produto completo com id preenchido.
+
+
+
+🧩 Se o id não fosse opcional?
+
+Você teria que sempre fornecer um id, o que não faz sentido ao criar algo novo — já que o frontend não sabe qual será o próximo ID.
+
+
+
+✅ Em resumo:
+
+Situação			O que acontece?
+
+Criar novo item			O id é omitido (opcional)
+
+Editar item existente		O id já existe e é usado normalmente
+
+id não for opcional		Você teria que colocar um valor falso ou inválido
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+\*Nesta passo fizemos a criação do Service, dentro de componentes/product, criamos o product.service.ts e importamos o HttpClientModule dentro do app.module para podermos fazer requisições Http.
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+EXPLICAÇÃO DO MÉTODO create PARA CRIAR UM PRODUTO VIA POST NO SERVICE:
+
+
+
+\*Neste passo, criamos um método responsável por cadastrar um novo produto na API. Primeiro, importamos o HttpClient do Angular e o injetamos no construtor da classe (por meio da injeção de dependência). Em seguida, declaramos o atributo baseUrl, que armazena a URL base da API: 'http://localhost:3100/products'.
+
+
+
+O método create recebe como parâmetro um objeto do tipo Product (modelo de produto) e retorna um Observable<Product>, que representa a resposta da requisição HTTP.
+
+
+
+Dentro do método, utilizamos o método post do HttpClient, passando como argumentos a URL da API (this.baseUrl) e o objeto product. Isso realiza uma requisição POST para cadastrar o produto no backend.
+
+
+
+\*MÉTODO QUE ESTA O SERVICE
+
+create(product: Product): Observable<Product> {
+
+&nbsp; return this.http.post<Product>(this.baseUrl, product);
+
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+EXPLICAÇÃO DO MÉTODO createProduct DO COMPONENTE:
+
+Este método é responsável por acionar a criação de um novo produto quando o usuário envia o formulário (por exemplo, clicando em "Salvar").
+
+
+
+Chamada do service:
+
+O método chama o create do productService, passando o objeto this.product, que representa o produto preenchido pelo usuário.
+
+
+
+Inscrição (subscribe):
+
+Como o método create retorna um Observable, usamos .subscribe() para esperar a resposta da API e executar ações após a criação do produto.
+
+
+
+Mensagem de confirmação:
+
+Dentro do .subscribe(), logo após a confirmação de que o produto foi criado com sucesso, chamamos productService.showMessage('Produto criado!').
+
+Essa função geralmente exibe uma notificação visual para o usuário (como um MatSnackBar).
+
+
+
+Navegação:
+
+Em seguida, usamos o this.router.navigate(\['/products']) para redirecionar o usuário de volta para a lista de produtos, após o cadastro.
+
+
+
+CÓDIO DO MÉTODO createProduct QUE ESTA NO TS O COMPONENTE:
+
+
+
+createProduct(): void {
+
+&nbsp; this.productService.create(this.product).subscribe(() => {
+
+&nbsp;   this.productService.showMessage('Produto criado!'); 
+
+&nbsp;   this.router.navigate(\['/products']); 
+
+&nbsp; });
+
+}
+
+
+
+✅ Resumo do que ele faz:
+
+Etapa				Ação
+
+1\. Chama o service		this.productService.create(...) envia o produto para a API
+
+2\. Espera a resposta		.subscribe(...) aguarda o resultado da operação
+
+3\. Exibe mensagem		showMessage('Produto criado!') avisa o usuário
+
+4\. Redireciona a página		this.router.navigate(\['/products']) leva o usuário para a listagem
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+\*PERGUNTA: POR QUE NA SEÇÃO DE PROPRIEDADES DA CLASSE  DO COMPONENTE ESSE MÉTODO FOI CRIADO FOI COLOCADO ISSO?:
+
+product: Product = {
+
+&nbsp;   name: '',
+
+&nbsp;   price: null
+
+&nbsp; }
+
+
+
+Ótima dúvida! Essa parte que você viu:
+
+
+
+TS:
+
+
+
+product: Product = {
+
+&nbsp; name: '',
+
+&nbsp; price: null
+
+}
+
+está na seção de propriedades da classe do componente, e é muito importante para que o formulário funcione corretamente no Angular.
+
+
+
+✅ Por que isso está ali?
+
+Essa linha declara e inicializa o objeto product, que será usado no formulário (ex: no \[(ngModel)] ou no formControlName).
+
+
+
+Motivos principais:
+
+Evita erro de undefined no template:
+
+Se o Angular tentasse acessar product.name ou product.price no HTML e product não estivesse definido, daria erro na renderização.
+
+
+
+Cria um produto "vazio" para preencher o formulário:
+
+Serve como estrutura base para o usuário digitar os dados. Depois de preenchido, ele será enviado no this.productService.create(this.product).
+
+
+
+Garante que o product está no formato do model:
+
+Como ele é do tipo Product, o TypeScript ajuda a garantir que você está trabalhando com os campos corretos (name, price, etc).
+
+
+
+🔍 Exemplo visual:
+
+Model:
+
+
+
+export interface Product {
+
+&nbsp; id?: number;
+
+&nbsp; name: string;
+
+&nbsp; price: number;
+
+}
+
+
+
+
+
+Componente:
+
+
+
+export class ProductCreateComponent {
+
+&nbsp; product: Product = {
+
+&nbsp;   name: '',
+
+&nbsp;   price: null
+
+&nbsp; };
+
+}
+
+
+
+HTML (template):
+
+
+
+<input \[(ngModel)]="product.name" placeholder="Nome">
+
+<input \[(ngModel)]="product.price" type="number" placeholder="Preço">
+
+
+
+👉 Como product já está inicializado, o Angular consegue ligar o formulário com o objeto, e depois você pode simplesmente chamar:
+
+
+
+TS: this.productService.create(this.product)
+
+
+
+✅ Resumo:
+
+Por que inicializar product?	  Para quê serve?
+
+Evitar erro de undefined	  O template precisa do objeto definido para funcionar
+
+Preparar objeto para envio	  Já fica pronto para enviar no método create()
+
+Ajudar o TypeScript com tipagem	  Garante que está seguindo a interface Product
+
+
+
+-OBS: Essa forma onde usa \[(ngModel)] no HTML e um objeto product no componente é chamada de Template-driven Forms.
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+&nbsp;\*\*VAMOS VER COMO CRIAR E USAR UM FORMULÁRIO REATIVO (REACTIVE FORMS) NO ANGULAR, PASSO A PASSO, USANDO O MESMO EXEMPLO DE PRODUCT (PODUCT COM NAME E PRICE).
+
+
+
+✅ 1. Pré-requisitos
+
+No seu módulo (app.module.ts ou outro onde está o componente), você precisa importar:
+
+
+
+import { ReactiveFormsModule } from '@angular/forms';
+
+
+
+@NgModule({
+
+&nbsp; imports: \[
+
+&nbsp;   ReactiveFormsModule
+
+&nbsp; ]
+
+})
+
+
+
+export class AppModule { }
+
+----------------------------------------------------------------------------------------------------
+
+
+
+✅ 2. Model de Produto (interface)
+
+
+
+export interface Product {
+
+&nbsp; id?: number;
+
+&nbsp; name: string;
+
+&nbsp; price: number;
+
+}
+
+
+
+----------------------------------------------------------------------------------------------------
+
+✅ 3. Componente: configurando o FormGroup
+
+
+
+import { Component } from '@angular/core';
+
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { Router } from '@angular/router';
+
+import { ProductService } from '../product.service';
+
+
+
+@Component({
+
+&nbsp; selector: 'app-product-create',
+
+&nbsp; templateUrl: './product-create.component.html'
+
+})
+
+
+
+export class ProductCreateComponent {
+
+&nbsp; form: FormGroup;
+
+
+
+&nbsp; constructor(
+
+&nbsp;   private fb: FormBuilder,
+
+&nbsp;   private productService: ProductService,
+
+&nbsp;   private router: Router
+
+&nbsp; ) {
+
+&nbsp;   // Criando o formulário com validações
+
+&nbsp;   this.form = this.fb.group({
+
+&nbsp;     name: \['', Validators.required],
+
+&nbsp;     price: \[null, \[Validators.required, Validators.min(0.01)]]
+
+&nbsp;   });
+
+&nbsp; }
+
+
+
+&nbsp; createProduct(): void {
+
+&nbsp;   if (this.form.valid) {
+
+&nbsp;     this.productService.create(this.form.value).subscribe(() => {
+
+&nbsp;       this.productService.showMessage('Produto criado!');
+
+&nbsp;       this.router.navigate(\['/products']);
+
+&nbsp;     });
+
+&nbsp;   }
+
+&nbsp; }
+
+}
+
+----------------------------------------------------------------------------------------------------
+
+✅ 4. HTML do formulário (product-create.component.html)
+
+
+
+<form \[formGroup]="form" (ngSubmit)="createProduct()">
+
+&nbsp; <label for="name">Nome</label>
+
+&nbsp; <input id="name" formControlName="name" type="text">
+
+&nbsp; <div \*ngIf="form.controls\['name'].invalid \&\& form.controls\['name'].touched">
+
+&nbsp;   Nome é obrigatório.
+
+&nbsp; </div>
+
+
+
+&nbsp; <label for="price">Preço</label>
+
+&nbsp; <input id="price" formControlName="price" type="number">
+
+&nbsp; <div \*ngIf="form.controls\['price'].invalid \&\& form.controls\['price'].touched">
+
+&nbsp;   Preço é obrigatório e deve ser maior que zero.
+
+&nbsp; </div>
+
+
+
+&nbsp; <button type="submit" \[disabled]="form.invalid">Salvar</button>
+
+</form>
+
+
+
+✅ Vantagens do Reactive Forms:
+
+
+
+Vantagem					Explicação
+
+Validação mais controlada			Você pode acessar os estados (valid, touched, dirty, etc.) facilmente
+
+Escalável					Mais fácil de montar formulários grandes e dinâmicos
+
+Integra melhor com serviços			Pode passar form.value diretamente pro backend
+
+Não precisa inicializar product manualmente	O FormGroup já cuida disso
+
+
+
+
+
+✅ Resumo geral:
+
+O que você faz?					Com Template-driven				Com Reactive Forms
+
+Cria o objeto de produto vazio			product: Product = {...}			form: FormGroup com FormBuilder
+
+Liga o formulário				\[(ngModel)]="product.name"			\[formGroup] + formControlName
+
+Envia para API					this.productService.create(this.product)	this.productService.create(this.form.value)
+
+
+
+
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+\*Neste passo criamos o formulário para criar um produto dentro de product-create. Nesse passo para trabalhar com formulários, foi necessário importar dentro  de app.module (e colocar em imports também)os seguintes módulos:
+
+
+
+import  { FormsModule }  from '@angular/forms'
+
+import  { MatFormFieldModule }  from '@angular/material/form-field';
+
+import  { MatInputModule }  from '@angular/material/input';
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------\* FORMULARIO: ✅ Explicação geral
+
+Esse formulário é um formulário simples de cadastro de produto, feito com:
+
+
+
+Template-driven forms (usa \[(ngModel)])
+
+
+
+Angular Material (componentes estilizados)
+
+
+
+HTML estruturado dentro de um <mat-card> para visual mais moderno
+
+
+
+<mat-card>
+
+&nbsp;   <mat-card-title>Novo Produto</mat-card-title>
+
+&nbsp;   <form>
+
+&nbsp;       <mat-form-field>
+
+&nbsp;           <input matInput placeholder="Nome" \[(ngModel)]="product.name" name="name">
+
+&nbsp;       </mat-form-field>
+
+&nbsp;       <mat-form-field>
+
+&nbsp;           <input matInput placeholder="Preço (R$)" \[(ngModel)]="product.price" name="price">
+
+&nbsp;       </mat-form-field>
+
+&nbsp;   </form>
+
+&nbsp;   <button mat-raised-button color="primary" (click)="createProduct()">Salvar</button>
+
+&nbsp;   <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+
+</mat-card>
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+🧱 Explicação por partes:
+
+1\. Container visual do Angular Material
+
+
+
+<mat-card>
+
+&nbsp; <mat-card-title>Novo Produto</mat-card-title>
+
+<mat-card>: Cria um cartão visual com sombra, bordas e padding.
+
+
+
+<mat-card-title>: Define o título do cartão: "Novo Produto".
+
+-----------------------------------------------------------------------------------------
+
+2\. Formulário (template-driven)
+
+
+
+<form>
+
+&nbsp; <mat-form-field>
+
+&nbsp;   <input matInput placeholder="Nome" \[(ngModel)]="product.name" name="name">
+
+&nbsp; </mat-form-field>
+
+
+
+&nbsp; <mat-form-field>
+
+&nbsp;   <input matInput placeholder="Preço (R$)" \[(ngModel)]="product.price" name="price">
+
+&nbsp; </mat-form-field>
+
+</form>
+
+
+
+Detalhes:
+
+<form>: Elemento HTML de formulário (ainda sem (ngSubmit) — isso poderia ser adicionado para enviar com Enter).
+
+
+
+<mat-form-field>: Componente do Angular Material que estiliza o campo de entrada.
+
+
+
+<input matInput>: Campo de texto com estilo Material.
+
+
+
+\[(ngModel)]="product.name": Faz data binding (ligação) entre o input e a propriedade product.name da classe do componente.
+
+
+
+name="name": Obrigatório no template-driven para que o Angular trate corretamente o campo.
+
+
+
+⚠️ Importante: Esse formulário é template-driven, porque usa \[(ngModel)]. O Angular vai atualizar this.product automaticamente à medida que o usuário digita.
+
+-----------------------------------------------------------------------------------------
+
+3\. Botões de ação
+
+
+
+<button mat-raised-button color="primary" (click)="createProduct()">Salvar</button>
+
+<button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+
+
+
+Detalhes:
+
+mat-raised-button: Cria um botão elevado com sombra (Material Design).
+
+
+
+color="primary": Estiliza o botão com a cor principal do tema (geralmente azul).
+
+
+
+color="warn": Estiliza com a cor de alerta (geralmente vermelho).
+
+
+
+(click)="createProduct()": Chama o método createProduct() no componente quando clicado.
+
+
+
+(click)="cancel()": Chama o método cancel() no componente (geralmente para voltar ou limpar o formulário).
+
+
+
+🔁 Fluxo completo do formulário:
+
+O usuário digita o nome e preço.
+
+
+
+O Angular atualiza automaticamente o objeto product via \[(ngModel)].
+
+
+
+Quando o usuário clica em "Salvar", o método createProduct() é chamado.
+
+
+
+Esse método usa this.productService.create(this.product) para enviar os dados à API.
+
+
+
+✅ Resumo:
+
+Parte							O que faz
+
+<mat-card>						Organiza visualmente o formulário
+
+\[(ngModel)]						Faz a ligação entre o input e o objeto product
+
+name="..."						Necessário no template-driven forms para controle de estado
+
+(click)="..."						Dispara métodos no componente quando os botões são clicados
+
+Angular Material (matInput, mat-form-field, etc.)	Dá aparência moderna e profissional ao formulário
+
+
+
+
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+
+
+\*Neste passo foi criado o componente de listagem dos produtos  dentro de components/product/product-read.
+
+
+
+MÉTODO READ DO SERVICE: 
+
+-Chama a API usando o HttpClient do Angular.
+
+
+
+-Faz uma requisição GET para a URL armazenada em this.baseUrl (ex: 'http://localhost:3000/products').
+
+
+
+-Espera receber uma lista de produtos (Product\[]) como resposta.
+
+
+
+-Retorna um Observable, que é como uma "promessa que avisa quando a resposta chegar".
+
+
+
+-Esse Observable será usado com .subscribe() para obter os dados.
+
+
+
+
+
+read(): Observable<Product\[]> {
+
+&nbsp;   return this.http.get<Product\[]>(this.baseUrl)
+
+&nbsp; }
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+\*USANDO O MÉTODO READ DENTRO DO COMPONENTE DE LISTAGEM DE PRODUTOS: product-read
+
+
+
+export class ProductReadComponent implements OnInit {
+
+
+
+&nbsp; products:Product\[]
+
+
+
+&nbsp; constructor(private productService: ProductService) { }
+
+
+
+&nbsp; ngOnInit(): void {
+
+&nbsp;   this.productService.read().subscribe(products => {
+
+&nbsp;     this.products = products
+
+&nbsp;     console.log(products)
+
+&nbsp;   })
+
+&nbsp; }
+
+
+
+
+
+📌 O que ele faz?
+
+Declara products: Product\[] para armazenar os produtos.
+
+
+
+Injeta o ProductService no construtor.
+
+
+
+No ngOnInit(), chama o método read() do service para buscar todos os produtos da API.
+
+
+
+Quando os dados chegam, atribui à variável products, que será usada no HTML (ex: com \*ngFor).
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+
+
+\*Neste passo foi sugerido uma forma de criar os componentes de uma maneira mais simples utilizando angular material schematics. É só entrar no site: https://v6.material.angular.dev/guide/schematics.
+
+
+
+-Comando: ng generate @angular/material:table components/product/product-read2. Neste caso criamos apenas uma tabela de exemplo usando shematics do angular material, que gera um componente inteiro automaticamente. A tabela de exemplo já vem com os módulos módulo da tabela, o de ordenação, paginação,  e eles  já são importados no appmodule automaticamente.
+
+
+
+-Existem outros tipos de shematic como:  Navigation Schematic, Dashboard Schematic, Table Schematic, cada um com seu respectivo comando e criação. Ou seja, podemos usar os schematics para gerar componentes prontos, e a partir desses componentes prontos, nós conseguimos criar nossos componentes de uma forma muito simples.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+\*ENTENDENDO O COMPONENTE PRONTO  DE UMA TABELA QUE FOI GERADO UTILIZANDO OS SCHEMATICS DO ANGULAR MATERIAL:
+
+\- O nome do componente é: product-read2. E foi gerado no caminho: componentes/product/product-read2
+
+
+
+-PERGUNTA: Como é que os componentes paginator, sort(que estão dentro de produt-read2-datasource) são colocados dentro do componente data source, já que o construtor não recebe nenhum parâmetro? R: Dentro do componente product-read2.component.ts, tem o decorator @ViewChild.
+
+
+
+-@ViewChild: É o filho da minha tela-template-view-visão, e nele é passado o tipo de componente que você quer que seja selecionado, e ele vai percorrer o HTML, vai ver onde esta o componente, Exemplo: @ViewChild(MatPaginator) paginator: MatPaginator, e vai pegar o primeiro componente paginator e colocar dentro da variável paginator. Ou seja, quando  você usa o decorator @ViewChild encima de uma variável o próprio Angular vai percorrer o seu template e vai pegar a primeira ocorrência desse componente. Ele vai entrar no HTML  e vai perceber eu existe o elemento paginator, vai pegar a instancia desse elemento e vai jogar para a variável dentro do TS,de tal forma que quem vai responsável por resolver esse atributo paginator: MatPaginator é o Angular a partir desse decorator @ViewChild.Essa é forma que conseguimos pegar da nossa view(HTM) os elementos: paginator,sort e table.
+
+
+
+
+
+-EXEMPLO DIRETO DO CODIGO:
+
+export class ProductRead2Component implements AfterViewInit, OnInit {
+
+&nbsp; @ViewChild(MatPaginator) paginator: MatPaginator;
+
+&nbsp; @ViewChild(MatSort) sort: MatSort;
+
+&nbsp; @ViewChild(MatTable) table: MatTable<Product>;
+
+&nbsp; dataSource: ProductRead2DataSource;
+
+
+
+ngOnInit() {
+
+&nbsp;   this.dataSource = new ProductRead2DataSource();
+
+&nbsp; }
+
+ngAfterViewInit() {
+
+&nbsp;   this.dataSource.sort = this.sort;
+
+&nbsp;   this.dataSource.paginator = this.paginator;
+
+&nbsp;   this.table.dataSource = this.dataSource; // Aqui seta os dados da tabela, se essa linha for comentada os dados não são mais exibidos na tabela.
+
+&nbsp; }
+
+
+
+-O elemento dataSource esta sendo criado no ngOnInit, e depois que a tela é inicializada após todos os componentes serem instanciados na tela, ai sim ele vai pegar setar os atributos dentro de ngAfterViewInit, fazendo a ligação tanto do sort e paginator dentro do dataSource, como ele atribui o dataSource para a tabela, ai sim os dados são renderizados.
+
+
+
+
+
+\- No HTML podemos usar um property binding \[dataSource]= "" no HTML pra mostrar os dados também.
+
+EXEMPLO:  <table mat-table class="full-width-table" matSort aria-label="Elements" \[dataSource]="dataSource.data">
+
+
+
+
+
+\- No TS tem um atributo que são as colunas que estão visíveis na tabela: displayedColumns = \['id', 'name']; 
+
+
+
+\- E no HTML ele usa as diretivas que cria o cabeçalho da tabela que mostra as colunas que serão exibidas: <tr mat-header-row \*matHeaderRowDef="displayedColumns"></tr>
+
+
+
+
+
+\- Esse mostra os dados da tabela:<tr mat-row \*matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+
+\- Definição e colunas da tabela: O nomes de  matColumnDef precisa ser exatamente nomes que estão no displayedColumns. Exemplo: displayedColumns = \['id', 'name']; por sua vez matColumnDef="id" e matColumnDef="name"
+
+
+
+
+
+-EXEMPLO DE CÓDIGO DE COLUNAS DE UMA TABELA.
+
+<!-- Id Column -->
+
+&nbsp;   <ng-container matColumnDef="id">
+
+&nbsp;     <th mat-header-cell \*matHeaderCellDef mat-sort-header>Id</th>
+
+&nbsp;     <td mat-cell \*matCellDef="let row">{{row.id}}</td>  
+
+&nbsp;   </ng-container>
+
+
+
+&nbsp;   <!-- Name Column -->
+
+&nbsp;   <ng-container matColumnDef="name">
+
+&nbsp;     <th mat-header-cell \*matHeaderCellDef mat-sort-header>Name</th>
+
+&nbsp;     <td mat-cell \*matCellDef="let row">{{row.name}}</td>
+
+&nbsp;   </ng-container>
+
+
+
+\- ng-container é um agrupador de elementos, onde definimos como vai ser o cabeçalho da coluna e como vai ser o conteúdo da coluna:
+
+<!-- Id Column -->
+
+&nbsp;   <ng-container matColumnDef="id">
+
+&nbsp;     <th mat-header-cell \*matHeaderCellDef mat-sort-header>Id</th>
+
+&nbsp;     <td mat-cell \*matCellDef="let row">{{row.id}}</td>
+
+&nbsp;   </ng-container>
+
+
+
+
+
+//OBS: A variável row é somente para representar as linhas a tabela, pode ser qualquer nome e não precisa ser o mesmo nome que esta dentro de {{}}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+\*OU SEJA ESSA PARTE SERIA O TEMPLATE DE CADA COLUNA:
+
+
+
+<!-- Id Column -->
+
+&nbsp;   <ng-container matColumnDef="id">
+
+&nbsp;     <th mat-header-cell \*matHeaderCellDef mat-sort-header>Id</th>
+
+&nbsp;     <td mat-cell \*matCellDef="let prod">{{row.id}}</td>
+
+&nbsp;   </ng-container>
+
+
+
+&nbsp;   <!-- Name Column -->
+
+&nbsp;   <ng-container matColumnDef="name">
+
+&nbsp;     <th mat-header-cell \*matHeaderCellDef mat-sort-header>Name</th>
+
+&nbsp;     <td mat-cell \*matCellDef="let prod">{{row.name}}</td>
+
+&nbsp;   </ng-container>
+
+
+
+---------------------------------------------------------------------------------
+
+\*E ESSE SERIA O TEMPLATE DA TABELA TODA:
+
+
+
+<tr mat-header-row \*matHeaderRowDef="displayedColumns"></tr>  --Define quais colunas serão exibidas no cabeçalho
+
+<tr mat-row \*matRowDef="let row; columns: displayedColumns;"></tr> --Define quais colunas serão exibidas nos dados e tem um variável row pra cada uma das linhas da tabela.
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+\*\*Neste passo criamos de fato a tabela de listagem de produtos, criamos o displayedColumns com os nomes das colunas: displayedColumns= \['id', 'name', 'price'];
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+\- Criamos uma lista de produtos: products:Product\[];
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+\- Chamamos  método read no ngOnInit, ou seja sempre que a pagina de listagem de produtos for carregada, os produtos também serão carregados:
+
+ngOnInit(): void { //Método que sempre é chamado automaticamente quando o componente é inicializado.
+
+&nbsp;   this.productService.read().subscribe(products => {
+
+&nbsp;     this.products = products;          
+
+&nbsp;   })
+
+&nbsp; } 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-DataSource: Origem de dados.
+
+
+
+-Property Binding DataSource: Vinculamos os produtos, displayedColumns e a tabela, mostrando os dados na tabela.
+
+<table mat-table \[dataSource]="products">
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+
+
+\*\*Neste passo colocamos mais uma coluna de ações na tabela de produtos com ícones de editar e excluir que serão usados para chamar os componentes de edição e exclusão. Esses ícones irão funcionar como se fossem botões.
+
+
+
+
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+\*\*Neste passo, no service criamos o método reaById() que retorna um produto pelo id.
+
+
+
+readyById(id: string): Observable<Product> {
+
+&nbsp;   const url = `${this.baseUrl}/${id}`
+
+&nbsp;   return this.http.get<Product>(url)
+
+&nbsp; }
+
+
+
+-Aqui precisamos modificar a baseUrl para adicionar o id que era assim: baseUrl "http://localhost:3001/products".
+
+
+
+Para que ela seja assim: "http://localhost:3001/products/numero-id.Para isso concatenamos e usamos interpolação para criar a nova url.
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+\*\*Neste passo  criamos o método update(), para atualizar um produto.
+
+
+
+update(product: Product): Observable<Product> {
+
+&nbsp;   const url = `${this.baseUrl}/${product.id}`
+
+&nbsp;   return this.http.put<Product>(url, product)
+
+&nbsp; }
+
+
+
+-Aqui também precisamos utilizar a url modificada, mas dessa vez passando o id do produto.
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+\*\*Próximo passo:  Antes de navegar para o componente de atualização de produto, a gente precisa nessa transição quando for carregar esse produto, já mandar um produto carregado. Quando formos fazer essa transição para a tela de atualização de produto no formulário, o formulário precisa inicializar já preenchido, e pra eu inicializar esse produto preenchido o formulário pronto para o usuário alterar, eu preciso fazer uma consulta no backend e pegar os dados daquele produto específico e ai sim  carregar o formulário com o dados preenchidos, para só então depois que tiver o formulário preenchido, o usuário alterar o que quiser e mandar um  update(requisição do tipo PUT). Para fazer esses passos precisaremos tanto do método de ler por id (readyById()), quanto do método de update().
+
+
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+\*\*Neste passo criamos  componente de atualização de produto: ProductUpdateComponent
+
+
+
+-Criei rota para o componente de atualização/edição, e para isso temos que passar um id na rota:
+
+&nbsp;{
+
+&nbsp; path: "products/update/:id", 
+
+&nbsp; component: ProductUpdateComponent
+
+&nbsp;}
+
+
+
+-Os dois pontos na frente de id, o Angular entende que é um parâmetro, na rota não terá os dois pontos literalmente mas sim um numero de id.
+
+
+
+-Para trazer os dados carregados  preenchidos para o formulário de atualização, precisamos:
+
+
+
+export class ProductUpdateComponent implements OnInit {
+
+&nbsp; product: Product 
+
+
+
+
+
+&nbsp; constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
+
+
+
+&nbsp; ngOnInit(): void {
+
+&nbsp;   const id = this.route.snapshot.paramMap.get('id')
+
+&nbsp;   this.productService.readyById(id).subscribe(product => {
+
+&nbsp;     this.product = product;
+
+&nbsp;   })
+
+&nbsp; }
+
+
+
+\*EXPLICAÇÃO DO CÓDIGO: 📦 export class ProductUpdateComponent implements OnInit
+
+Define um componente Angular chamado ProductUpdateComponent, usado para editar um produto existente.
+
+
+
+🧱 product: Product
+
+Declara uma variável product do tipo Product. Essa variável irá armazenar os dados do produto que será editado.
+
+
+
+🔧 Construtor
+
+
+
+constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
+
+Injeta três dependências:
+
+
+
+ProductService: usado para acessar os dados do produto (ex: buscar por ID).
+
+
+
+Router: permite navegar para outras rotas após salvar/editar.
+
+
+
+ActivatedRoute: acessa os parâmetros da rota atual (como o id do produto) que neste caso é o esmo id definido nas rotas
+
+
+
+🚀 ngOnInit()
+
+Este método é executado automaticamente ao carregar o componente.
+
+
+
+
+
+const id = this.route.snapshot.paramMap.get('id')
+
+Pega o ID do produto da URL (ex: /produtos/editar/5 → id = 5)
+
+
+
+
+
+this.productService.readyById(id).subscribe(product => {
+
+&nbsp; this.product = product;
+
+})
+
+
+
+Usa o serviço para buscar o produto com aquele ID.
+
+
+
+Quando a resposta chega (com .subscribe), os dados do produto são armazenados na variável product.
+
+
+
+✅ Em resumo:
+
+Esse componente:
+
+
+
+Lê o ID do produto na URL.
+
+
+
+Busca o produto no backend com esse ID.
+
+
+
+Armazena os dados para exibir no formulário e permitir a edição.
+
+
+
+Se quiser, posso mostrar o HTML típico que acompanha esse componente.
+
+
+
+
+
+-Após isso usamos o servisse para criar o método do ts de atualizar produto:
+
+
+
+updateProduct(): void {
+
+&nbsp;   this.productService.update(this.product).subscribe(() => {
+
+&nbsp;     this.productService.showMessage('Produto atualizado com sucesso!')
+
+&nbsp;     this.router.navigate(\['/products']);
+
+&nbsp;   });
+
+&nbsp; }
+
+
+
+
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+\*\*Neste passo criamos  componente e exclusão de produto ProductDeleteComponent e criamos os métodos:
+
+import { Component, OnInit } from '@angular/core';
+
+import { ProductService } from '../product.service';
+
+import { Product } from '../product.model';
+
+import { ActivatedRoute, Router } from '@angular/router';
+
+
+
+@Component({
+
+&nbsp; selector: 'app-product-delete',
+
+&nbsp; templateUrl: './product-delete.component.html',
+
+&nbsp; styleUrls: \['./product-delete.component.css']
+
+})
+
+export class ProductDeleteComponent implements OnInit {
+
+&nbsp; product: Product
+
+
+
+
+
+&nbsp; constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
+
+
+
+&nbsp; ngOnInit(): void {
+
+&nbsp;   const id = +this.route.snapshot.paramMap.get('id');
+
+&nbsp;   this.productService.readyById(id).subscribe(product => {
+
+&nbsp;     this.product = product;
+
+&nbsp;   })
+
+&nbsp; }
+
+
+
+&nbsp; deleteProduct(): void {
+
+&nbsp;   this.productService.delete(this.product.id).subscribe(() => {
+
+&nbsp;     this.productService.showMessage('Produto excluído com sucesso!');
+
+&nbsp;     this.router.navigate(\['/products']);
+
+&nbsp;   })
+
+&nbsp; }
+
+
+
+&nbsp; cancel(): void {
+
+&nbsp;   this.router.navigate(\['/products']);
+
+&nbsp; }
+
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+
+\- const id = +this.route.snapshot.paramMap.get('id');
+
+
+
+
+
+✅ Explicação
+
+📌 this.route.snapshot.paramMap.get('id')
+
+Isso pega o valor do parâmetro da rota chamado 'id'.
+
+
+
+Exemplo: se a URL for /produtos/editar/5, isso retorna "5" (uma string).
+
+
+
+📌 +this.route.snapshot.paramMap.get('id')
+
+Esse sinal de mais (+) converte a string "5" em número 5.
+
+
+
+Isso se chama coerção numérica em JavaScript/TypeScript.
+
+
+
+🧠 Por que isso é feito?
+
+Porque a maioria dos ids nos modelos e no backend são do tipo number (como no seu caso).
+
+
+
+E se você passar uma string onde a função espera um number, pode dar erro ou não encontrar nada.
+
+
+
+
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\*EXEMPLO DE MÉTODO PARA USAR SNACKBAR (COMO FOI FEITO NO NOSSO SERVICE) - ESSE É O PRIMEIROMÉTODO QUE FOI CRIADO, NO FINAL DO PROJETO ELE OI ALTERADO.
+
+
+
+showMessage(msg: string): void {
+
+&nbsp;   this.snackbar.open(msg,'X', { //o parâmetro action esta com X que serve para fechar o snackbar(pode colocar qualquer texto, se ficar vazio você terá que experaroduratn terminar)
+
+&nbsp;     duration: 3000,  //duração de 3 segundos
+
+&nbsp;     horizontalPosition: "right", //posição horizontal a direita
+
+&nbsp;     verticalPosition: "top"  //posição vertical em cima
+
+&nbsp;   })
+
+&nbsp; }
+
+
+
+
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+\*\*EXPLICAÇÕES ADICIONAIS:
+
+\- pipe, map, catchError
+
+\- O operador ternário (condição ? A : B)
+
+\- A função showMessage
+
+\- E o método errorHandler
+
+
+
+
+
+✅ 1. Função showMessage (mensagem de sucesso ou erro)
+
+
+
+showMessage(msg: string, isError: boolean = false): void {
+
+&nbsp; this.snackbar.open(msg, 'X', {
+
+&nbsp;   duration: 3000,
+
+&nbsp;   horizontalPosition: "right",
+
+&nbsp;   verticalPosition: "top",
+
+&nbsp;   panelClass: isError ? \['msg-error'] : \['msg-success']
+
+&nbsp; });
+
+}
+
+
+
+🧠 Explicação passo a passo:
+
+
+
+Parte					Explicação
+
+msg: string				Mensagem que será exibida
+
+isError: boolean = false		Se true, trata como erro (vermelho); se false, sucesso (verde).
+
+this.snackbar.open(...)			Exibe o aviso com Angular Material
+
+'X'					Texto do botão para fechar
+
+duration: 3000				Duração de 3 segundos
+
+horizontalPosition: "right"		Mostra a mensagem no canto direito
+
+verticalPosition: "top"			Mostra a mensagem na parte superior
+
+panelClass				Define a cor: msg-error ou msg-success
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+✅ 2. Operador ternário
+
+
+
+isError ? \['msg-error'] : \['msg-success']
+
+🧠 Explicação:
+
+Sintaxe:
+
+
+
+condição ? valorSeVerdadeiro : valorSeFalso
+
+
+
+No seu caso:
+
+
+
+Se isError for true, usa a classe msg-error
+
+
+
+Se for false, usa msg-success
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+✅ 3. Método errorHandler
+
+
+
+errorHandler(e: any): Observable<any> {
+
+&nbsp; console.log(e); // mostra o erro no console do navegador
+
+&nbsp; this.showMessage('Ocorreu um erro!', true); // mostra mensagem vermelha
+
+&nbsp; return EMPTY; // retorna um Observable vazio (interrompe a ação)
+
+}
+
+
+
+🧠 Explicação:
+
+Parte			Explicação
+
+e: any			Parâmetro que representa o erro capturado
+
+console.log(e)		Mostra detalhes do erro no console (útil para debug)
+
+this.showMessage(...)	Exibe a mensagem de erro visualmente
+
+return EMPTY;		Impede que o Observable continue (evita bugs depois do erro)
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+✅ 4. Método create() com pipe, map e catchError
+
+
+
+create(product: Product): Observable<Product> {
+
+&nbsp; return this.http.post<Product>(this.baseUrl, product).pipe(
+
+&nbsp;   map((obj) => obj),
+
+&nbsp;   catchError(e => this.errorHandler(e))
+
+&nbsp; );
+
+}
+
+🧠 Explicação do fluxo:
+
+Parte				Explicação
+
+this.http.post<Product>(...)	Envia o produto para o backend
+
+.pipe(...)			Permite encadear operadores como map e catchError
+
+map(obj => obj)			Aqui não faz nada, só repassa o valor (poderia ser omitido neste caso)
+
+catchError(...)			Se der erro na requisição, chama o errorHandler
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+✅ O que é pipe, map, catchError?
+
+🔧 pipe(...)
+
+
+
+É um método do RxJS usado para encadear operadores em um Observable.
+
+
+
+Pense no pipe como uma linha de montagem:
+
+
+
+Chega um dado (ou erro)
+
+
+
+Cada operador transforma, trata ou intercepta isso
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+🔧 map(...)
+
+Transforma o valor do Observable e retorna algo novo
+
+
+
+No seu caso:
+
+
+
+map((obj) => obj)
+
+
+
+Não faz nenhuma transformação, apenas passa o valor adiante.
+
+⚠️ Pode ser removido, se você não estiver usando ele para transformar.
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+🔧 catchError(...)
+
+Intercepta erros na requisição e executa uma função para tratá-los
+
+
+
+No seu caso:
+
+
+
+catchError(e => this.errorHandler(e))
+
+Isso garante que qualquer erro no POST (ex: servidor fora do ar, dados inválidos) seja tratado de forma amigável.
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+✅ Exemplo visual final:
+
+
+
+this.productService.create(this.product).subscribe(() => {
+
+&nbsp; this.productService.showMessage('Produto criado com sucesso!');
+
+&nbsp; this.router.navigate(\['/produtos']);
+
+});
+
+
+
+Se **funcionar**, mostra mensagem verde.
+
+Se **der erro**, já aparece a mensagem vermelha, pois o catchError() cuida disso.
+
+
+
+🔧 Dica opcional — CSS global
+
+No styles.css, adicione:
+
+
+
+
+
+.msg-success {
+
+&nbsp; background-color: green;
+
+&nbsp; color: white;
+
+}
+
+
+
+.msg-error {
+
+&nbsp; background-color: red;
+
+&nbsp; color: white;
+
+}
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+
+
+\*\*EXPLICAÇÕES ADICIONAIS SOBRE: ARROE FUNCTIONS, MÉTODOS DE ARRAY, STRINGS, PIPE, MAP, CATCHERROR
+
+
+
+✅ 1. Arrow Functions (funções seta)
+
+📌 Sintaxe:
+
+
+
+(parametros) => { bloco de código }
+
+🔧 Exemplo:
+
+
+
+const dobrar = (numero) => {
+
+&nbsp; return numero \* 2;
+
+};
+
+
+
+console.log(dobrar(4)); // 8
+
+
+
+🧠 Como ler:
+
+“Uma função que recebe numero e retorna numero \* 2.”
+
+
+
+🆚 Comparação com função tradicional:
+
+
+
+function dobrar(numero) {
+
+&nbsp; return numero \* 2;
+
+}
+
+⚠️ Observação:
+
+Se a função tiver apenas 1 linha, você pode tirar as chaves {} e o return:
+
+
+
+const dobrar = (numero) => numero \* 2;
+
+📌 Em métodos Angular como map ou filter:
+
+
+
+.map((produto) => produto.nome.toUpperCase())
+
+"Para cada produto, retorna o nome em maiúsculas."
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+✅ 2. Métodos de array e string mais usados
+
+🔧 .filter()
+
+Filtra um array e retorna apenas os itens que passam em uma condição.
+
+
+
+
+
+const numeros = \[1, 2, 3, 4, 5];
+
+const pares = numeros.filter(n => n % 2 === 0);
+
+console.log(pares); // \[2, 4]
+
+📖 Lê-se:
+
+
+
+“Retorna apenas os números onde n % 2 === 0 (ou seja, pares)”.
+
+
+
+🔧 .find()
+
+Retorna o primeiro item que satisfaz uma condição.
+
+
+
+const produtos = \[{id: 1}, {id: 2}];
+
+const achado = produtos.find(p => p.id === 2);
+
+console.log(achado); // {id: 2}
+
+📖 Lê-se:
+
+
+
+“Acha o primeiro produto com id === 2.”
+
+
+
+🔧 .trim()
+
+Remove espaços do começo e do fim de uma string.
+
+
+
+const nome = "  Lucas  ";
+
+console.log(nome.trim()); // "Lucas"
+
+🔧 .map()
+
+Transforma cada item do array, e retorna um novo array com os resultados.
+
+
+
+const nomes = \["ana", "joão"];
+
+const nomesMaiusculos = nomes.map(nome => nome.toUpperCase());
+
+console.log(nomesMaiusculos); // \["ANA", "JOÃO"]
+
+🔧 .includes()
+
+Verifica se um valor existe dentro de outro (string ou array).
+
+
+
+const frutas = \['maçã', 'banana'];
+
+console.log(frutas.includes('banana')); // true
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+✅ 3. Métodos RxJS no Angular (pipe, map, catchError)
+
+Quando usamos chamadas HTTP (.get(), .post()), o resultado é um Observable, e usamos .pipe() para transformar ou tratar esse resultado.
+
+
+
+🔧 .pipe(...)
+
+Encadeia transformações em observables. Serve como um “canal de processamento”.
+
+
+
+this.http.get(...).pipe(
+
+&nbsp; map(res => res),
+
+&nbsp; catchError(e => this.errorHandler(e))
+
+)
+
+🔧 .map(...)
+
+Transforma o dado retornado pela API. É igual ao .map() de arrays, mas em fluxo de dados (Observable).
+
+
+
+map(produto => {
+
+&nbsp; produto.nome = produto.nome.toUpperCase();
+
+&nbsp; return produto;
+
+})
+
+🔧 .catchError(...)
+
+Captura erros que aconteceram na requisição e permite tratá-los.
+
+
+
+catchError(erro => {
+
+&nbsp; this.showMessage('Erro ao salvar produto', true);
+
+&nbsp; return EMPTY;
+
+})
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+✅ Como explicar isso numa entrevista ou desafio trainee:
+
+“Esse método usa pipe() para encadear operadores RxJS. Primeiro, usamos map() para transformar os dados se necessário. Em seguida, usamos catchError() para interceptar qualquer erro na requisição e mostrar uma mensagem amigável ao usuário com showMessage().”
+
+
+
+🚀 Quer um resumo rápido para colar como cola visual?
+
+Claro! Aqui vai:
+
+
+
+Método		Para que serve					Exemplo rápido
+
+filter()	Filtrar itens com base em condição		nums.filter(n => n > 0)
+
+find()		Encontrar o primeiro item que bate		users.find(u => u.id === 5)
+
+map()		Transformar cada item				nomes.map(n => n.toUpperCase())
+
+trim()		Tirar espaços da string				" Lucas ".trim()
+
+includes()	Verificar se existe dentro de array/texto	nomes.includes("Lucas")
+
+pipe()		Encadear operadores em Observables		.pipe(map(), catchError())
+
+catchError()	Tratar erros de Observable			catchError(e => ...)
+
+
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+**\*\*Neste passo** implementamos um recurso de que quando a gente altera a navegação entre uma tela e outra, o header é modificado. Aprendemos como é possível fazer comunicação  entre componentes a partir de servisse.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
