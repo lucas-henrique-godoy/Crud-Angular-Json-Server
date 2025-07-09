@@ -1568,6 +1568,7 @@ console.log(dobrar(4)); // 8
 function dobrar(numero) {
   return numero * 2;
 }
+
 ⚠️ Observação:
 Se a função tiver apenas 1 linha, você pode tirar as chaves {} e o return:
 
